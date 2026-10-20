@@ -65,8 +65,8 @@ describe('Contact Submission API (POST /api/v1/contact)', () => {
     assert.equal(response.body.success, false);
   });
 
-  it('should enforce rate limiting after 5 requests from same IP', async () => {
-    for (let i = 0; i < 5; i++) {
+  it('should enforce rate limiting after 3 requests from same IP', async () => {
+    for (let i = 0; i < 3; i++) {
       const res = await supertest(app)
         .post('/api/v1/contact')
         .send({
@@ -78,7 +78,7 @@ describe('Contact Submission API (POST /api/v1/contact)', () => {
       assert.equal(res.status, 201);
     }
 
-    // 6th request should fail with 429
+    // 4th request should fail with 429
     const blockedRes = await supertest(app)
       .post('/api/v1/contact')
       .send({
@@ -91,5 +91,21 @@ describe('Contact Submission API (POST /api/v1/contact)', () => {
     assert.equal(blockedRes.status, 429);
     assert.equal(blockedRes.body.success, false);
     assert.match(blockedRes.body.error.message, /too many contact submissions/i);
+  });
+
+  it('should silently accept (but drop) a submission with the honeypot field filled', async () => {
+    const response = await supertest(app)
+      .post('/api/v1/contact')
+      .send({
+        name: 'Spam Bot',
+        email: 'bot@example.com',
+        subject: 'Spam',
+        message: 'This should be silently dropped.',
+        website: 'http://spam-bot-filled-this.example',
+      });
+
+    assert.equal(response.status, 201);
+    assert.equal(response.body.success, true);
+    assert.equal(response.body.data.message, 'Message sent successfully.');
   });
 });

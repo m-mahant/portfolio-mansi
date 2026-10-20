@@ -9,7 +9,8 @@ export class ContactService {
   constructor(private readonly repository: ContactRepository = contactRepository) {}
 
   // Validates, sanitizes, and persists a user contact form submission.
-  async submitContactMessage(payload: unknown, clientIp?: string): Promise<ContactMessage> {
+  // Returns null for honeypot-triggered spam: pretend success, save nothing, send nothing.
+  async submitContactMessage(payload: unknown, clientIp?: string): Promise<ContactMessage | null> {
     const parseResult = contactSubmissionSchema.safeParse(payload);
     if (!parseResult.success) {
       const issue = parseResult.error.issues[0];
@@ -18,6 +19,10 @@ export class ContactService {
     }
 
     const validatedInput: ContactSubmissionInput = parseResult.data;
+
+    if (validatedInput.website) {
+      return null;
+    }
 
     const now = new Date().toISOString();
     const messageData: Omit<ContactMessage, 'id'> = {

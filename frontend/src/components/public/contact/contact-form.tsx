@@ -21,6 +21,7 @@ export const ContactForm: React.FC = () => {
     email: '',
     subject: '',
     message: '',
+    website: '',
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -81,10 +82,11 @@ export const ContactForm: React.FC = () => {
         email: formData.email.trim(),
         subject: formData.subject.trim(),
         message: formData.message.trim(),
+        website: formData.website,
       });
 
       setIsSuccess(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', subject: '', message: '', website: '' });
     } catch (error) {
       const errorMessage =
         error instanceof Error
@@ -135,6 +137,23 @@ export const ContactForm: React.FC = () => {
         </div>
       ) : (
         <form onSubmit={handleSubmit} noValidate className="space-y-4">
+          {/* Honeypot: hidden from real visitors, left for spam bots that autofill every field. */}
+          <div
+            aria-hidden="true"
+            style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}
+          >
+            <label htmlFor="contact-website">Website</label>
+            <input
+              id="contact-website"
+              name="website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={formData.website}
+              onChange={handleChange}
+            />
+          </div>
+
           {errors.general && (
             <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-sm flex items-center gap-3">
               <svg className="w-5 h-5 shrink-0 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

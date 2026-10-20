@@ -5,8 +5,8 @@ interface RateLimitRecord {
   timestamps: number[];
 }
 
-const windowMs = 15 * 60 * 1000; // 15 minutes window
-const maxRequests = 5; // 5 submissions limit per 15 mins per IP
+const windowMs = 60 * 60 * 1000; // 60 minutes window
+const maxRequests = 3; // 3 submissions limit per hour per IP
 const ipRecords = new Map<string, RateLimitRecord>();
 
 // Cleanup stale records periodically
@@ -39,7 +39,7 @@ export function contactRateLimiter(req: Request, res: Response, next: NextFuncti
   res.setHeader('X-RateLimit-Remaining', String(remaining));
 
   if (record.timestamps.length >= maxRequests) {
-    throw AppError.tooManyRequests('Too many contact submissions from this IP address. Please try again in 15 minutes.');
+    throw AppError.tooManyRequests('Too many contact submissions from this IP address. Please try again in an hour.');
   }
 
   record.timestamps.push(now);

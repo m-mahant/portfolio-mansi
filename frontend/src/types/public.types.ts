@@ -131,6 +131,8 @@ export interface ContactSubmissionData {
   email: string;
   subject: string;
   message: string;
+  // Honeypot: left blank by real visitors, caught in CSS, filled by most spam bots.
+  website?: string;
 }
 
 // Contact submission response data interface.
