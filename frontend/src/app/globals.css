@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #6366f1;
+  --color-secondary: #8b5cf6;
+  --color-accent: #d97706;
+  --color-background: #0f172a;
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-elevated: rgba(255, 255, 255, 0.05);
+  --color-text: #f8fafc;
+  --color-muted: #94a3b8;
+  --color-text-muted: #94a3b8;
+  --color-border: #334155;
+
+  /* Liquid Glass Semantic Tokens */
+  --glass-bg: rgba(30, 41, 59, 0.65);
+  --glass-bg-strong: rgba(15, 23, 42, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+  --glass-blur: blur(16px);
+
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Pacifico', cursive;
+  --font-button: 'Inter', sans-serif;
+  --font-card-title: 'Cinzel', serif;
+  --font-card-subtitle: 'Inter', sans-serif;
+  --font-card-description: 'Inter', sans-serif;
+  --font-tag: 'Fira Code', monospace;
+  --font-nav: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  --radius-base: 0.75rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.125rem;
+  --radius-xl: 1.5rem;
+
+  --motion-duration: 300ms;
+  --motion-enabled: 1;
+
+  --background: var(--color-background);
+  --foreground: var(--color-text);
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-text);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body), sans-serif;
+  transition: background-color var(--motion-duration) ease, color var(--motion-duration) ease;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* Typography Utility Classes */
+.font-heading { font-family: var(--font-heading), serif; }
+.font-body { font-family: var(--font-body), sans-serif; }
+.font-accent { font-family: var(--font-accent), cursive; }
+.font-button { font-family: var(--font-button), sans-serif; }
+.font-card-title { font-family: var(--font-card-title), serif; }
+.font-card-subtitle { font-family: var(--font-card-subtitle), sans-serif; }
+.font-card-description { font-family: var(--font-card-description), sans-serif; }
+.font-tag { font-family: var(--font-tag), monospace; }
+.font-nav { font-family: var(--font-nav), sans-serif; }
+.font-mono { font-family: var(--font-mono), monospace; }
+
+/* Liquid Glass Design System Utilities */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+}
+
+.glass-panel-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+  transition: all var(--motion-duration) ease;
+}
+
+.glass-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+}
+
+.glass-header {
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-button {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  transition: all 200ms ease;
+}
+
+.glass-button:hover {
+  background: var(--color-surface);
+  border-color: var(--color-primary);
+}
+
+.glass-input {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  color: var(--color-text);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.glass-input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}

@@ -1,0 +1,130 @@
+# Setup
+
+Lumenfolio is a **dynamic multi-work portfolio CMS**: **Next.js** (`frontend/`) and **Express** (`backend/`). There is no root `package.json`. Copy env files from each app’s `.env.example`. Never commit real secrets.
+
+How the stack is wired: [architecture.md](./architecture.md). HTTP routes and request flow: [api.md](./api.md).
+
+## What you need
+
+- Node.js 18+ and npm
+- A [Firebase](https://console.firebase.google.com/) project with **Authentication** (Email/Password) and **Cloud Firestore**
+- An [ImageKit](https://imagekit.io/) account (media uploads and CDN URLs)
+- One Firebase Auth user who will become the first admin
+
+Firebase Storage is not used. The browser never writes Firestore; the API uses the Admin SDK.
+
+## Local development
+
+### 1. Backend
+
+```bash
+cd backend
+cp .env.example .env
+# Fill FIREBASE_* and IMAGEKIT_*
+npm install
+npm run dev
+# http://localhost:4000
+```
+
+Create a Firebase Auth user in the console, then allow-list them:
+
+```bash
+# in backend/.env
+BOOTSTRAP_ADMIN_EMAIL=you@example.com
+
+npm run bootstrap:admin
+```
+
+That upserts `admins/{uid}` with `isActive: true`. Admin routes require a Firebase ID token **and** that document.
+
+Optional sample content (overwrites seed document IDs; deletes catalog docs that are not in the seed list):
+
+```bash
+npm run seed:firebase-content
+```
+
+Sample media URLs point at placeholders. Upload real files through Admin → Media (ImageKit) and replace URLs in the CMS.
+
+### 2. Frontend
+
+```bash
+cd frontend
+cp .env.example .env.local
+# NEXT_PUBLIC_API_URL=http://localhost:4000
+# NEXT_PUBLIC_SITE_URL=http://localhost:3000
+# plus Firebase web app keys (Project settings → Your apps)
+npm install
+npm run dev
+# http://localhost:3000
+```
+
+Public site: `/`. Admin: `/admin/login`. API docs: `http://localhost:4000/api-docs`.
+
+## Environment
+
+**Frontend** (`frontend/.env.local`) — all `NEXT_PUBLIC_*` values are visible in the browser. Do not put Admin SDK or ImageKit private keys here.
+
+| Variable | Local example |
+| --- | --- |
+| `NEXT_PUBLIC_API_URL` | `http://localhost:4000` (no `/api/v1` suffix) |
+| `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` |
+| `NEXT_PUBLIC_FIREBASE_API_KEY` | Firebase web API key |
+| `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` | `your-project.firebaseapp.com` |
+| `NEXT_PUBLIC_FIREBASE_PROJECT_ID` | Firebase project id |
+| `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` | usually `your-project.appspot.com` |
+| `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` | from Firebase |
+| `NEXT_PUBLIC_FIREBASE_APP_ID` | from Firebase |
+
+**Backend** (`backend/.env`)
+
+| Variable | Notes |
+| --- | --- |
+| `PORT` | `4000` locally. Do **not** set this on Render; the platform injects `PORT`. |
+| `FRONTEND_URL` | Public origin of the Next app, no trailing slash. Used for CORS. |
+| `NODE_ENV` | `development` or `production` |
+| `FIREBASE_PROJECT_ID` | Must match the frontend project |
+| `FIREBASE_CLIENT_EMAIL` | Service account email |
+| `FIREBASE_PRIVATE_KEY` | Full private key; keep `\n` escaping as in the downloaded JSON |
+| `IMAGEKIT_PUBLIC_KEY` | ImageKit |
+| `IMAGEKIT_PRIVATE_KEY` | ImageKit (server only) |
+| `IMAGEKIT_URL_ENDPOINT` | e.g. `https://ik.imagekit.io/your_id` |
+| `BOOTSTRAP_ADMIN_EMAIL` | Only needed for `npm run bootstrap:admin` |
+
+## Firestore rules
+
+Lock client SDK access. The API uses the Admin SDK and bypasses rules, so authorization must stay in Express (`admins/{uid}`).
+
+Example (adjust to your project):
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+```
+
+## Deploy (optional)
+
+This is not a hosted SaaS. You can run your own instance.
+
+1. **API** — Node service (for example Render Web Service) from `backend/`. Start command: `npm start` (`tsx src/server.ts`). Set `NODE_ENV=production`, `FRONTEND_URL` to the live site origin, Firebase Admin + ImageKit env vars. Do not set `PORT` on Render.
+2. **Web** — Next.js (for example Vercel) from `frontend/`. Set every `NEXT_PUBLIC_*` as **plain config** (not secret) so they are inlined at build time. `NEXT_PUBLIC_API_URL` is the API origin without `/api/v1`. `NEXT_PUBLIC_SITE_URL` is the live site origin, not localhost.
+3. Firebase Auth → **Authorized domains**: add your production host (for example `your-app.vercel.app`).
+4. Redeploy the frontend after changing `NEXT_PUBLIC_*` values.
+
+## Security
+
+- ImageKit private key and Firebase service-account key stay on the API only.
+- Admin login is Firebase Auth + `admins/{uid}`. Do not skip that check.
+- Swagger UI documents the API; it does not bypass auth on admin routes.
+
+## After clone: make it yours
+
+1. Change site name, about copy, and socials in Admin (or edit `backend/scripts/seed-firebase-content.ts` and re-seed).
+2. Brand fallbacks live in `frontend/src/lib/brand.ts` and `backend/src/lib/brand.ts`.
+3. Suggested GitHub repository name: **`lumenfolio`**.
+4. If you use the Firebase CLI, set `.firebaserc` `projects.default` to your real Firebase project id (the committed value is a placeholder).
