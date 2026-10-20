@@ -34,6 +34,9 @@ export interface EnvConfig {
   imagekitPrivateKey?: string;
   imagekitUrlEndpoint?: string;
   bootstrapAdminEmail?: string;
+  resendApiKey?: string;
+  contactNotificationEmail?: string;
+  contactFromEmail: string;
 }
 
 // Firebase readiness status interface for internal diagnostic checks.

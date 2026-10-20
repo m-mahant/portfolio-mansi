@@ -43,6 +43,7 @@ Admin form
 ```text
 POST /api/v1/contact  (rate limited)
   → contactMessages/{id}
+  → best-effort email notification via Resend (if RESEND_API_KEY is set)
 ```
 
 ### Media upload

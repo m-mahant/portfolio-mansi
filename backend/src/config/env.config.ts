@@ -58,6 +58,10 @@ export function validateAndLoadEnv(): EnvConfig {
 
   const bootstrapAdminEmail = process.env.BOOTSTRAP_ADMIN_EMAIL;
 
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const contactNotificationEmail = process.env.CONTACT_NOTIFICATION_EMAIL;
+  const contactFromEmail = process.env.CONTACT_FROM_EMAIL || 'onboarding@resend.dev';
+
   return {
     port,
     frontendUrl,
@@ -70,6 +74,9 @@ export function validateAndLoadEnv(): EnvConfig {
     imagekitPrivateKey,
     imagekitUrlEndpoint,
     bootstrapAdminEmail,
+    resendApiKey,
+    contactNotificationEmail,
+    contactFromEmail,
   };
 }
 

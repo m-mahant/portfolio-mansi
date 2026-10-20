@@ -89,6 +89,9 @@ Public site: `/`. Admin: `/admin/login`. API docs: `http://localhost:4000/api-do
 | `IMAGEKIT_PRIVATE_KEY` | ImageKit (server only) |
 | `IMAGEKIT_URL_ENDPOINT` | e.g. `https://ik.imagekit.io/your_id` |
 | `BOOTSTRAP_ADMIN_EMAIL` | Only needed for `npm run bootstrap:admin` |
+| `RESEND_API_KEY` | Optional. Enables an email notification on contact form submissions (via [Resend](https://resend.com)). Form still saves to Firestore if unset. |
+| `CONTACT_NOTIFICATION_EMAIL` | Optional. Where the contact notification is sent. |
+| `CONTACT_FROM_EMAIL` | Optional. Verified Resend sender; defaults to `onboarding@resend.dev`. |
 
 ## Firestore rules
 

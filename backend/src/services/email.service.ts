@@ -1,0 +1,43 @@
+import { Resend } from 'resend';
+import { env } from '../config/env.config';
+import { ContactMessage } from '../types/database.types';
+
+let resendClient: Resend | null = null;
+
+// Lazily initializes the Resend client only when an API key is configured.
+function getResendClient(): Resend | null {
+  if (!env.resendApiKey) {
+    return null;
+  }
+  if (!resendClient) {
+    resendClient = new Resend(env.resendApiKey);
+  }
+  return resendClient;
+}
+
+// Sends a best-effort email notification for a new contact form submission; never throws.
+export async function sendContactNotification(submission: ContactMessage): Promise<void> {
+  const client = getResendClient();
+
+  if (!client || !env.contactNotificationEmail) {
+    return;
+  }
+
+  try {
+    await client.emails.send({
+      from: `Portfolio Contact Form <${env.contactFromEmail}>`,
+      to: env.contactNotificationEmail,
+      replyTo: submission.email,
+      subject: `New contact message: ${submission.subject}`,
+      text: [
+        `From: ${submission.name} <${submission.email}>`,
+        `Subject: ${submission.subject}`,
+        '',
+        submission.message,
+      ].join('\n'),
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown email send error';
+    process.stderr.write(`[EmailService Warning] Failed to send contact notification: ${message}\n`);
+  }
+}

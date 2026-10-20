@@ -2,6 +2,7 @@ import { contactRepository, ContactRepository } from '../repositories/contact.re
 import { contactSubmissionSchema, ContactSubmissionInput } from '../validators/contact.validators';
 import { ContactMessage } from '../types/database.types';
 import { AppError } from '../errors/app-error';
+import { sendContactNotification } from './email.service';
 
 // Service layer for validating and persisting user contact submissions.
 export class ContactService {
@@ -30,7 +31,12 @@ export class ContactService {
       ipAddress: clientIp,
     };
 
-    return this.repository.createMessage(messageData);
+    const created = await this.repository.createMessage(messageData);
+
+    // Email notification is best-effort; it must never fail the submission itself.
+    void sendContactNotification(created);
+
+    return created;
   }
 }
 
