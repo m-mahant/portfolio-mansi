@@ -42,3 +42,6 @@ Thumbs.db
 logs/
 tmp/
 .temp/
+
+# Firestore backups (may contain visitor PII from contactMessages)
+backend/backups/
