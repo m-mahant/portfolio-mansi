@@ -22,7 +22,7 @@ import {
 } from '../src/types/database.types';
 import { BRAND_DESCRIPTION, BRAND_NAME, BRAND_TAGLINE } from '../src/lib/brand';
 
-const SAMPLE_MEDIA_URL = 'https://placehold.co/1200x800/1f2937/f9fafb.png?text=Lumenfolio';
+const SAMPLE_MEDIA_URL = 'https://placehold.co/1200x800/1f2937/f9fafb.png?text=Portfolio';
 
 // Populates Cloud Firestore with realistic portfolio data across all collections.
 export async function seedFirebaseContent(): Promise<void> {
@@ -46,7 +46,7 @@ export async function seedFirebaseContent(): Promise<void> {
       mediaId: 'med-site-logo-01',
       url: SAMPLE_MEDIA_URL,
       storagePath: 'portfolio/site/logo.jpg',
-      altText: 'Lumenfolio Logo',
+      altText: 'Mansi Mahant Logo',
     },
     favicon: {
       mediaId: 'med-site-favicon-01',
@@ -54,7 +54,7 @@ export async function seedFirebaseContent(): Promise<void> {
       storagePath: 'portfolio/site/favicon.jpg',
       altText: 'Favicon',
     },
-    copyrightText: '© 2026 Riley Navarro. All rights reserved.',
+    copyrightText: '© 2026 Mansi Mahant. All rights reserved.',
     seo: {
       title: `${BRAND_NAME} — Dynamic multi-work portfolio`,
       description: BRAND_DESCRIPTION,
@@ -106,7 +106,7 @@ export async function seedFirebaseContent(): Promise<void> {
     profileImage: {
       mediaId: '6a97bf8d83c1c6139f7e2f86',
       url: SAMPLE_MEDIA_URL,
-      altText: 'Riley Navarro Portrait',
+      altText: 'Mansi Mahant Portrait',
     },
     secondaryImage: {
       mediaId: '6a97bf8d83c1c6139f7e2f86',
@@ -114,8 +114,8 @@ export async function seedFirebaseContent(): Promise<void> {
       altText: 'Studio and Workspace',
     },
     seo: {
-      title: 'About — Riley Navarro',
-      description: 'Learn about Riley Navarro\'s dual identity as Software Engineer and Digital Artist.',
+      title: 'About — Mansi Mahant',
+      description: "Learn about Mansi Mahant's dual identity as Software Engineer and Digital Artist.",
     },
     updatedAt: now,
   };
@@ -127,7 +127,7 @@ export async function seedFirebaseContent(): Promise<void> {
     headline: 'Where Logic Meets',
     headlineAccent: 'Imagination',
     subtitle: 'Engineering digital experiences with the precision of code and the freedom of art.',
-    exploreButtonLabel: 'Explore Lumenfolio',
+    exploreButtonLabel: 'Explore Portfolio',
     exploreButtonTarget: '/',
     loadingText: 'LUMENFOLIO',
     autoRedirect: false,
@@ -136,8 +136,8 @@ export async function seedFirebaseContent(): Promise<void> {
     redirectTarget: '/',
     enabled: true,
     seo: {
-      title: 'Welcome | Lumenfolio',
-      description: 'Entry experience for Lumenfolio portfolio.',
+      title: 'Welcome | Mansi Mahant',
+      description: "Entry experience for Mansi Mahant's portfolio.",
     },
     updatedAt: now,
   };
@@ -164,7 +164,7 @@ export async function seedFirebaseContent(): Promise<void> {
       artCtaTarget: '/work/art-crafts',
     },
     seo: {
-      title: 'Home | Lumenfolio',
+      title: 'Home | Mansi Mahant',
       description: 'Official portfolio showcasing full-stack engineering projects and digital artwork.',
     },
     updatedAt: now,
@@ -181,7 +181,7 @@ export async function seedFirebaseContent(): Promise<void> {
     artTitle: 'Art & Crafts',
     artDescription: 'Digital illustrations, 3D modeling, creative media, and artistic process documentation.',
     seo: {
-      title: 'Work Overview | Lumenfolio',
+      title: 'Work Overview | Mansi Mahant',
       description: 'Explore software development case studies and creative digital art portfolios.',
     },
     updatedAt: now,
@@ -198,7 +198,7 @@ export async function seedFirebaseContent(): Promise<void> {
     subtitle:
       'Explore software engineering case studies, full-stack architectures, API systems, and production implementations.',
     seo: {
-      title: 'Software Development Portfolio | Lumenfolio',
+      title: 'Software Development Portfolio | Mansi Mahant',
       description:
         'Explore software engineering case studies, full-stack architectures, API systems, and production implementations.',
     },
@@ -216,7 +216,7 @@ export async function seedFirebaseContent(): Promise<void> {
       'A curated space showcasing the dialogue between digital precision and physical craftsmanship. From procedural GLSL shaders to wheel-thrown stoneware ceramics, every piece embodies an exploration in medium, texture, light, and geometry.',
     galleryHeading: 'Art & Crafts Gallery',
     seo: {
-      title: 'Art & Crafts Gallery | Lumenfolio',
+      title: 'Art & Crafts Gallery | Mansi Mahant',
       description:
         'Explore 3D renders, digital illustrations, generative code artwork, and handcrafted fine ceramics.',
     },
@@ -229,7 +229,7 @@ export async function seedFirebaseContent(): Promise<void> {
     title: 'Blog & Articles',
     subtitle: 'Insights, engineering reflections, design patterns, and creative notes.',
     seo: {
-      title: 'Blog & Articles | Lumenfolio',
+      title: 'Blog & Articles | Mansi Mahant',
       description: 'Insights, engineering reflections, design patterns, and creative notes.',
     },
     updatedAt: now,
@@ -244,7 +244,7 @@ export async function seedFirebaseContent(): Promise<void> {
     educationSectionTitle: 'Education & Certifications',
     educationSectionSubtitle: 'Academic background and professional certifications.',
     seo: {
-      title: 'Experience & Education | Lumenfolio',
+      title: 'Experience & Education | Mansi Mahant',
       description:
         'A timeline of software engineering roles, technical leadership positions, and formal academic background.',
     },
@@ -265,7 +265,7 @@ export async function seedFirebaseContent(): Promise<void> {
     resumeUrl: SAMPLE_MEDIA_URL,
     resumeLabel: 'Download Full Resume',
     seo: {
-      title: 'Contact | Lumenfolio',
+      title: 'Contact | Mansi Mahant',
       description: 'Get in touch for engineering roles, technical consulting, or artwork commissions.',
     },
     updatedAt: now,
@@ -290,7 +290,7 @@ export async function seedFirebaseContent(): Promise<void> {
     {
       id: 'social-02',
       platform: 'LinkedIn',
-      label: 'Riley Navarro',
+      label: 'Mansi Mahant',
       url: 'https://linkedin.com/in/example',
       icon: 'linkedin',
       displayOrder: 2,
@@ -371,15 +371,15 @@ export async function seedFirebaseContent(): Promise<void> {
   const projects: Project[] = [
     {
       id: 'project-01',
-      title: 'Lumenfolio Platform',
-      slug: 'lumenfolio-platform',
+      title: 'Personal Portfolio CMS',
+      slug: 'personal-portfolio-cms',
       subtitle: 'Dynamic Portfolio Fusing Software Engineering & Editorial Art',
       shortDescription: 'A production Next.js 16 and Express REST application powered by Cloud Firestore and ImageKit CDN.',
-      description: 'Lumenfolio is an advanced portfolio system built with Next.js App Router, Express, and Cloud Firestore. It features dynamic theme token management, OpenAPI Swagger documentation, and a granular CMS layer.',
+      description: 'This platform is an advanced portfolio system built with Next.js App Router, Express, and Cloud Firestore. It features dynamic theme token management, OpenAPI Swagger documentation, and a granular CMS layer.',
       coverImage: {
         mediaId: '6a97bf88ccf795e5202d6084', width: 1920, height: 1080,
         url: SAMPLE_MEDIA_URL,
-        altText: 'Lumenfolio product screenshot',
+        altText: 'Portfolio platform screenshot',
       },
       status: 'published',
       isFeatured: true,
@@ -417,24 +417,20 @@ export async function seedFirebaseContent(): Promise<void> {
         ],
       },
       performance: {
-        enabled: true,
-        summary: 'Achieved sub-50ms API responses and 98+ Lighthouse scores.',
-        metrics: [
-          { name: 'API Response Time', value: '38', unit: 'ms' },
-          { name: 'Lighthouse Performance', value: '99', unit: '/100' },
-        ],
+        enabled: false,
+        summary: '',
+        metrics: [],
       },
       challenges: 'Handling hydration consistency across dynamic server-rendered theme variables and responsive image aspect ratios.',
-      results: 'Zero downtime deployment with 100% backend-driven dynamic content population.',
+      results: 'A fully backend-driven dynamic portfolio with no redeploys needed to update content.',
       gallery: [
         { mediaId: 'med-proj-01-g1', url: SAMPLE_MEDIA_URL, altText: 'Dashboard View', displayOrder: 1 },
         { mediaId: 'med-proj-01-g2', url: SAMPLE_MEDIA_URL, altText: 'Detail Case Study', displayOrder: 2 },
       ],
       links: [
-        { label: 'GitHub Repository', url: 'https://github.com/example/lumenfolio', type: 'github', isVisible: true, displayOrder: 1 },
-        { label: 'Live Demo', url: 'http://localhost:3000', type: 'live', isVisible: true, displayOrder: 2 },
+        { label: 'GitHub Repository', url: 'https://github.com/m-mahant/portfolio-mansi', type: 'github', isVisible: true, displayOrder: 1 },
       ],
-      seo: { title: 'Lumenfolio Platform', description: 'Case study of the Lumenfolio portfolio architecture.' },
+      seo: { title: 'Personal Portfolio CMS', description: 'Case study of this portfolio platform\'s architecture.' },
       createdAt: now,
       updatedAt: now,
     },
@@ -608,7 +604,7 @@ export async function seedFirebaseContent(): Promise<void> {
       status: 'published',
       isFeatured: true,
       displayOrder: 1,
-      seo: { title: 'Ethereal Digital Canvas — Artwork', description: 'Generative digital artwork by Riley Navarro.' },
+      seo: { title: 'Ethereal Digital Canvas — Artwork', description: 'Generative digital artwork by Mansi Mahant.' },
       createdAt: now,
       updatedAt: now,
     },
@@ -1833,7 +1829,7 @@ By following these battle-tested design patterns, platforms can support millions
       createdAt: '2026-08-10T09:00:00.000Z',
       updatedAt: '2026-08-15T10:00:00.000Z',
       seo: {
-        title: 'Building Scalable Cloud-Native Applications — Riley Navarro',
+        title: 'Building Scalable Cloud-Native Applications — Mansi Mahant',
         description: 'Architectural principles and strategies for building high-availability cloud microservices.',
         keywords: ['cloud', 'kubernetes', 'microservices', 'architecture'],
       },
@@ -1865,7 +1861,7 @@ By establishing clean contract-driven development, frontend and backend teams ca
       createdAt: '2026-08-18T11:00:00.000Z',
       updatedAt: '2026-08-20T14:30:00.000Z',
       seo: {
-        title: 'Designing Reliable Backend APIs — Riley Navarro',
+        title: 'Designing Reliable Backend APIs — Mansi Mahant',
         description: 'Mastering type-safe RESTful API design with Express, TypeScript, and Zod.',
         keywords: ['api', 'nodejs', 'typescript', 'rest'],
       },
@@ -1895,7 +1891,7 @@ Whether developing cloud infrastructure or rendering generative digital art, the
       createdAt: '2026-08-22T08:00:00.000Z',
       updatedAt: '2026-08-25T09:15:00.000Z',
       seo: {
-        title: 'From Software Engineering to Digital Art — Riley Navarro',
+        title: 'From Software Engineering to Digital Art — Mansi Mahant',
         description: 'The intersection of software architecture, GLSL shaders, and visual art.',
         keywords: ['creative coding', 'generative art', 'design', 'shaders'],
       },
@@ -1927,7 +1923,7 @@ Through code, artists transition from creating single static images to designing
       createdAt: '2026-08-26T12:00:00.000Z',
       updatedAt: '2026-08-28T16:45:00.000Z',
       seo: {
-        title: 'Exploring Generative Art & Creative Algorithms — Riley Navarro',
+        title: 'Exploring Generative Art & Creative Algorithms — Mansi Mahant',
         description: 'Deep dive into noise functions, particle systems, and WebGL creative coding.',
         keywords: ['shaders', 'webgl', 'generative art', 'math'],
       },
@@ -1959,7 +1955,7 @@ Investing in DX leads to happier engineering teams, faster release cycles, and m
       createdAt: '2026-08-30T10:00:00.000Z',
       updatedAt: '2026-09-01T08:00:00.000Z',
       seo: {
-        title: 'Building Developer-Friendly Systems — Riley Navarro',
+        title: 'Building Developer-Friendly Systems — Mansi Mahant',
         description: 'Strategies for maximizing developer experience and engineering velocity.',
         keywords: ['dx', 'architecture', 'solid', 'typescript'],
       },
