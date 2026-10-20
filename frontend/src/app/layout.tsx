@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { ThemeRuntimeProvider } from '@/context/theme-runtime';
 import { BRAND_NAME, BRAND_TAGLINE } from '@/lib/brand';
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col bg-[var(--color-background,#0f172a)] text-[var(--color-text,#f8fafc)] font-sans transition-colors duration-300 overflow-x-hidden">
         <ThemeRuntimeProvider>{children}</ThemeRuntimeProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
