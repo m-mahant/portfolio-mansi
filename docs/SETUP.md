@@ -1,6 +1,6 @@
 # Setup
 
-Lumenfolio is a **dynamic multi-work portfolio CMS**: **Next.js** (`frontend/`) and **Express** (`backend/`). There is no root `package.json`. Copy env files from each app’s `.env.example`. Never commit real secrets.
+Mansi Mahant’s portfolio is a **dynamic multi-work portfolio CMS**: **Next.js** (`frontend/`) and **Express** (`backend/`). There is no root `package.json`. Copy env files from each app’s `.env.example`. Never commit real secrets.
 
 How the stack is wired: [architecture.md](./architecture.md). HTTP routes and request flow: [api.md](./api.md).
 
@@ -126,5 +126,5 @@ This is not a hosted SaaS. You can run your own instance.
 
 1. Change site name, about copy, and socials in Admin (or edit `backend/scripts/seed-firebase-content.ts` and re-seed).
 2. Brand fallbacks live in `frontend/src/lib/brand.ts` and `backend/src/lib/brand.ts`.
-3. Suggested GitHub repository name: **`lumenfolio`**.
+3. GitHub repository: **`portfolio-mansi`**.
 4. If you use the Firebase CLI, set `.firebaserc` `projects.default` to your real Firebase project id (the committed value is a placeholder).

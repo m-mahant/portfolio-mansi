@@ -1,4 +1,4 @@
-# Lumenfolio
+# Mansi Mahant
 
 **A dynamic CMS for every kind of work you ship.**
 
@@ -13,7 +13,7 @@ Admin UI  →  /api/v1/admin  →  Firestore / ImageKit
 Public UI →  /api/v1        →  Firestore (ImageKit URLs)
 ```
 
-License: [MIT](./LICENSE). Setup: [docs/SETUP.md](./docs/SETUP.md). Architecture: [docs/architecture.md](./docs/architecture.md). API: [docs/api.md](./docs/api.md). Contributing: [CONTRIBUTING.md](./CONTRIBUTING.md).
+License: [Proprietary](./LICENSE). Setup: [docs/SETUP.md](./docs/SETUP.md). Architecture: [docs/architecture.md](./docs/architecture.md). API: [docs/api.md](./docs/api.md).
 
 ---
 
@@ -40,7 +40,7 @@ License: [MIT](./LICENSE). Setup: [docs/SETUP.md](./docs/SETUP.md). Architecture
 ## Layout
 
 ```text
-lumenfolio/
+portfolio-mansi/
 ├── frontend/          # Next.js (public + admin)
 ├── backend/           # Express API
 │   ├── src/
@@ -50,7 +50,6 @@ lumenfolio/
 │   ├── architecture.md
 │   └── api.md
 ├── AGENTS.md
-├── CONTRIBUTING.md
 ├── LICENSE
 └── README.md
 ```
@@ -87,4 +86,4 @@ Each public page has a Firestore config document. Catalogs are separate collecti
 
 ## GitHub
 
-Suggested GitHub repository name: **`lumenfolio`**.
+GitHub repository: **`portfolio-mansi`**.

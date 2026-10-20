@@ -16,7 +16,7 @@ const DEFAULT_CONTACT_PAGE_CONFIG: ContactPageConfig = {
   resumeUrl: '#',
   resumeLabel: 'Download Resume (PDF)',
   seo: {
-    title: 'Contact | Lumenfolio',
+    title: 'Contact | Mansi Mahant',
     description: 'Get in touch for software engineering opportunities, commissions, or technical collaborations.',
   },
   updatedAt: new Date().toISOString(),

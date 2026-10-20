@@ -9,7 +9,7 @@ interface PublicFooterProps {
 
 // Renders the global public website footer with navigation links and copyright information.
 export const PublicFooter: React.FC<PublicFooterProps> = ({
-  siteName = 'Lumenfolio',
+  siteName = 'Mansi Mahant',
   copyrightText,
 }) => {
   const currentYear = new Date().getFullYear();
@@ -20,7 +20,7 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({
         <div className="flex flex-col gap-1 text-center sm:text-left">
           <p className="font-semibold text-[var(--color-text)]">{siteName}</p>
           <p className="text-[var(--color-muted)] opacity-80">
-            {copyrightText || `© ${currentYear} Lumenfolio. All rights reserved.`}
+            {copyrightText || `© ${currentYear} Mansi Mahant. All rights reserved.`}
           </p>
         </div>
 

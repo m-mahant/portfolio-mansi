@@ -271,7 +271,7 @@ export default function AdminIntroPage() {
                   type="text"
                   value={formData.exploreButtonLabel || ''}
                   onChange={(e) => handleChange('exploreButtonLabel', e.target.value)}
-                  placeholder="e.g. Explore Lumenfolio"
+                  placeholder="e.g. Explore Portfolio"
                   className="w-full px-3.5 py-2 rounded-xl bg-[var(--color-background)] border border-[var(--glass-border)] text-xs text-[var(--color-text)] focus:border-[var(--color-primary)] outline-none font-semibold"
                 />
               </div>
@@ -306,7 +306,7 @@ export default function AdminIntroPage() {
                 type="text"
                 value={formData.loadingText || ''}
                 onChange={(e) => handleChange('loadingText', e.target.value)}
-                placeholder="e.g. LUMENFOLIO"
+                placeholder="e.g. MANSI MAHANT"
                 className="w-full px-3.5 py-2 rounded-xl bg-[var(--color-background)] border border-[var(--glass-border)] text-xs text-[var(--color-text)] focus:border-[var(--color-primary)] outline-none font-mono"
               />
             </div>
@@ -385,7 +385,7 @@ export default function AdminIntroPage() {
                   type="text"
                   value={formData.seo?.title || ''}
                   onChange={(e) => handleSeoChange('title', e.target.value)}
-                  placeholder="Welcome | Lumenfolio"
+                  placeholder="Welcome | Mansi Mahant"
                   className="w-full px-3.5 py-2 rounded-xl bg-[var(--color-background)] border border-[var(--glass-border)] text-xs text-[var(--color-text)] focus:border-[var(--color-primary)] outline-none"
                 />
               </div>
@@ -397,7 +397,7 @@ export default function AdminIntroPage() {
                   type="text"
                   value={formData.seo?.description || ''}
                   onChange={(e) => handleSeoChange('description', e.target.value)}
-                  placeholder="Entry experience for Lumenfolio..."
+                  placeholder="Entry experience for Mansi Mahant..."
                   className="w-full px-3.5 py-2 rounded-xl bg-[var(--color-background)] border border-[var(--glass-border)] text-xs text-[var(--color-text)] focus:border-[var(--color-primary)] outline-none"
                 />
               </div>

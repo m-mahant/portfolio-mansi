@@ -14,7 +14,7 @@ interface PublicHeaderProps {
   site?: SiteSettings | null;
 }
 
-export const PublicHeader: React.FC<PublicHeaderProps> = ({ siteName = 'Lumenfolio', site }) => {
+export const PublicHeader: React.FC<PublicHeaderProps> = ({ siteName = 'Mansi Mahant', site }) => {
   const name = site?.siteName || siteName;
   const logoUrl = site?.logo?.url;
   const logoAlt = site?.logo?.altText || name;

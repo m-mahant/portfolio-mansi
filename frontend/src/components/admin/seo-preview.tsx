@@ -15,9 +15,9 @@ interface SeoPreviewProps {
 
 export const SeoPreview: React.FC<SeoPreviewProps> = ({
   seo,
-  defaultTitle = 'Lumenfolio',
+  defaultTitle = 'Mansi Mahant',
   defaultDescription = 'Dynamic portfolio fusing software engineering and digital craft.',
-  siteName = 'Lumenfolio',
+  siteName = 'Mansi Mahant',
   slug = '',
 }) => {
   const displayTitle = seo.title?.trim() || defaultTitle;

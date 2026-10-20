@@ -7,7 +7,7 @@ function startServer(): void {
   app.listen(env.port, () => {
     const status = getFirebaseStatus();
     // eslint-disable-next-line no-console
-    console.log(`Lumenfolio Backend listening on http://localhost:${env.port} [${env.nodeEnv}]`);
+    console.log(`Mansi Mahant Backend listening on http://localhost:${env.port} [${env.nodeEnv}]`);
     // eslint-disable-next-line no-console
     console.log(`Firebase Admin Status: Initialized=${status.initialized}, ProjectId=${status.projectId}`);
   });

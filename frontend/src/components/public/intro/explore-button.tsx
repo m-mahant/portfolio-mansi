@@ -14,7 +14,7 @@ export const ExploreButton: React.FC<ExploreButtonProps> = ({
   onClick,
   disabled = false,
   isReducedMotion = false,
-  label = 'Explore Lumenfolio',
+  label = 'Explore Portfolio',
 }) => {
   return (
     <button

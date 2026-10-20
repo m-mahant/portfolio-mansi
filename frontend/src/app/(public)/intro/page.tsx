@@ -5,8 +5,8 @@ import { IntroStandaloneView } from '@/components/public/intro/intro-standalone-
 import { IntroPageConfig } from '@/types/public.types';
 
 export const metadata = generatePublicMetadata({
-  titleOverride: 'Welcome | Lumenfolio',
-  descriptionOverride: 'Entry experience for Lumenfolio portfolio.',
+  titleOverride: 'Welcome | Mansi Mahant',
+  descriptionOverride: "Entry experience for Mansi Mahant's portfolio.",
 });
 
 export const dynamic = 'force-dynamic';

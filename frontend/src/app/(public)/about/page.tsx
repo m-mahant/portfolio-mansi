@@ -13,7 +13,7 @@ import { AboutProfile, ContactPageConfig, SocialLink } from '@/types/public.type
 
 export const metadata = generatePublicMetadata({
   titleOverride: 'About Profile',
-  descriptionOverride: 'Learn more about the developer and artist behind Lumenfolio.',
+  descriptionOverride: "Learn more about the developer and artist behind Mansi Mahant's portfolio.",
   canonicalPath: '/about',
 });
 

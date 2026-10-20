@@ -10,7 +10,7 @@ const DEFAULT_EXPERIENCE_PAGE_CONFIG: ExperiencePageConfig = {
   educationSectionTitle: 'Education & Certifications',
   educationSectionSubtitle: 'Academic background and professional certifications.',
   seo: {
-    title: 'Experience & Education | Lumenfolio',
+    title: 'Experience & Education | Mansi Mahant',
     description:
       'A timeline of software engineering roles, technical leadership positions, and formal academic background.',
   },

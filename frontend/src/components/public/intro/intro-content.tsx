@@ -23,7 +23,7 @@ export const IntroContent: React.FC<IntroContentProps> = ({
   const subtitle =
     introConfig?.subtitle ||
     'Engineering digital experiences with the precision of code and the freedom of art.';
-  const exploreButtonLabel = introConfig?.exploreButtonLabel || 'Explore Lumenfolio';
+  const exploreButtonLabel = introConfig?.exploreButtonLabel || 'Explore Portfolio';
 
   return (
     <div

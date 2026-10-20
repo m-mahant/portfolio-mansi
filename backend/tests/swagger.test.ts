@@ -9,7 +9,7 @@ describe('OpenAPI & Swagger Documentation Endpoints', () => {
     assert.equal(res.status, 200);
     assert.equal(res.headers['content-type'], 'application/json; charset=utf-8');
     assert.equal(res.body.openapi, '3.0.0');
-    assert.equal(res.body.info.title, 'Lumenfolio API');
+    assert.equal(res.body.info.title, 'Mansi Mahant API');
     assert.ok(res.body.paths['/api/v1/projects']);
     assert.ok(res.body.paths['/api/v1/admin/site']);
   });

@@ -71,7 +71,7 @@ export function SiteForm({ initialData = {}, onSave, isSaving }: SiteFormProps) 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Input
             label="Site Name *"
-            placeholder="Lumenfolio"
+            placeholder="Mansi Mahant"
             value={formData.siteName || ''}
             onChange={(e) => handleChange('siteName', e.target.value)}
             required

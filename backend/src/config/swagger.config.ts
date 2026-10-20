@@ -2,7 +2,7 @@ import swaggerUi from 'swagger-ui-express';
 import { Express, Request, Response } from 'express';
 import { BRAND_DESCRIPTION, BRAND_NAME } from '../lib/brand';
 
-// Complete OpenAPI 3.0.0 Specification for Lumenfolio Backend APIs.
+// Complete OpenAPI 3.0.0 Specification for Mansi Mahant Backend APIs.
 export const openApiSpec = {
   openapi: '3.0.0',
   info: {
@@ -74,9 +74,9 @@ export const openApiSpec = {
           headline: { type: 'string', example: 'Where Logic Meets' },
           headlineAccent: { type: 'string', example: 'Imagination' },
           subtitle: { type: 'string', example: 'Engineering digital experiences with the precision of code and the freedom of art.' },
-          exploreButtonLabel: { type: 'string', example: 'Explore Lumenfolio' },
+          exploreButtonLabel: { type: 'string', example: 'Explore Portfolio' },
           exploreButtonTarget: { type: 'string', example: '/' },
-          loadingText: { type: 'string', example: 'LUMENFOLIO' },
+          loadingText: { type: 'string', example: 'MANSI MAHANT' },
           autoRedirect: { type: 'boolean', example: false },
           autoRedirectDelay: { type: 'number', example: 5000 },
           showOnInitialVisit: { type: 'boolean', example: true },

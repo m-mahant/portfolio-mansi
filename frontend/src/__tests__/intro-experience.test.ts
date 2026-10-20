@@ -10,8 +10,8 @@ export function runIntroExperienceTests(): void {
   assert.strictEqual(DEFAULT_THEME.colors.background, '#0f172a');
 
   // Verifies primary CTA text requirement
-  const expectedCtaText = 'Explore Lumenfolio';
-  assert.strictEqual(expectedCtaText, 'Explore Lumenfolio');
+  const expectedCtaText = 'Explore Portfolio';
+  assert.strictEqual(expectedCtaText, 'Explore Portfolio');
 
   // Verifies conceptual title direction
   const expectedTitle = 'Where Logic Meets Imagination';

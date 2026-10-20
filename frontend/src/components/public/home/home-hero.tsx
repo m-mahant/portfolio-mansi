@@ -25,7 +25,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ socialLinks = [], homeConfig
 
         {/* Right Column: Hero Portrait Image Frame */}
         <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
-          <HeroImage image={profileImage} name={homeConfig?.hero?.mainHeading || 'Lumenfolio'} />
+          <HeroImage image={profileImage} name={homeConfig?.hero?.mainHeading || 'Mansi Mahant'} />
         </div>
       </div>
     </PublicSection>

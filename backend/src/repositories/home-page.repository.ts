@@ -20,7 +20,7 @@ const DEFAULT_HOME_PAGE_CONFIG: HomePageConfig = {
     artCtaTarget: '/work/art-crafts',
   },
   seo: {
-    title: 'Home | Lumenfolio',
+    title: 'Home | Mansi Mahant',
     description: 'Official portfolio showcasing full-stack engineering projects and digital artwork.',
   },
   updatedAt: new Date().toISOString(),

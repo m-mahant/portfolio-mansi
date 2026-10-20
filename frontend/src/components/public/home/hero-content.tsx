@@ -17,7 +17,7 @@ export const HeroContent: React.FC<HeroContentProps> = ({
   homeConfig,
 }) => {
   const hero = homeConfig?.hero;
-  const name = hero?.mainHeading || 'Lumenfolio';
+  const name = hero?.mainHeading || 'Mansi Mahant';
   const title = hero?.accentHeading || 'Software Developer × Creative Artist';
   const shortBio =
     hero?.description ||

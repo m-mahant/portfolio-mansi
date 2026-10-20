@@ -7,7 +7,7 @@ const DEFAULT_BLOG_PAGE_CONFIG: BlogPageConfig = {
   title: 'Blog & Articles',
   subtitle: 'Insights, engineering reflections, design patterns, and creative notes.',
   seo: {
-    title: 'Blog & Articles | Lumenfolio',
+    title: 'Blog & Articles | Mansi Mahant',
     description: 'Insights, engineering reflections, design patterns, and creative notes.',
   },
   updatedAt: new Date().toISOString(),

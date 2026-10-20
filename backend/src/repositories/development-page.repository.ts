@@ -8,7 +8,7 @@ const DEFAULT_DEVELOPMENT_PAGE_CONFIG: DevelopmentPageConfig = {
   subtitle:
     'Explore software engineering case studies, full-stack architectures, API systems, and production implementations.',
   seo: {
-    title: 'Software Development Portfolio | Lumenfolio',
+    title: 'Software Development Portfolio | Mansi Mahant',
     description:
       'Explore software engineering case studies, full-stack architectures, API systems, and production implementations.',
   },

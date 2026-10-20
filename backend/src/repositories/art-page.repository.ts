@@ -12,7 +12,7 @@ const DEFAULT_ART_PAGE_CONFIG: ArtPageConfig = {
     'A curated space showcasing the dialogue between digital precision and physical craftsmanship. From procedural GLSL shaders to wheel-thrown stoneware ceramics, every piece embodies an exploration in medium, texture, light, and geometry.',
   galleryHeading: 'Art & Crafts Gallery',
   seo: {
-    title: 'Art & Crafts Gallery | Lumenfolio',
+    title: 'Art & Crafts Gallery | Mansi Mahant',
     description:
       'Explore 3D renders, digital illustrations, generative code artwork, and handcrafted fine ceramics.',
   },

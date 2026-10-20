@@ -8,12 +8,12 @@ const DEFAULT_INTRO_PAGE_CONFIG: IntroPageConfig = {
   headline: 'Where Logic Meets',
   headlineAccent: 'Imagination',
   subtitle: 'Engineering digital experiences with the precision of code and the freedom of art.',
-  exploreButtonLabel: 'Explore Lumenfolio',
+  exploreButtonLabel: 'Explore Portfolio',
   exploreButtonTarget: '/',
   enabled: true,
   seo: {
-    title: 'Welcome | Lumenfolio',
-    description: 'Entry experience for Lumenfolio portfolio.',
+    title: 'Welcome | Mansi Mahant',
+    description: "Entry experience for Mansi Mahant's portfolio.",
   },
   updatedAt: new Date().toISOString(),
 };

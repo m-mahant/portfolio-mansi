@@ -1,6 +1,6 @@
 # Architecture
 
-Lumenfolio is one CMS-backed portfolio, not a SaaS. Two apps, one API, one Firestore project, ImageKit for files.
+Mansi Mahant's portfolio is one CMS-backed portfolio, not a SaaS. Two apps, one API, one Firestore project, ImageKit for files.
 
 ```text
 Browser (public /admin)

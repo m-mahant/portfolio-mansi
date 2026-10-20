@@ -249,7 +249,7 @@ export default function AdminSeoPage() {
             seo={currentSeo}
             defaultTitle={
               activeTab === 'site'
-                ? siteSettings?.siteTitle || 'Lumenfolio'
+                ? siteSettings?.siteTitle || 'Mansi Mahant'
                 : activeTab === 'projects'
                 ? activeProject?.title || 'Project Case Study'
                 : activeArtwork?.title || 'Artwork Piece'

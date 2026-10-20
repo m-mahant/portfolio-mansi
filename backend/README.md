@@ -1,6 +1,6 @@
-# Lumenfolio API
+# Mansi Mahant API
 
-REST API for the Lumenfolio multi-work portfolio CMS. Firestore + ImageKit.
+REST API for the Mansi Mahant multi-work portfolio CMS. Firestore + ImageKit.
 
 Setup: [docs/SETUP.md](../docs/SETUP.md).
 

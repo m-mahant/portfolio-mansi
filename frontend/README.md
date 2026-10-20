@@ -1,4 +1,4 @@
-# Lumenfolio web
+# Mansi Mahant web
 
 Public multi-work portfolio and Admin CMS. Talks to the Express API; the browser does not read or write Firestore.
 

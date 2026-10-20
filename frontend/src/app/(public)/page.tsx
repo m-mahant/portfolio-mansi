@@ -6,7 +6,7 @@ import { HomeHero } from '@/components/public/home/home-hero';
 import { HomePageConfig, IntroPageConfig, SocialLink } from '@/types/public.types';
 
 export const metadata = generatePublicMetadata({
-  titleOverride: 'Lumenfolio — Home',
+  titleOverride: 'Mansi Mahant — Home',
   descriptionOverride: 'Dynamic portfolio fusing software engineering precision and creative digital artwork.',
 });
 

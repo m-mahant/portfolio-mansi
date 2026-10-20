@@ -20,7 +20,7 @@ const DEFAULT_WORK_PAGE_CONFIG: WorkPageConfig = {
   artTitle: 'Art & Crafts',
   artDescription: 'Digital illustrations, 3D modeling, creative media, and artistic process documentation.',
   seo: {
-    title: 'Work Overview | Lumenfolio',
+    title: 'Work Overview | Mansi Mahant',
     description: 'Explore software development case studies and creative digital art portfolios.',
   },
   updatedAt: new Date().toISOString(),

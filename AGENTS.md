@@ -1,4 +1,4 @@
-# AGENTS.md — Lumenfolio
+# AGENTS.md — Mansi Mahant Portfolio
 
 Instructions for coding agents working in this repository.
 
@@ -12,7 +12,7 @@ Source code is authoritative. Do not treat old completion reports as truth.
 
 - `frontend/` — Next.js 16 App Router (public + admin). Public fetchers: `frontend/src/services/api/public-api.ts`. Admin client: `frontend/src/lib/api/admin-api.ts`. Brand fallbacks: `frontend/src/lib/brand.ts`.
 - `backend/` — Express, Zod validators, Firestore repositories, ImageKit uploads. Brand fallbacks: `backend/src/lib/brand.ts`.
-- Docs that must stay current: `README.md`, `docs/SETUP.md`, `docs/architecture.md`, `docs/api.md`, this file, `CONTRIBUTING.md`. Do not add task lists, “current state”, or duplicate frontend/backend context files.
+- Docs that must stay current: `README.md`, `docs/SETUP.md`, `docs/architecture.md`, `docs/api.md`, this file. Do not add task lists, “current state”, or duplicate frontend/backend context files.
 
 ## Implementation plan (non-trivial tasks)
 
