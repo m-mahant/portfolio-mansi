@@ -11,7 +11,8 @@
     "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
     "test": "tsx --test tests/**/*.test.ts",
     "bootstrap:admin": "tsx scripts/bootstrap-admin.ts",
-    "seed:firebase-content": "tsx scripts/seed-firebase-content.ts"
+    "seed:firebase-content": "tsx scripts/seed-firebase-content.ts",
+    "seed:imagekit-media": "tsx scripts/seed-imagekit-media.ts"
   },
   "dependencies": {
     "@imagekit/nodejs": "^7.11.0",
