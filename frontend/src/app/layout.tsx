@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { ThemeRuntimeProvider } from '@/context/theme-runtime';
 import { BRAND_NAME, BRAND_TAGLINE } from '@/lib/brand';
@@ -62,6 +63,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeRuntimeProvider>{children}</ThemeRuntimeProvider>
         <Analytics />
         <SpeedInsights />
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
       </body>
     </html>
   );
