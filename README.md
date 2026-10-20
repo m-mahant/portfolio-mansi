@@ -74,7 +74,7 @@ Fill Firebase and ImageKit keys, bootstrap an admin, optionally seed sample cont
 | backend | `npm run bootstrap:admin` | writes `admins/{uid}` |
 | backend | `npm run seed:firebase-content` | sample Firestore data |
 
-API: `http://localhost:4000/api/v1`. Swagger: `/api-docs`. Inventory and request flow: [docs/api.md](./docs/api.md).
+API: `http://localhost:4000/api/v1`. Swagger: `/api-docs` (development only). Inventory and request flow: [docs/api.md](./docs/api.md).
 
 ---
 

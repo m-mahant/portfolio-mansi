@@ -58,7 +58,7 @@ npm run dev
 # http://localhost:3000
 ```
 
-Public site: `/`. Admin: `/admin/login`. API docs: `http://localhost:4000/api-docs`.
+Public site: `/`. Admin: `/admin/login`. API docs: `http://localhost:4000/api-docs` (development only, not mounted when `NODE_ENV=production`).
 
 ## Environment
 

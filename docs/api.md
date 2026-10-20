@@ -3,7 +3,7 @@
 Base: `http://localhost:4000/api/v1`.
 Set `NEXT_PUBLIC_API_URL` to the **origin** (`http://localhost:4000`), not `/api/v1`. The public client appends `/api/v1`.
 
-Interactive spec: `/api-docs`. Envelope: `{ success, data }` or `{ success, error }`.
+Interactive spec: `/api-docs` (development only, not mounted in production). Envelope: `{ success, data }` or `{ success, error }`.
 
 ## Request flow
 

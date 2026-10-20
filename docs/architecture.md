@@ -66,6 +66,6 @@ Uploads go to `POST /api/v1/admin/media/upload` (multipart). The API writes the 
 
 ## Live docs
 
-OpenAPI UI: `http://localhost:4000/api-docs` (also `/api/v1/docs`). JSON: `/api-docs/json`.
+OpenAPI UI: `http://localhost:4000/api-docs` (also `/api/v1/docs`). JSON: `/api-docs/json`. Mounted only when `NODE_ENV !== 'production'`.
 
 If this file and the code disagree, **code wins**.

@@ -27,8 +27,10 @@ export function createApp(): Express {
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-  // OpenAPI Documentation UI endpoints (/api-docs, /api/v1/docs)
-  setupSwagger(app);
+  // OpenAPI Documentation UI endpoints (/api-docs, /api/v1/docs) — development only, hidden in production
+  if (env.nodeEnv !== 'production') {
+    setupSwagger(app);
+  }
 
   // API v1 routes
   app.use('/api/v1', healthRouter);

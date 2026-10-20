@@ -11,4 +11,4 @@ npm run dev
 ```
 
 - Health: http://localhost:4000/api/v1/health
-- Swagger: http://localhost:4000/api-docs
+- Swagger: http://localhost:4000/api-docs (development only)
