@@ -111,10 +111,11 @@ service cloud.firestore {
 
 This is not a hosted SaaS. You can run your own instance.
 
-1. **API** — Node service (for example Render Web Service) from `backend/`. Start command: `npm start` (`tsx src/server.ts`). Set `NODE_ENV=production`, `FRONTEND_URL` to the live site origin, Firebase Admin + ImageKit env vars. Do not set `PORT` on Render.
+1. **API** — Render Web Service via the root `render.yaml` Blueprint (New → Blueprint, connect the repo). Builds `backend/`, start command `npm start` (`tsx src/server.ts`), health check `/api/v1/health`. Fill in `FRONTEND_URL` and the Firebase Admin + ImageKit env vars in the Render dashboard (left blank in the Blueprint on purpose — never commit real secrets). Do not set `PORT` on Render.
 2. **Web** — Next.js (for example Vercel) from `frontend/`. Set every `NEXT_PUBLIC_*` as **plain config** (not secret) so they are inlined at build time. `NEXT_PUBLIC_API_URL` is the API origin without `/api/v1`. `NEXT_PUBLIC_SITE_URL` is the live site origin, not localhost.
 3. Firebase Auth → **Authorized domains**: add your production host (for example `your-app.vercel.app`).
 4. Redeploy the frontend after changing `NEXT_PUBLIC_*` values.
+5. Render's free plan spins the API down after 15 minutes of no inbound traffic. `.github/workflows/keep-backend-awake.yml` pings `/api/v1/health` every 10 minutes to keep it warm — after the first deploy, add a repository variable `BACKEND_HEALTH_URL` (Settings → Secrets and variables → Actions → Variables) set to `https://<your-render-service>.onrender.com/api/v1/health`.
 
 ## Security
 
