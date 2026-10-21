@@ -3,7 +3,8 @@
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { Artwork } from '@/types/public.types';
-import { ArtworkLightbox, LightboxImageItem } from './artwork-lightbox';
+import { ArtworkLightbox } from './artwork-lightbox';
+import { getArtworkLightboxImages } from '@/utils/artwork.utils';
 
 interface ArtworkGalleryProps {
   artwork: Artwork;
@@ -15,33 +16,7 @@ export function ArtworkGallery({ artwork }: ArtworkGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number>(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
 
-  // Compile list of unique images for the gallery lightbox
-  const galleryImages: LightboxImageItem[] = useMemo(() => {
-    const list: LightboxImageItem[] = [];
-
-    if (artwork.featuredImage?.url) {
-      list.push({
-        url: artwork.featuredImage.url,
-        altText: artwork.featuredImage.altText || `${artwork.title} Cover`,
-        caption: artwork.featuredImage.caption || `${artwork.title} (Featured Cover)`,
-      });
-    }
-
-    if (artwork.images && artwork.images.length > 0) {
-      artwork.images.forEach((img) => {
-        // Avoid duplicate URL if featured image is identical
-        if (!list.some((item) => item.url === img.url)) {
-          list.push({
-            url: img.url,
-            altText: img.altText || artwork.title,
-            caption: img.caption,
-          });
-        }
-      });
-    }
-
-    return list;
-  }, [artwork]);
+  const galleryImages = useMemo(() => getArtworkLightboxImages(artwork), [artwork]);
 
   if (galleryImages.length === 0) {
     return null;

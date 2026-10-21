@@ -6,6 +6,7 @@ import { publicApi } from '@/services/api/public-api';
 import { PublicSection } from '@/components/public/public-section';
 import { PublicImage } from '@/components/public/public-image';
 import { BlogContent } from '@/components/public/blog/blog-content';
+import { ShareButtons } from '@/components/public/share-buttons';
 import { generatePublicMetadata } from '@/utils/seo.utils';
 import { calculateReadTime, formatBlogDate } from '@/utils/blog.utils';
 
@@ -127,6 +128,10 @@ export default async function PublicBlogDetailPage({ params }: PageProps) {
           )}
 
           <BlogContent content={blog.content} />
+
+          <div className="pt-6 border-t border-[var(--color-border)]">
+            <ShareButtons title={blog.title} />
+          </div>
         </div>
       </PublicSection>
     </article>

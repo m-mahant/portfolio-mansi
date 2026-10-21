@@ -13,6 +13,7 @@ import { ProjectApiFlowSection } from '@/components/public/development/project-a
 import { ProjectPerformanceSection } from '@/components/public/development/project-performance-section';
 import { ProjectGallerySection } from '@/components/public/development/project-gallery-section';
 import { ProjectLinksSection } from '@/components/public/development/project-links-section';
+import { ShareButtons } from '@/components/public/share-buttons';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -80,6 +81,10 @@ export default async function PublicProjectDetailPage({ params }: PageProps) {
           <ProjectPerformanceSection project={project} />
           <ProjectGallerySection project={project} />
           <ProjectLinksSection project={project} />
+
+          <div className="pt-6 border-t border-[var(--color-border)]">
+            <ShareButtons title={project.title} />
+          </div>
         </div>
       </PublicSection>
     </article>

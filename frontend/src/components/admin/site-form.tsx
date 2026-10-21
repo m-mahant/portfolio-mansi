@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { SiteSettings, MediaRef } from '@/types/admin.types';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -113,8 +114,8 @@ export function SiteForm({ initialData = {}, onSave, isSaving }: SiteFormProps) 
             <label className="block text-xs font-medium text-[var(--color-text-muted)]">Logo Image</label>
             <div className="flex items-center gap-3">
               {formData.logo?.url ? (
-                <div className="w-12 h-12 rounded-lg overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] p-1">
-                  <img src={formData.logo.url} alt="Logo" className="w-full h-full object-contain" />
+                <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] p-1">
+                  <Image src={formData.logo.url} alt="Logo" fill sizes="48px" className="object-contain" />
                 </div>
               ) : (
                 <div className="w-12 h-12 rounded-lg border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] flex items-center justify-center text-xs text-[var(--color-text-muted)]">
@@ -138,8 +139,8 @@ export function SiteForm({ initialData = {}, onSave, isSaving }: SiteFormProps) 
             <label className="block text-xs font-medium text-[var(--color-text-muted)]">Favicon Icon</label>
             <div className="flex items-center gap-3">
               {formData.favicon?.url ? (
-                <div className="w-12 h-12 rounded-lg overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] p-1">
-                  <img src={formData.favicon.url} alt="Favicon" className="w-full h-full object-contain" />
+                <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] p-1">
+                  <Image src={formData.favicon.url} alt="Favicon" fill sizes="48px" className="object-contain" />
                 </div>
               ) : (
                 <div className="w-12 h-12 rounded-lg border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] flex items-center justify-center text-xs text-[var(--color-text-muted)]">
