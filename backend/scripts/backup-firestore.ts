@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { initFirebaseAdmin, db, storage } from '../src/config/firebase.config';
+import { initFirebaseAdmin, db } from '../src/config/firebase.config';
+import { ImageKitService } from '../src/services/imagekit.service';
 
 // Single-document collections: collectionName -> fixed docId.
 const SINGLETON_DOCS: Record<string, string> = {
@@ -30,23 +31,24 @@ const COLLECTIONS = [
   'contactMessages',
 ];
 
-// Uploads the local backup JSON files to the private Firebase Storage bucket so CI runs (ephemeral disk) retain a copy.
-async function uploadToStorage(outDir: string, timestamp: string): Promise<void> {
-  if (!storage) {
-    console.log('Firebase Storage is not initialized; skipping remote upload.');
-    return;
-  }
-
-  const bucket = storage.bucket();
+// Uploads the local backup JSON files to ImageKit as private files (not publicly listable/fetchable)
+// so CI runs (ephemeral disk) retain a copy. Reuses the same ImageKit account already used for media.
+async function uploadToImageKit(outDir: string, timestamp: string): Promise<void> {
+  const imagekit = new ImageKitService();
   const files = fs.readdirSync(outDir);
 
   for (const file of files) {
-    await bucket.upload(path.join(outDir, file), {
-      destination: `firestore-backups/${timestamp}/${file}`,
+    const fileBuffer = fs.readFileSync(path.join(outDir, file));
+    await imagekit.uploadFile({
+      fileBuffer,
+      fileName: file,
+      folder: `/backups/firestore/${timestamp}`,
+      useUniqueFileName: false,
+      isPrivateFile: true,
     });
   }
 
-  console.log(`Uploaded backup to Storage: firestore-backups/${timestamp}/`);
+  console.log(`Uploaded backup to ImageKit: /backups/firestore/${timestamp}/`);
 }
 
 // Exports every known Firestore collection to timestamped JSON files for disaster recovery.
@@ -76,8 +78,8 @@ export async function backupFirestore(): Promise<void> {
     console.log(`Backed up ${collectionName} (${docs.length} document(s))`);
   }
 
-  if (process.env.BACKUP_UPLOAD_TO_STORAGE === 'true') {
-    await uploadToStorage(outDir, timestamp);
+  if (process.env.BACKUP_UPLOAD_TO_IMAGEKIT === 'true') {
+    await uploadToImageKit(outDir, timestamp);
   }
 
   console.log(`\nBackup complete: ${outDir}`);
