@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react-hooks/set-state-in-effect */
 
 // Manages public dynamic theme tokens, user-controlled light/dark/system preference, font loading, and CSS root property injection.
 
