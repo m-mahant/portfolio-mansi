@@ -1,19 +1,21 @@
 # Mansi Mahant
 
-**A dynamic CMS for every kind of work you ship.**
+**Personal portfolio and CMS.**
 
-Open-source portfolio for people who do more than one thing: software projects, artwork, writing, and experience — all on one public site, edited in Admin, served live.
+[![CI](https://github.com/m-mahant/portfolio-mansi/actions/workflows/ci.yml/badge.svg)](https://github.com/m-mahant/portfolio-mansi/actions/workflows/ci.yml)
 
-Stack: Next.js + Express + Cloud Firestore + ImageKit. Sample copy is fictional (Riley Navarro / example.com) so you can fork, seed, and replace it.
+Mansi Mahant's personal site — software projects, artwork, writing, and experience, all on one public site, edited in Admin, served live.
 
-**GitHub About:** `Dynamic multi-work portfolio CMS — software, art, writing, and experience. Public site + Admin.`
+Stack: Next.js + Express + Cloud Firestore + ImageKit.
+
+**GitHub About:** `Personal multi-work portfolio CMS — software, art, writing, and experience. Public site + Admin.`
 
 ```text
 Admin UI  →  /api/v1/admin  →  Firestore / ImageKit
 Public UI →  /api/v1        →  Firestore (ImageKit URLs)
 ```
 
-License: [Proprietary](./LICENSE). Setup: [docs/SETUP.md](./docs/SETUP.md). Architecture: [docs/architecture.md](./docs/architecture.md). API: [docs/api.md](./docs/api.md).
+License: [Proprietary — all rights reserved, not open source](./LICENSE). Setup: [docs/SETUP.md](./docs/SETUP.md). Architecture: [docs/architecture.md](./docs/architecture.md). API: [docs/api.md](./docs/api.md).
 
 ---
 
