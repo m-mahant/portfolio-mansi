@@ -9,6 +9,7 @@ import { ArtworkProcess } from '@/components/public/art-crafts/artwork-process';
 import { ArtworkMeta } from '@/components/public/art-crafts/artwork-meta';
 import { ArtworkGallery } from '@/components/public/art-crafts/artwork-gallery';
 import { RelatedArtwork } from '@/components/public/art-crafts/related-artwork';
+import { ShareButtons } from '@/components/public/share-buttons';
 import { generatePublicMetadata } from '@/utils/seo.utils';
 import { BRAND_NAME } from '@/lib/brand';
 
@@ -79,6 +80,10 @@ export default async function PublicArtworkDetailPage({ params }: PageProps) {
             <ArtworkStory artwork={artwork} />
             <ArtworkProcess artwork={artwork} />
             <ArtworkGallery artwork={artwork} />
+
+            <div className="pt-6 border-t border-[var(--color-border)]">
+              <ShareButtons title={artwork.title} />
+            </div>
           </div>
 
           <div className="lg:col-span-4 lg:sticky lg:top-24">

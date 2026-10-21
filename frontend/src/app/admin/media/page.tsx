@@ -4,6 +4,7 @@
 // Enhanced Admin Media Assets Library page with folder tree navigation, search, MIME filtering, pagination, and asset preview.
 
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
+import Image from 'next/image';
 import { useAdminAuth } from '@/context/admin-auth-context';
 import { adminApi } from '@/lib/api/admin-api';
 import { MediaItem } from '@/types/admin.types';
@@ -390,11 +391,12 @@ export default function AdminMediaPage() {
                   className="group bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-indigo-500/50 rounded-xl overflow-hidden cursor-pointer transition-all duration-200 flex flex-col justify-between shadow-lg"
                 >
                   <div className="aspect-square w-full bg-[var(--color-surface-elevated)] overflow-hidden relative flex items-center justify-center p-1">
-                    <img
+                    <Image
                       src={item.thumbnailUrl || item.url}
                       alt={item.altText || item.fileName}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-lg"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 768px) 50vw, 200px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300 rounded-lg"
                     />
                   </div>
 
@@ -441,11 +443,13 @@ export default function AdminMediaPage() {
                       className="hover:bg-[var(--color-surface-elevated)] cursor-pointer transition-colors"
                     >
                       <td className="p-3">
-                        <div className="w-10 h-10 rounded bg-[var(--color-surface-elevated)] overflow-hidden border border-[var(--color-border)] flex items-center justify-center">
-                          <img
+                        <div className="relative w-10 h-10 rounded bg-[var(--color-surface-elevated)] overflow-hidden border border-[var(--color-border)]">
+                          <Image
                             src={item.thumbnailUrl || item.url}
                             alt={item.fileName}
-                            className="w-full h-full object-cover"
+                            fill
+                            sizes="40px"
+                            className="object-cover"
                           />
                         </div>
                       </td>

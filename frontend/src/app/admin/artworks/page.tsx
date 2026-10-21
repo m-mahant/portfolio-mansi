@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Pencil, Trash2 } from 'lucide-react';
 import { useAdminAuth } from '@/context/admin-auth-context';
 import { adminApi } from '@/lib/api/admin-api';
@@ -162,8 +163,8 @@ export default function AdminArtworksPage() {
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-3">
                         {item.featuredImage?.url ? (
-                          <div className="w-10 h-10 rounded-lg overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] shrink-0">
-                            <img src={item.featuredImage.url} alt={item.title} className="w-full h-full object-cover" />
+                          <div className="relative w-10 h-10 rounded-lg overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] shrink-0">
+                            <Image src={item.featuredImage.url} alt={item.title} fill sizes="40px" className="object-cover" />
                           </div>
                         ) : (
                           <div className="w-10 h-10 rounded-lg border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] shrink-0 flex items-center justify-center text-[var(--color-text-muted)] text-xs">
