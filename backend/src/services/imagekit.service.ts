@@ -7,6 +7,7 @@ export interface ImageKitUploadParams {
   fileName: string;
   folder: string;
   useUniqueFileName?: boolean;
+  isPrivateFile?: boolean;
 }
 
 export interface ImageKitUploadResult {
@@ -41,6 +42,7 @@ export class ImageKitService {
         fileName: params.fileName,
         folder: params.folder,
         useUniqueFileName: params.useUniqueFileName ?? true,
+        isPrivateFile: params.isPrivateFile ?? false,
       });
 
       if (!response.fileId || !response.url) {

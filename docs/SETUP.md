@@ -11,7 +11,7 @@ How the stack is wired: [architecture.md](./architecture.md). HTTP routes and re
 - An [ImageKit](https://imagekit.io/) account (media uploads and CDN URLs)
 - One Firebase Auth user who will become the first admin
 
-Firebase Storage holds nothing app-facing; it is only used as the optional destination for scheduled Firestore backups (see Security). The browser never writes Firestore; the API uses the Admin SDK.
+Firebase Storage is not used (it requires the paid Blaze plan to enable at all). The browser never writes Firestore; the API uses the Admin SDK.
 
 ## Local development
 
@@ -92,7 +92,6 @@ Public site: `/`. Admin: `/admin/login`. API docs: `http://localhost:4000/api-do
 | `RESEND_API_KEY` | Optional. Enables an email notification on contact form submissions (via [Resend](https://resend.com)). Form still saves to Firestore if unset. |
 | `CONTACT_NOTIFICATION_EMAIL` | Optional. Where the contact notification is sent. |
 | `CONTACT_FROM_EMAIL` | Optional. Verified Resend sender; defaults to `onboarding@resend.dev`. |
-| `FIREBASE_STORAGE_BUCKET` | Optional. Defaults to `${FIREBASE_PROJECT_ID}.appspot.com`. Only read by the scheduled Firestore backup. |
 
 ## Firestore rules
 
@@ -130,7 +129,7 @@ This is not a hosted SaaS. You can run your own instance.
 - ImageKit private key and Firebase service-account key stay on the API only.
 - Admin login is Firebase Auth + `admins/{uid}`. Do not skip that check.
 - Swagger UI documents the API; it does not bypass auth on admin routes.
-- `npm run backup:firestore` (from `backend/`) exports every collection to timestamped JSON under `backend/backups/` (gitignored — contains visitor PII from `contactMessages`). `.github/workflows/backup-firestore.yml` also runs this weekly (Sundays) and, since GitHub Actions artifacts are publicly downloadable on a public repo, uploads the JSON to the project's private Firebase Storage bucket instead (`BACKUP_UPLOAD_TO_STORAGE=true`, under `firestore-backups/<timestamp>/`) — never as a workflow artifact. Requires repository secrets `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL`, `FIREBASE_PRIVATE_KEY`, `FIREBASE_STORAGE_BUCKET`.
+- `npm run backup:firestore` (from `backend/`) exports every collection to timestamped JSON under `backend/backups/` (gitignored — contains visitor PII from `contactMessages`). `.github/workflows/backup-firestore.yml` also runs this weekly (Sundays) and, since GitHub Actions artifacts are publicly downloadable on a public repo, uploads the JSON to ImageKit as **private files** instead (`BACKUP_UPLOAD_TO_IMAGEKIT=true`, under `/backups/firestore/<timestamp>/`, `isPrivateFile: true` so the CDN URL alone can't serve them) — never as a workflow artifact, and no Firebase Storage bucket needed (that requires the paid Blaze plan). Requires repository secrets `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL`, `FIREBASE_PRIVATE_KEY`, `IMAGEKIT_PUBLIC_KEY`, `IMAGEKIT_PRIVATE_KEY`, `IMAGEKIT_URL_ENDPOINT` (the same ImageKit credentials already used for media).
 
 ## After clone: make it yours
 
