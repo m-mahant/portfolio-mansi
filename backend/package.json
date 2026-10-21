@@ -16,6 +16,7 @@
     "backup:firestore": "tsx scripts/backup-firestore.ts"
   },
   "dependencies": {
+    "@google-cloud/firestore": "^9.3.1",
     "@imagekit/nodejs": "^7.11.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
