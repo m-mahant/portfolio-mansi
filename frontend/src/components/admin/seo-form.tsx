@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { SeoMetadata, MediaRef } from '@/types/admin.types';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -170,8 +171,8 @@ export function SeoForm({ seo = {}, onChange }: SeoFormProps) {
         </div>
 
         {seo.ogImage && (
-          <div className="mt-2 w-36 aspect-video rounded-lg overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
-            <img src={seo.ogImage} alt="OG Preview" className="w-full h-full object-cover" />
+          <div className="relative mt-2 w-36 aspect-video rounded-lg overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
+            <Image src={seo.ogImage} alt="OG Preview" fill sizes="144px" className="object-cover" />
           </div>
         )}
       </div>

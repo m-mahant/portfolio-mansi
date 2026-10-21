@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Blog, BlogStatus, MediaRef } from '@/types/admin.types';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -224,11 +225,15 @@ export function BlogForm({ initialData = {}, onSave, isSaving }: BlogFormProps) 
 
         {formData.featuredImage?.url ? (
           <div className="relative group rounded-xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] max-w-md">
-            <img
-              src={formData.featuredImage.url}
-              alt={formData.featuredImage.altText || 'Featured blog cover'}
-              className="w-full h-48 object-cover"
-            />
+            <div className="relative w-full h-48">
+              <Image
+                src={formData.featuredImage.url}
+                alt={formData.featuredImage.altText || 'Featured blog cover'}
+                fill
+                sizes="400px"
+                className="object-cover"
+              />
+            </div>
             <div className="p-3 flex items-center justify-between bg-black/60 backdrop-blur-sm text-white">
               <span className="text-xs truncate max-w-[200px]">
                 {formData.featuredImage.altText || 'Cover Image'}

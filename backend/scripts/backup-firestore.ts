@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { initFirebaseAdmin, db } from '../src/config/firebase.config';
+import { initFirebaseAdmin, db, storage } from '../src/config/firebase.config';
 
 // Single-document collections: collectionName -> fixed docId.
 const SINGLETON_DOCS: Record<string, string> = {
@@ -30,6 +30,25 @@ const COLLECTIONS = [
   'contactMessages',
 ];
 
+// Uploads the local backup JSON files to the private Firebase Storage bucket so CI runs (ephemeral disk) retain a copy.
+async function uploadToStorage(outDir: string, timestamp: string): Promise<void> {
+  if (!storage) {
+    console.log('Firebase Storage is not initialized; skipping remote upload.');
+    return;
+  }
+
+  const bucket = storage.bucket();
+  const files = fs.readdirSync(outDir);
+
+  for (const file of files) {
+    await bucket.upload(path.join(outDir, file), {
+      destination: `firestore-backups/${timestamp}/${file}`,
+    });
+  }
+
+  console.log(`Uploaded backup to Storage: firestore-backups/${timestamp}/`);
+}
+
 // Exports every known Firestore collection to timestamped JSON files for disaster recovery.
 export async function backupFirestore(): Promise<void> {
   console.log('Initializing Firebase Admin SDK...');
@@ -55,6 +74,10 @@ export async function backupFirestore(): Promise<void> {
     const docs = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     fs.writeFileSync(path.join(outDir, `${collectionName}.json`), JSON.stringify(docs, null, 2));
     console.log(`Backed up ${collectionName} (${docs.length} document(s))`);
+  }
+
+  if (process.env.BACKUP_UPLOAD_TO_STORAGE === 'true') {
+    await uploadToStorage(outDir, timestamp);
   }
 
   console.log(`\nBackup complete: ${outDir}`);
