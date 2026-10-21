@@ -129,7 +129,7 @@ export async function seedFirebaseContent(): Promise<void> {
     subtitle: 'Engineering digital experiences with the precision of code and the freedom of art.',
     exploreButtonLabel: 'Explore Portfolio',
     exploreButtonTarget: '/',
-    loadingText: 'LUMENFOLIO',
+    loadingText: 'MANSI MAHANT',
     autoRedirect: false,
     autoRedirectDelay: 5000,
     showOnInitialVisit: true,

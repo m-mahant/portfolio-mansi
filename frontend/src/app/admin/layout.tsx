@@ -52,7 +52,7 @@ function AdminShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-background)] flex text-[var(--color-text)] font-sans">
+    <div className="h-screen overflow-hidden bg-[var(--color-background)] flex text-[var(--color-text)] font-sans">
       <AdminSidebar mobileOpen={mobileOpen} onMobileClose={closeMobile} />
       <div className="flex-1 flex flex-col min-w-0">
         <AdminHeader onMobileToggle={() => setMobileOpen((prev) => !prev)} />

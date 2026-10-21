@@ -7,23 +7,38 @@ import { PublicEmptyState } from '@/components/public/public-empty-state';
 import { BlogCard } from '@/components/public/blog/blog-card';
 import { generatePublicMetadata } from '@/utils/seo.utils';
 
+// Adds the RSS feed auto-discovery link to blog listing metadata.
+function withRssAlternate(metadata: ReturnType<typeof generatePublicMetadata>) {
+  return {
+    ...metadata,
+    alternates: {
+      ...metadata.alternates,
+      types: { 'application/rss+xml': '/blog/rss.xml' },
+    },
+  };
+}
+
 export async function generateMetadata() {
   try {
     const page = await publicApi.getBlogPage();
-    return generatePublicMetadata({
-      titleOverride: page.seo?.title || page.title || 'Blogs & Articles',
-      descriptionOverride:
-        page.seo?.description ||
-        page.subtitle ||
-        'Read articles, technical deep dives, and creative notes.',
-      canonicalPath: '/blog',
-    });
+    return withRssAlternate(
+      generatePublicMetadata({
+        titleOverride: page.seo?.title || page.title || 'Blogs & Articles',
+        descriptionOverride:
+          page.seo?.description ||
+          page.subtitle ||
+          'Read articles, technical deep dives, and creative notes.',
+        canonicalPath: '/blog',
+      })
+    );
   } catch {
-    return generatePublicMetadata({
-      titleOverride: 'Blogs & Articles',
-      descriptionOverride: 'Read articles, technical deep dives, and creative notes.',
-      canonicalPath: '/blog',
-    });
+    return withRssAlternate(
+      generatePublicMetadata({
+        titleOverride: 'Blogs & Articles',
+        descriptionOverride: 'Read articles, technical deep dives, and creative notes.',
+        canonicalPath: '/blog',
+      })
+    );
   }
 }
 

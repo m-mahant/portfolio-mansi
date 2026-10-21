@@ -125,6 +125,7 @@ This is not a hosted SaaS. You can run your own instance.
 - ImageKit private key and Firebase service-account key stay on the API only.
 - Admin login is Firebase Auth + `admins/{uid}`. Do not skip that check.
 - Swagger UI documents the API; it does not bypass auth on admin routes.
+- `npm run backup:firestore` (from `backend/`) exports every collection to timestamped JSON under `backend/backups/` (gitignored — contains visitor PII from `contactMessages`). Run it manually before risky changes; there is no automatic schedule.
 
 ## After clone: make it yours
 
