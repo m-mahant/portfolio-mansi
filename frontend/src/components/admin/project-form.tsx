@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Project, MediaRef, PublishStatus } from '@/types/admin.types';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -334,7 +335,7 @@ export function ProjectForm({ initialData = {}, onSave, isSaving }: ProjectFormP
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           {formData.coverImage?.url ? (
             <div className="w-full max-w-56 aspect-video rounded-xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] relative">
-              <img src={formData.coverImage.url} alt={formData.title || 'Cover'} className="w-full h-full object-cover" />
+              <Image src={formData.coverImage.url} alt={formData.title || 'Cover'} fill sizes="224px" className="object-cover" />
             </div>
           ) : (
             <div className="w-full max-w-56 aspect-video rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] flex items-center justify-center text-xs text-[var(--color-text-muted)]">
@@ -524,7 +525,7 @@ export function ProjectForm({ initialData = {}, onSave, isSaving }: ProjectFormP
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               {formData.architecture?.diagramUrl ? (
                 <div className="w-full max-w-56 aspect-video rounded-xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] relative">
-                  <img src={formData.architecture.diagramUrl} alt="Architecture Diagram" className="w-full h-full object-cover" />
+                  <Image src={formData.architecture.diagramUrl} alt="Architecture Diagram" fill sizes="224px" className="object-cover" />
                 </div>
               ) : (
                 <div className="w-full max-w-56 aspect-video rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] flex items-center justify-center text-xs text-[var(--color-text-muted)]">
@@ -628,7 +629,7 @@ export function ProjectForm({ initialData = {}, onSave, isSaving }: ProjectFormP
             {(formData.gallery || []).map((img, idx) => (
               <div key={idx} className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-3 space-y-2">
                 <div className="aspect-video w-full rounded-lg overflow-hidden bg-[var(--color-surface-elevated)] relative">
-                  <img src={img.url} alt={img.altText || 'Gallery'} className="w-full h-full object-cover" />
+                  <Image src={img.url} alt={img.altText || 'Gallery'} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                 </div>
                 <div className="flex justify-between items-center pt-1">
                   <div className="flex gap-1">
