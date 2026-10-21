@@ -66,7 +66,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
 
   const sidebarContent = (
     <div className="h-full flex flex-col min-h-0">
-      <div className="p-5 border-b border-[var(--glass-border)] flex items-center justify-between shrink-0">
+      <div className="h-14 sm:h-16 px-5 border-b border-[var(--glass-border)] flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-9 h-9 rounded-xl bg-[var(--color-primary)] flex items-center justify-center font-extrabold text-white text-base shadow-md shadow-[var(--color-primary)]/30 shrink-0">
             L
