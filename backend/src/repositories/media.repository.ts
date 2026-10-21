@@ -1,3 +1,4 @@
+import { Query } from 'firebase-admin/firestore';
 import { db } from '../config/firebase.config';
 import { Media } from '../types/database.types';
 import { ListMediaQueryInput, UpdateMediaMetadataInput } from '../validators/media.validators';
@@ -48,7 +49,7 @@ export class MediaRepository {
       return { items: [], total: 0, page: filters.page, limit: filters.limit };
     }
 
-    let query: FirebaseFirestore.Query = db.collection(this.collectionName);
+    let query: Query = db.collection(this.collectionName);
 
     if (filters.folder) {
       query = query.where('folder', '==', filters.folder);

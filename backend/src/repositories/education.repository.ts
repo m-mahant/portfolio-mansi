@@ -1,3 +1,4 @@
+import { Query } from 'firebase-admin/firestore';
 import { db, isFirebaseInitialized } from '../config/firebase.config';
 import { Education } from '../types/database.types';
 import { AppError } from '../errors/app-error';
@@ -53,7 +54,7 @@ export class EducationRepository {
     }
 
     try {
-      let query: FirebaseFirestore.Query = db.collection('education');
+      let query: Query = db.collection('education');
       if (options.isVisible !== undefined) {
         query = query.where('isVisible', '==', options.isVisible);
       }
