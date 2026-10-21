@@ -1,17 +1,24 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Artwork } from '@/types/public.types';
 import { PublicImage } from '@/components/public/public-image';
+import { ArtworkLightbox } from '@/components/public/art-crafts/artwork-lightbox';
+import { getArtworkLightboxImages } from '@/utils/artwork.utils';
 
 interface ArtworkDetailHeroProps {
   artwork: Artwork;
 }
 
-// Artwork detail hero: back link, title, tags, and cover image.
+// Artwork detail hero: back link, title, tags, and a cover image that opens the full lightbox.
 export function ArtworkDetailHero({ artwork }: ArtworkDetailHeroProps) {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   const coverUrl = artwork.featuredImage?.url || artwork.images?.[0]?.url;
   const coverAlt = artwork.featuredImage?.altText || artwork.title;
+  const lightboxImages = getArtworkLightboxImages(artwork);
 
   return (
     <section className="space-y-8">
@@ -64,16 +71,32 @@ export function ArtworkDetailHero({ artwork }: ArtworkDetailHeroProps) {
       </div>
 
       {coverUrl && (
-        <div className="overflow-hidden rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)]/50 shadow-2xl">
+        <button
+          type="button"
+          onClick={() => {
+            setLightboxIndex(0);
+            setIsLightboxOpen(true);
+          }}
+          aria-label="View full-size artwork"
+          className="group block w-full overflow-hidden rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)]/50 shadow-2xl cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+        >
           <PublicImage
             src={coverUrl}
             alt={coverAlt}
             aspectRatio="video"
             priority
-            className="w-full h-auto object-cover max-h-[550px]"
+            className="w-full h-auto object-cover max-h-[550px] transition-transform duration-500 group-hover:scale-105"
           />
-        </div>
+        </button>
       )}
+
+      <ArtworkLightbox
+        images={lightboxImages}
+        currentIndex={lightboxIndex}
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        onNavigate={setLightboxIndex}
+      />
     </section>
   );
 }
