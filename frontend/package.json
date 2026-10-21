@@ -11,6 +11,7 @@
     "test": "npx tsx --test src/__tests__/*.test.ts"
   },
   "dependencies": {
+    "@next/third-parties": "^16.4.2",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "firebase": "^12.18.0",

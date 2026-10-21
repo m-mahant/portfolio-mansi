@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAdminAuth } from '@/context/admin-auth-context';
 import { adminApi } from '@/lib/api/admin-api';
-import { Project, Artwork, Experience, Education, MediaItem } from '@/types/admin.types';
+import { Project, Artwork, Blog, Experience, Education, MediaItem } from '@/types/admin.types';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Loading } from '@/components/ui/loading';
 import { Alert } from '@/components/ui/alert';
@@ -28,7 +28,7 @@ export default function AdminDashboardPage() {
 
   const [projects, setProjects] = useState<Project[]>([]);
   const [artworks, setArtworks] = useState<Artwork[]>([]);
-  const [blogsList, setBlogsList] = useState<any[]>([]);
+  const [blogsList, setBlogsList] = useState<Blog[]>([]);
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [educationList, setEducationList] = useState<Education[]>([]);
   const [mediaList, setMediaList] = useState<MediaItem[]>([]);

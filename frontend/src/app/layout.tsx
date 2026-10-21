@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { ThemeRuntimeProvider } from '@/context/theme-runtime';
 import { BRAND_NAME, BRAND_TAGLINE } from '@/lib/brand';
+import { CookieConsent } from '@/components/public/cookie-consent';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeRuntimeProvider>{children}</ThemeRuntimeProvider>
         <Analytics />
         <SpeedInsights />
+        <CookieConsent gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
       </body>
     </html>
   );
