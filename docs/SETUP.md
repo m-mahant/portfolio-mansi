@@ -120,6 +120,10 @@ This is not a hosted SaaS. You can run your own instance.
 4. Redeploy the frontend after changing `NEXT_PUBLIC_*` values.
 5. Render's free plan spins the API down after 15 minutes of no inbound traffic. `.github/workflows/keep-backend-awake.yml` pings `/api/v1/health` every 10 minutes to keep it warm — after the first deploy, add a repository variable `BACKEND_HEALTH_URL` (Settings → Secrets and variables → Actions → Variables) set to `https://<your-render-service>.onrender.com/api/v1/health`.
 
+## CI
+
+`.github/workflows/ci.yml` runs on every push and pull request: backend lint + typecheck, frontend lint + typecheck + unit tests + build. It does not run `backend`'s `npm test` — those integration tests hit the real Firestore project and send a real email through Resend on every contact-form test case, which would spam production data on each push. Run `npm test` manually in `backend/` before merging instead.
+
 ## Security
 
 - ImageKit private key and Firebase service-account key stay on the API only.
