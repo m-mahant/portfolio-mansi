@@ -183,6 +183,10 @@ describe('Admin CMS Backend APIs Security & CRUD Integration', () => {
         assert.equal(createRes.body.data.slug, expectedSlug);
         assert.equal(createRes.body.data.sections.overview, true);
         assert.equal(createRes.body.data.sections.problem, false);
+
+        await request(app)
+          .delete(`/api/v1/admin/projects/${createRes.body.data.id}`)
+          .set('Authorization', 'Bearer mock_admin_token');
       } finally {
         cleanupAuth();
       }
@@ -192,7 +196,7 @@ describe('Admin CMS Backend APIs Security & CRUD Integration', () => {
       const cleanupAuth = setupAdminAuthMock();
       const dupSlug = `unique-proj-slug-${Date.now()}`;
       try {
-        await request(app)
+        const firstRes = await request(app)
           .post('/api/v1/admin/projects')
           .set('Authorization', 'Bearer mock_admin_token')
           .send({
@@ -215,6 +219,10 @@ describe('Admin CMS Backend APIs Security & CRUD Integration', () => {
         assert.equal(duplicateRes.status, 409);
         assert.equal(duplicateRes.body.success, false);
         assert.equal(duplicateRes.body.error.code, 'CONFLICT');
+
+        await request(app)
+          .delete(`/api/v1/admin/projects/${firstRes.body.data.id}`)
+          .set('Authorization', 'Bearer mock_admin_token');
       } finally {
         cleanupAuth();
       }
@@ -261,6 +269,10 @@ describe('Admin CMS Backend APIs Security & CRUD Integration', () => {
         assert.equal(createRes.body.success, true);
         assert.equal(createRes.body.data.slug, expectedSlug);
         assert.equal(createRes.body.data.sections.description, true);
+
+        await request(app)
+          .delete(`/api/v1/admin/artworks/${createRes.body.data.id}`)
+          .set('Authorization', 'Bearer mock_admin_token');
       } finally {
         cleanupAuth();
       }
@@ -270,7 +282,7 @@ describe('Admin CMS Backend APIs Security & CRUD Integration', () => {
       const cleanupAuth = setupAdminAuthMock();
       const dupSlug = `unique-art-slug-${Date.now()}`;
       try {
-        await request(app)
+        const firstRes = await request(app)
           .post('/api/v1/admin/artworks')
           .set('Authorization', 'Bearer mock_admin_token')
           .send({
@@ -293,6 +305,10 @@ describe('Admin CMS Backend APIs Security & CRUD Integration', () => {
         assert.equal(duplicateRes.status, 409);
         assert.equal(duplicateRes.body.success, false);
         assert.equal(duplicateRes.body.error.code, 'CONFLICT');
+
+        await request(app)
+          .delete(`/api/v1/admin/artworks/${firstRes.body.data.id}`)
+          .set('Authorization', 'Bearer mock_admin_token');
       } finally {
         cleanupAuth();
       }
@@ -318,6 +334,10 @@ describe('Admin CMS Backend APIs Security & CRUD Integration', () => {
         assert.equal(createRes.status, 201);
         assert.equal(createRes.body.success, true);
         assert.equal(createRes.body.data.endDate, undefined);
+
+        await request(app)
+          .delete(`/api/v1/admin/experience/${createRes.body.data.id}`)
+          .set('Authorization', 'Bearer mock_admin_token');
       } finally {
         cleanupAuth();
       }
