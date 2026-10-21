@@ -29,6 +29,10 @@ function canSendNotification(): boolean {
 
 // Sends a best-effort email notification for a new contact form submission; never throws.
 export async function sendContactNotification(submission: ContactMessage): Promise<void> {
+  if (process.env.NODE_ENV === 'test') {
+    return;
+  }
+
   const client = getResendClient();
 
   if (!client || !env.contactNotificationEmail) {

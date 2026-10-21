@@ -9,7 +9,7 @@
     "start": "tsx src/server.ts",
     "lint": "eslint src/**/*.ts",
     "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
-    "test": "tsx --test tests/**/*.test.ts",
+    "test": "NODE_ENV=test tsx --test tests/**/*.test.ts",
     "bootstrap:admin": "tsx scripts/bootstrap-admin.ts",
     "seed:firebase-content": "tsx scripts/seed-firebase-content.ts",
     "seed:imagekit-media": "tsx scripts/seed-imagekit-media.ts",
