@@ -18,6 +18,7 @@ export const NAV_ITEMS = [
   { label: 'Blog Page', href: '/admin/blog-page', icon: '📰', category: 'Public Pages' },
   { label: 'Experience Page', href: '/admin/experience-page', icon: '🧭', category: 'Public Pages' },
   { label: 'Contact Page', href: '/admin/contact', icon: '✉️', category: 'Public Pages' },
+  { label: 'Privacy Page', href: '/admin/privacy', icon: '🔒', category: 'Public Pages' },
   { label: 'Projects', href: '/admin/projects', icon: '💻', category: 'Content Catalogs' },
   { label: 'Artworks', href: '/admin/artworks', icon: '🎨', category: 'Content Catalogs' },
   { label: 'Blogs', href: '/admin/blogs', icon: '📝', category: 'Content Catalogs' },
@@ -64,70 +65,64 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       : pathname === href || pathname.startsWith(`${href}/`);
 
   const sidebarContent = (
-    <div className="h-full flex flex-col justify-between">
-      <div>
-        <div className="p-5 border-b border-[var(--glass-border)] flex items-center justify-between">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-xl bg-[var(--color-primary)] flex items-center justify-center font-extrabold text-white text-base shadow-md shadow-[var(--color-primary)]/30 shrink-0">
-              L
-            </div>
-            <div className="min-w-0">
-              <h1 className="font-bold text-sm text-[var(--color-text)] leading-none font-heading truncate">
-                Admin CMS
-              </h1>
-              <span className="text-[11px] text-[var(--color-muted)] font-mono truncate block">
-                {BRAND_NAME}
-              </span>
-            </div>
+    <div className="h-full flex flex-col min-h-0">
+      <div className="p-5 border-b border-[var(--glass-border)] flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-9 h-9 rounded-xl bg-[var(--color-primary)] flex items-center justify-center font-extrabold text-white text-base shadow-md shadow-[var(--color-primary)]/30 shrink-0">
+            L
           </div>
-          <button
-            type="button"
-            onClick={onMobileClose}
-            className="md:hidden p-1.5 rounded-lg text-[var(--color-muted)] hover:text-[var(--color-text)]"
-            aria-label="Close menu"
-          >
-            ✕
-          </button>
+          <div className="min-w-0">
+            <h1 className="font-bold text-sm text-[var(--color-text)] leading-none font-heading truncate">
+              Admin CMS
+            </h1>
+            <span className="text-[11px] text-[var(--color-muted)] font-mono truncate block">
+              {BRAND_NAME}
+            </span>
+          </div>
         </div>
+        <button
+          type="button"
+          onClick={onMobileClose}
+          className="md:hidden p-1.5 rounded-lg text-[var(--color-muted)] hover:text-[var(--color-text)]"
+          aria-label="Close menu"
+        >
+          ✕
+        </button>
+      </div>
 
-        <nav className="p-3 space-y-4 overflow-y-auto max-h-[calc(100vh-140px)]">
-          {categories.map((cat) => (
-            <div key={cat} className="space-y-1">
-              <div className="px-3.5 pt-1 pb-0.5 text-[10px] uppercase tracking-wider font-mono font-bold text-[var(--color-muted)]">
-                {cat}
-              </div>
-              {NAV_ITEMS.filter((item) => item.category === cat).map((item) => {
-                const isActive = isActiveHref(item.href);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all ${
-                      isActive
-                        ? 'bg-[var(--color-primary)]/20 text-[var(--color-primary)] border border-[var(--color-primary)]/30 shadow-xs'
-                        : 'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--glass-highlight)]'
-                    }`}
-                  >
-                    <span className="text-sm">{item.icon}</span>
-                    <span className="font-nav">{item.label}</span>
-                  </Link>
-                );
-              })}
+      <nav className="p-3 space-y-4 flex-1 min-h-0 overflow-y-auto">
+        {categories.map((cat) => (
+          <div key={cat} className="space-y-1">
+            <div className="px-3.5 pt-1 pb-0.5 text-[10px] uppercase tracking-wider font-mono font-bold text-[var(--color-muted)]">
+              {cat}
             </div>
-          ))}
-        </nav>
-      </div>
-
-      <div className="p-4 border-t border-[var(--glass-border)] text-[11px] text-[var(--color-muted)] font-mono">
-        Express REST API & Firebase SDK
-      </div>
+            {NAV_ITEMS.filter((item) => item.category === cat).map((item) => {
+              const isActive = isActiveHref(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all ${
+                    isActive
+                      ? 'bg-[var(--color-primary)]/20 text-[var(--color-primary)] border border-[var(--color-primary)]/30 shadow-xs'
+                      : 'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--glass-highlight)]'
+                  }`}
+                >
+                  <span className="text-sm">{item.icon}</span>
+                  <span className="font-nav">{item.label}</span>
+                </Link>
+              );
+            })}
+          </div>
+        ))}
+      </nav>
     </div>
   );
 
   return (
     <>
-      {/* Desktop Sidebar — fixed */}
-      <aside className="hidden md:flex w-64 glass-panel-strong border-r border-[var(--glass-border)] text-[var(--color-text)] flex-col shrink-0 sticky top-0 h-screen z-30">
+      {/* Desktop Sidebar — fixed height, never scrolls with the page; only nav scrolls internally if needed */}
+      <aside className="hidden md:flex w-64 glass-panel-strong border-r border-[var(--glass-border)] text-[var(--color-text)] flex-col shrink-0 h-full z-30">
         {sidebarContent}
       </aside>
 
