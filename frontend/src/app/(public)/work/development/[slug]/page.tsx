@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { publicApi } from '@/services/api/public-api';
 import { PublicSection } from '@/components/public/public-section';
 import { generatePublicMetadata } from '@/utils/seo.utils';
+import { BRAND_NAME } from '@/lib/brand';
 import { ProjectHero } from '@/components/public/development/project-hero';
 import { ProjectOverviewSection } from '@/components/public/development/project-overview-section';
 import { ProjectFeaturesSection } from '@/components/public/development/project-features-section';
@@ -47,8 +48,25 @@ export default async function PublicProjectDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.title,
+    description: project.shortDescription,
+    image: project.coverImage?.url ? [project.coverImage.url] : undefined,
+    dateCreated: project.createdAt,
+    dateModified: project.updatedAt,
+    keywords: [...(project.tags || []), ...(project.technologies || [])].join(', '),
+    author: { '@type': 'Person', name: BRAND_NAME },
+  };
+
   return (
     <article className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <PublicSection className="py-12 md:py-16">
         <div className="relative max-w-6xl mx-auto space-y-12 md:space-y-16">
           <div className="pointer-events-none absolute -top-20 left-0 h-72 w-72 rounded-full bg-[var(--color-primary)]/10 blur-3xl" />

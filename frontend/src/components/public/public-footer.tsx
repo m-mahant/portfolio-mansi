@@ -55,6 +55,11 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({
               Contact
             </Link>
           </li>
+          <li>
+            <Link href="/privacy" className="hover:text-[var(--color-text)] transition-colors">
+              Privacy
+            </Link>
+          </li>
         </ul>
       </PublicContainer>
     </footer>

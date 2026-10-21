@@ -31,7 +31,9 @@ export function generatePublicMetadata(options?: SeoOptions): Metadata {
     site?.shortDescription ||
     DEFAULT_SITE_DESCRIPTION;
 
-  const ogImage = seo?.ogImage || site?.logo?.url || '/og-default.jpg';
+  // Falls back to the generated opengraph-image.tsx route (not a dead /og-default.jpg
+  // link) when no real site logo or per-page SEO image is configured.
+  const ogImage = seo?.ogImage || site?.logo?.url || '/opengraph-image';
   const canonicalUrl = options?.canonicalPath ? options.canonicalPath : undefined;
   const isNoIndex = Boolean(seo?.noIndex);
 
@@ -51,13 +53,14 @@ export function generatePublicMetadata(options?: SeoOptions): Metadata {
       title,
       description,
       type: options?.ogType || 'website',
-      images: ogImage ? [{ url: ogImage, alt: title }] : [],
+      // Omitted (not an empty array) when unset, so Next.js falls back to opengraph-image.tsx.
+      ...(ogImage ? { images: [{ url: ogImage, alt: title }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ogImage ? [ogImage] : [],
+      ...(ogImage ? { images: [ogImage] } : {}),
     },
   };
 }

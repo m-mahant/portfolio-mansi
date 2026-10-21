@@ -19,6 +19,7 @@ import {
   IntroPageConfig,
   WorkPageConfig,
   ContactPageConfig,
+  PrivacyPageConfig,
   DevelopmentPageConfig,
   ArtPageConfig,
   BlogPageConfig,
@@ -432,6 +433,18 @@ export const adminApi = {
   async updateContactPageConfig(data: Partial<ContactPageConfig>, token: string): Promise<ContactPageConfig> {
     return fetchWithAuth<ContactPageConfig>(
       '/api/v1/admin/contact',
+      { method: 'PATCH', body: JSON.stringify(data) },
+      token
+    );
+  },
+
+  // Privacy Page Config
+  async getPrivacyPageConfig(token: string): Promise<PrivacyPageConfig> {
+    return fetchWithAuth<PrivacyPageConfig>('/api/v1/admin/privacy', { method: 'GET' }, token);
+  },
+  async updatePrivacyPageConfig(data: Partial<PrivacyPageConfig>, token: string): Promise<PrivacyPageConfig> {
+    return fetchWithAuth<PrivacyPageConfig>(
+      '/api/v1/admin/privacy',
       { method: 'PATCH', body: JSON.stringify(data) },
       token
     );

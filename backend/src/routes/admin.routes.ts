@@ -18,6 +18,7 @@ import { adminArtworkRouter } from './admin/artwork.routes';
 import { adminExperienceRouter } from './admin/experience.routes';
 import { adminEducationRouter } from './admin/education.routes';
 import { adminContactRouter } from './admin/contact.routes';
+import { adminPrivacyRouter } from './admin/privacy.routes';
 import { adminThemeRouter } from './admin/theme.routes';
 import { adminBlogRouter } from './admin/blog.routes';
 
@@ -71,6 +72,9 @@ adminRouter.use('/education', adminEducationRouter);
 
 // Protected admin contact page routes (/api/v1/admin/contact/*)
 adminRouter.use('/contact', adminContactRouter);
+
+// Protected admin privacy page routes (/api/v1/admin/privacy/*)
+adminRouter.use('/privacy', adminPrivacyRouter);
 
 // Protected admin theme settings routes (/api/v1/admin/theme/*)
 adminRouter.use('/theme', adminThemeRouter);
