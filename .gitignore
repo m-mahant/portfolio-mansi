@@ -23,7 +23,6 @@ pnpm-debug.log*
 frontend/.next/
 frontend/out/
 frontend/build/
-frontend/package-lock.json
 
 # Backend build outputs
 backend/dist/
