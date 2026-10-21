@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import { publicApi } from '@/services/api/public-api';
 import { PublicSection } from '@/components/public/public-section';
-import { generatePublicMetadata } from '@/utils/seo.utils';
+import { generatePublicMetadata, generateBreadcrumbJsonLd } from '@/utils/seo.utils';
 import { BRAND_NAME } from '@/lib/brand';
 import { ProjectHero } from '@/components/public/development/project-hero';
 import { ProjectOverviewSection } from '@/components/public/development/project-overview-section';
@@ -61,11 +61,22 @@ export default async function PublicProjectDetailPage({ params }: PageProps) {
     author: { '@type': 'Person', name: BRAND_NAME },
   };
 
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Work', path: '/work' },
+    { name: 'Development', path: '/work/development' },
+    { name: project.title, path: `/work/development/${project.slug}` },
+  ]);
+
   return (
     <article className="min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <PublicSection className="py-12 md:py-16">
