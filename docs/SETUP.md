@@ -60,6 +60,21 @@ npm run dev
 
 Public site: `/`. Admin: `/admin/login`. API docs: `http://localhost:4000/api-docs` (development only, not mounted when `NODE_ENV=production`).
 
+### 3. End-to-end tests (optional)
+
+Requires both the backend and frontend dev servers running (above). From `frontend/`:
+
+```bash
+npx playwright install chromium   # once
+npm run test:e2e
+```
+
+Covers public navigation, contact form validation/success/error states, and admin login
+(rejecting bad credentials — there's no dedicated test admin account, so it never attempts a
+real successful login). The contact form tests mock the `POST /api/v1/contact` network call
+instead of hitting the real backend, for the same reason `backend`'s own contact test is kept
+out of CI (see below) — it would otherwise write real Firestore documents.
+
 ## Environment
 
 **Frontend** (`frontend/.env.local`) — all `NEXT_PUBLIC_*` values are visible in the browser. Do not put Admin SDK or ImageKit private keys here.
@@ -122,7 +137,7 @@ This is not a hosted SaaS. You can run your own instance.
 
 ## CI
 
-`.github/workflows/ci.yml` runs on every push and pull request: backend lint + typecheck, frontend lint + typecheck + unit tests + build. It does not run `backend`'s `npm test` — those integration tests hit the real Firestore project and send a real email through Resend on every contact-form test case, which would spam production data on each push. Run `npm test` manually in `backend/` before merging instead.
+`.github/workflows/ci.yml` runs on every push and pull request: backend lint + typecheck, frontend lint + typecheck + unit tests + build. It does not run `backend`'s `npm test` — those integration tests hit the real Firestore project and send a real email through Resend on every contact-form test case, which would spam production data on each push. Run `npm test` manually in `backend/` before merging instead. The Playwright E2E suite (`frontend/npm run test:e2e`) is also not in CI — it needs both servers running against real data and would add real orchestration cost for a site with no PR-based review flow yet; run it manually.
 
 ## Security
 
