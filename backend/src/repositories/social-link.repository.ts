@@ -1,3 +1,4 @@
+import { Query } from 'firebase-admin/firestore';
 import { db, isFirebaseInitialized } from '../config/firebase.config';
 import { SocialLink } from '../types/database.types';
 import { AppError } from '../errors/app-error';
@@ -53,7 +54,7 @@ export class SocialLinkRepository {
     }
 
     try {
-      let query: FirebaseFirestore.Query = db.collection('socialLinks');
+      let query: Query = db.collection('socialLinks');
       if (options.isVisible !== undefined) {
         query = query.where('isVisible', '==', options.isVisible);
       }
