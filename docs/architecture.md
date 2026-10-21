@@ -39,7 +39,7 @@ or `{ "success": false, "error": { "code", "message", "details?" } }`.
 
 | Kind | Firestore | Example |
 | --- | --- | --- |
-| Page chrome | One config doc per page | `introPage/config`, `homePage/config`, `workPage/config`, `developmentPage/config`, `artPage/config`, `blogPage/config`, `experiencePage/config`, `contactPage/config` |
+| Page chrome | One config doc per page | `introPage/config`, `homePage/config`, `workPage/config`, `developmentPage/config`, `artPage/config`, `blogPage/config`, `experiencePage/config`, `contactPage/config`, `privacyPage/config` |
 | Profile | Single doc | `about/profile` |
 | Global | Single docs | `siteSettings/general`, `themeSettings/active` |
 | Catalogs | Collections | `projects`, `artworks`, `blogs`, `experiences`, `education`, `socialLinks` |
