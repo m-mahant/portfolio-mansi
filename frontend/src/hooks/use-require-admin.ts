@@ -10,17 +10,21 @@ export function useRequireAdmin() {
   const { user, idToken, isAuthorizedAdmin, isLoading, authError } = useAdminAuth();
   const router = useRouter();
 
+  const isRedirectingToLogin = !isLoading && !user;
+
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (isRedirectingToLogin) {
       router.push('/admin/login');
     }
-  }, [user, isLoading, router]);
+  }, [isRedirectingToLogin, router]);
 
   return {
     user,
     idToken,
     isAuthorizedAdmin,
-    isLoading,
+    // Treat "about to redirect" as still loading so callers never render protected
+    // content for an unauthenticated user in the gap before router.push() takes effect.
+    isLoading: isLoading || isRedirectingToLogin,
     isForbidden: !isLoading && Boolean(user) && !isAuthorizedAdmin,
     authError,
   };
