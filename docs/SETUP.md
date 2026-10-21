@@ -138,4 +138,3 @@ This is not a hosted SaaS. You can run your own instance.
 2. Brand fallbacks live in `frontend/src/lib/brand.ts` and `backend/src/lib/brand.ts`.
 3. GitHub repository: **`portfolio-mansi`**.
 4. If you use the Firebase CLI, set `.firebaserc` `projects.default` to your real Firebase project id (the committed value is a placeholder).
-5. Blog comments use [giscus](https://giscus.app) (GitHub Discussions, no backend needed). If you fork this repo: enable Discussions in repo Settings, install the [giscus app](https://github.com/apps/giscus) and grant it access to your repo, then update `GISCUS_REPO`, `GISCUS_REPO_ID`, `GISCUS_CATEGORY`, and `GISCUS_CATEGORY_ID` in `frontend/src/components/public/blog/giscus-comments.tsx` (`gh api graphql` with a `discussionCategories` query gets the IDs).
