@@ -10,7 +10,7 @@ import { ArtworkMeta } from '@/components/public/art-crafts/artwork-meta';
 import { ArtworkGallery } from '@/components/public/art-crafts/artwork-gallery';
 import { RelatedArtwork } from '@/components/public/art-crafts/related-artwork';
 import { ShareButtons } from '@/components/public/share-buttons';
-import { generatePublicMetadata } from '@/utils/seo.utils';
+import { generatePublicMetadata, generateBreadcrumbJsonLd } from '@/utils/seo.utils';
 import { BRAND_NAME } from '@/lib/brand';
 
 interface PageProps {
@@ -63,11 +63,22 @@ export default async function PublicArtworkDetailPage({ params }: PageProps) {
     creator: { '@type': 'Person', name: BRAND_NAME },
   };
 
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Work', path: '/work' },
+    { name: 'Art & Crafts', path: '/work/art-crafts' },
+    { name: artwork.title, path: `/work/art-crafts/${artwork.slug}` },
+  ]);
+
   return (
     <PublicSection className="py-12 md:py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <div className="relative max-w-6xl mx-auto space-y-12 md:space-y-16">

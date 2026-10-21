@@ -7,7 +7,7 @@ import { PublicSection } from '@/components/public/public-section';
 import { PublicImage } from '@/components/public/public-image';
 import { BlogContent } from '@/components/public/blog/blog-content';
 import { ShareButtons } from '@/components/public/share-buttons';
-import { generatePublicMetadata } from '@/utils/seo.utils';
+import { generatePublicMetadata, generateBreadcrumbJsonLd } from '@/utils/seo.utils';
 import { calculateReadTime, formatBlogDate } from '@/utils/blog.utils';
 
 interface PageProps {
@@ -59,11 +59,21 @@ export default async function PublicBlogDetailPage({ params }: PageProps) {
     articleSection: blog.category || 'General',
   };
 
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: blog.title, path: `/blog/${blog.slug}` },
+  ]);
+
   return (
     <article className="min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <PublicSection className="py-12 md:py-16">
