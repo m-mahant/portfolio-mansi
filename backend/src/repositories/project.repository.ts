@@ -1,3 +1,4 @@
+import { Query } from 'firebase-admin/firestore';
 import { db, isFirebaseInitialized } from '../config/firebase.config';
 import { Project, PublishStatus } from '../types/database.types';
 import { normalizeForFirestore } from '../utils/firestore.utils';
@@ -35,7 +36,7 @@ export class ProjectRepository {
     }
 
     try {
-      let query: FirebaseFirestore.Query = db
+      let query: Query = db
         .collection('projects')
         .where('status', '==', 'published');
 
@@ -124,7 +125,7 @@ export class ProjectRepository {
     }
 
     try {
-      let query: FirebaseFirestore.Query = db.collection('projects');
+      let query: Query = db.collection('projects');
       if (options.status) {
         query = query.where('status', '==', options.status);
       }

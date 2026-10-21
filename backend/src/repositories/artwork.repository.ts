@@ -1,3 +1,4 @@
+import { Query } from 'firebase-admin/firestore';
 import { db, isFirebaseInitialized } from '../config/firebase.config';
 import { Artwork, PublishStatus } from '../types/database.types';
 import { normalizeForFirestore } from '../utils/firestore.utils';
@@ -35,7 +36,7 @@ export class ArtworkRepository {
     }
 
     try {
-      let query: FirebaseFirestore.Query = db
+      let query: Query = db
         .collection('artworks')
         .where('status', '==', 'published');
 
@@ -124,7 +125,7 @@ export class ArtworkRepository {
     }
 
     try {
-      let query: FirebaseFirestore.Query = db.collection('artworks');
+      let query: Query = db.collection('artworks');
       if (options.status) {
         query = query.where('status', '==', options.status);
       }
