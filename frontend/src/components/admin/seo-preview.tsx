@@ -3,6 +3,7 @@
 // Real-time search engine result snippet and social card preview component.
 
 import React from 'react';
+import Image from 'next/image';
 import { SeoMetadata } from '@/types/admin.types';
 
 interface SeoPreviewProps {
@@ -104,8 +105,8 @@ export const SeoPreview: React.FC<SeoPreviewProps> = ({
 
         <div className="bg-[var(--color-background)] rounded-xl border border-[var(--color-border)] overflow-hidden shadow-md">
           {displayOgImage ? (
-            <div className="aspect-video w-full bg-[var(--color-surface)] overflow-hidden border-b border-[var(--color-border)]">
-              <img src={displayOgImage} alt="OG Banner" className="w-full h-full object-cover" />
+            <div className="relative aspect-video w-full bg-[var(--color-surface)] overflow-hidden border-b border-[var(--color-border)]">
+              <Image src={displayOgImage} alt="OG Banner" fill sizes="400px" className="object-cover" />
             </div>
           ) : (
             <div className="aspect-video w-full bg-[var(--color-surface)]/60 border-b border-[var(--color-border)] flex items-center justify-center text-[var(--color-muted)] text-xs italic">
