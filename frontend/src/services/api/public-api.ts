@@ -22,6 +22,7 @@ import {
   IntroPageConfig,
   WorkPageConfig,
   ContactPageConfig,
+  PrivacyPageConfig,
   DevelopmentPageConfig,
   ArtPageConfig,
   BlogPageConfig,
@@ -152,6 +153,11 @@ export async function getContactPage(options?: RequestInit): Promise<ContactPage
   return fetchPublicApi<ContactPageConfig>('/contact', options);
 }
 
+// Fetches public privacy policy page configuration.
+export async function getPrivacyPage(options?: RequestInit): Promise<PrivacyPageConfig> {
+  return fetchPublicApi<PrivacyPageConfig>('/privacy', options);
+}
+
 // Fetches public site settings, title, branding, and contact availability toggles.
 export async function getSite(options?: RequestInit): Promise<SiteSettings> {
   return fetchPublicApi<SiteSettings>('/site', options);
@@ -257,6 +263,7 @@ export const publicApi = {
   getBlogPage,
   getExperiencePage,
   getContactPage,
+  getPrivacyPage,
   getSite,
   getAbout,
   getSocial,

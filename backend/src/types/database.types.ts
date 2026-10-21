@@ -200,6 +200,13 @@ export interface ContactPageConfig {
   updatedAt: string;
 }
 
+// Privacy Policy page configuration document: privacyPage/config
+export interface PrivacyPageConfig {
+  content: string;
+  seo?: SeoMetadata;
+  updatedAt: string;
+}
+
 // Social Link entry document: socialLinks/{socialId}
 export interface SocialLink {
   id: string;

@@ -14,6 +14,7 @@ import { getArtworks, getArtworkBySlug } from '../controllers/artwork.controller
 import { getExperiences } from '../controllers/experience.controller';
 import { getEducation } from '../controllers/education.controller';
 import { getPublicContactPage } from '../controllers/contact-page.controller';
+import { getPublicPrivacyPage } from '../controllers/privacy-page.controller';
 import { getThemeSettings } from '../controllers/theme.controller';
 import { getPublicBlogs, getPublicBlogBySlug } from '../controllers/blog.controller';
 import { contactController } from '../controllers/contact.controller';
@@ -49,6 +50,9 @@ router.get('/social-links', getSocialLinks);
 // Contact page configuration & submission
 router.get('/contact', getPublicContactPage);
 router.post('/contact', contactRateLimiter, contactController.submitContact);
+
+// Privacy policy page configuration
+router.get('/privacy', getPublicPrivacyPage);
 
 // Software projects
 router.get('/projects', getProjects);

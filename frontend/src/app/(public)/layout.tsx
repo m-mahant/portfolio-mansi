@@ -50,8 +50,14 @@ export default async function PublicLayout({ children }: { children: React.React
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[var(--color-primary)] focus:text-white focus:text-sm focus:font-semibold focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        Skip to main content
+      </a>
       <PublicHeader siteName={siteName} site={site} />
-      <main className="flex-1 w-full min-w-0">{children}</main>
+      <main id="main-content" className="flex-1 w-full min-w-0">{children}</main>
       <PublicFooter siteName={siteName} copyrightText={copyrightText} />
     </div>
   );

@@ -64,8 +64,8 @@ export const IntroBackground: React.FC = () => {
     }));
 
     // Ambient floating light orb positions
-    let orb1 = { x: width * 0.2, y: height * 0.3, vx: 0.2, vy: 0.15 };
-    let orb2 = { x: width * 0.8, y: height * 0.7, vx: -0.15, vy: -0.2 };
+    const orb1 = { x: width * 0.2, y: height * 0.3, vx: 0.2, vy: 0.15 };
+    const orb2 = { x: width * 0.8, y: height * 0.7, vx: -0.15, vy: -0.2 };
 
     const render = () => {
       colors = getThemeColors();

@@ -181,6 +181,12 @@ export interface ContactPageConfig {
   updatedAt?: string;
 }
 
+export interface PrivacyPageConfig {
+  content: string;
+  seo?: SeoMetadata;
+  updatedAt?: string;
+}
+
 export interface SocialLink {
   id?: string;
   platform: string;

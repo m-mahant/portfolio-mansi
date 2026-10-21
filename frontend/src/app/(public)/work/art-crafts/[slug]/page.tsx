@@ -10,6 +10,7 @@ import { ArtworkMeta } from '@/components/public/art-crafts/artwork-meta';
 import { ArtworkGallery } from '@/components/public/art-crafts/artwork-gallery';
 import { RelatedArtwork } from '@/components/public/art-crafts/related-artwork';
 import { generatePublicMetadata } from '@/utils/seo.utils';
+import { BRAND_NAME } from '@/lib/brand';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -48,8 +49,26 @@ export default async function PublicArtworkDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'VisualArtwork',
+    name: artwork.title,
+    description: artwork.shortDescription || artwork.subtitle,
+    image: artwork.featuredImage?.url ? [artwork.featuredImage.url] : undefined,
+    artform: artwork.category,
+    dateCreated: artwork.year || artwork.createdAt,
+    artMedium: artwork.materials?.join(', '),
+    keywords: artwork.tags?.join(', '),
+    creator: { '@type': 'Person', name: BRAND_NAME },
+  };
+
   return (
     <PublicSection className="py-12 md:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div className="relative max-w-6xl mx-auto space-y-12 md:space-y-16">
         <div className="pointer-events-none absolute -top-20 right-0 h-72 w-72 rounded-full bg-[var(--color-accent)]/10 blur-3xl" />
 

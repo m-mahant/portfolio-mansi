@@ -73,6 +73,7 @@ No auth except the contact POST.
 | GET | `/social`, `/social-links` | Visible socials |
 | GET | `/contact` | Contact page config |
 | POST | `/contact` | Message submit |
+| GET | `/privacy` | Privacy policy page config |
 | GET | `/projects` | Published projects (query: pagination) |
 | GET | `/projects/:slug` | Project by slug |
 | GET | `/artworks` | Published artworks |
@@ -94,6 +95,7 @@ Page configs are GET + PATCH on a single resource:
 | `/intro`, `/home`, `/work` | |
 | `/development`, `/art`, `/blog-page`, `/experience-page` | |
 | `/contact` | |
+| `/privacy` | |
 | `/site`, `/about`, `/theme` | GET + PATCH |
 
 Catalogs (list / get / create / patch / delete):
