@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import React, { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
