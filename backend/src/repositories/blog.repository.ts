@@ -1,3 +1,4 @@
+import { Query } from 'firebase-admin/firestore';
 import { db, isFirebaseInitialized } from '../config/firebase.config';
 import { Blog, BlogStatus } from '../types/database.types';
 import { normalizeForFirestore } from '../utils/firestore.utils';
@@ -113,7 +114,7 @@ export class BlogRepository {
     }
 
     try {
-      let query: FirebaseFirestore.Query = db.collection('blogs');
+      let query: Query = db.collection('blogs');
       if (options.status) {
         query = query.where('status', '==', options.status);
       }

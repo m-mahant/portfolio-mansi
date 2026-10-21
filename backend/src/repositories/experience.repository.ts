@@ -1,3 +1,4 @@
+import { Query } from 'firebase-admin/firestore';
 import { db, isFirebaseInitialized } from '../config/firebase.config';
 import { Experience } from '../types/database.types';
 import { AppError } from '../errors/app-error';
@@ -53,7 +54,7 @@ export class ExperienceRepository {
     }
 
     try {
-      let query: FirebaseFirestore.Query = db.collection('experiences');
+      let query: Query = db.collection('experiences');
       if (options.isVisible !== undefined) {
         query = query.where('isVisible', '==', options.isVisible);
       }
