@@ -13,7 +13,7 @@ interface ThemePreviewProps {
 
 export const ThemePreview: React.FC<ThemePreviewProps> = ({ theme }) => {
   const [viewMode, setViewMode] = useState<'split' | 'dark' | 'light'>('split');
-  const { fonts, styles, animations } = theme;
+  const { fonts, styles } = theme;
 
   const darkPalette: ThemeColors = theme.darkColors || theme.colors || DEFAULT_DARK_COLORS;
   const lightPalette: ThemeColors = theme.lightColors || DEFAULT_LIGHT_COLORS;

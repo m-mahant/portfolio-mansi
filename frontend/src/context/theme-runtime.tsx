@@ -110,7 +110,6 @@ const ThemeContext = createContext<ThemeContextType>({
 export function applyThemeToDocument(
   theme: ThemeSettings,
   effectiveMode: "light" | "dark",
-  pathname: string = "/",
 ): "light" | "dark" {
   if (typeof document === "undefined") return effectiveMode;
 
@@ -357,7 +356,7 @@ export const ThemeRuntimeProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const computedMode = resolveActiveThemeMode(userPreference);
     setActiveMode(computedMode);
-    applyThemeToDocument(theme, computedMode, pathname);
+    applyThemeToDocument(theme, computedMode);
   }, [userPreference, theme, pathname]);
 
   // Listen for OS system theme changes ONLY when user has no explicit preference (userPreference === null)
@@ -370,7 +369,7 @@ export const ThemeRuntimeProvider: React.FC<{ children: React.ReactNode }> = ({
     const handleSystemChange = (e: MediaQueryListEvent) => {
       const computedMode = e.matches ? "dark" : "light";
       setActiveMode(computedMode);
-      applyThemeToDocument(theme, computedMode, pathname);
+      applyThemeToDocument(theme, computedMode);
     };
 
     mediaQuery.addEventListener("change", handleSystemChange);
