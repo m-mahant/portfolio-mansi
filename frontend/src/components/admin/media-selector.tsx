@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
+import Image from 'next/image';
 import { useAdminAuth } from '@/context/admin-auth-context';
 import { adminApi } from '@/lib/api/admin-api';
 import { MediaItem } from '@/types/admin.types';
@@ -251,11 +252,12 @@ export function MediaSelector({
                     }`}
                   >
                     <div className="aspect-video w-full rounded-lg overflow-hidden bg-[var(--color-surface-elevated)] flex items-center justify-center relative">
-                      <img
+                      <Image
                         src={item.thumbnailUrl || item.url}
                         alt={item.altText || item.fileName}
-                        className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-200"
-                        loading="lazy"
+                        fill
+                        sizes="(max-width: 768px) 50vw, 200px"
+                        className="object-cover group-hover:scale-105 transition-transform duration-200"
                       />
                     </div>
                     <div className="mt-2 text-xs">

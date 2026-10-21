@@ -3,6 +3,7 @@
 // Admin CMS page for controlling content displayed on the public Home page (/).
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useAdminAuth } from '@/context/admin-auth-context';
 import { adminApi } from '@/lib/api/admin-api';
 import { HomePageConfig, MediaRef } from '@/types/admin.types';
@@ -92,11 +93,13 @@ export default function AdminHomePage() {
             </p>
             <div className="flex items-center gap-3 pt-1">
               {config.hero?.profileImage?.url ? (
-                <div className="w-20 h-28 rounded-xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
-                  <img
+                <div className="relative w-20 h-28 rounded-xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
+                  <Image
                     src={config.hero.profileImage.url}
                     alt={config.hero.profileImage.altText || 'Home portrait'}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="80px"
+                    className="object-cover"
                   />
                 </div>
               ) : (

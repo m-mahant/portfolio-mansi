@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Artwork, ArtworkImage, MediaRef, PublishStatus } from '@/types/admin.types';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -317,7 +318,7 @@ export function ArtworkForm({ initialData = {}, onSave, isSaving }: ArtworkFormP
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           {formData.featuredImage?.url ? (
             <div className="w-48 aspect-video rounded-xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] relative">
-              <img src={formData.featuredImage.url} alt={formData.title || 'Artwork'} className="w-full h-full object-cover" />
+              <Image src={formData.featuredImage.url} alt={formData.title || 'Artwork'} fill sizes="192px" className="object-cover" />
             </div>
           ) : (
             <div className="w-48 aspect-video rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] flex items-center justify-center text-xs text-[var(--color-text-muted)]">
@@ -400,7 +401,7 @@ export function ArtworkForm({ initialData = {}, onSave, isSaving }: ArtworkFormP
             {(formData.images || []).map((img, idx) => (
               <div key={idx} className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-3 space-y-2">
                 <div className="aspect-video w-full rounded-lg overflow-hidden bg-[var(--color-surface-elevated)] relative">
-                  <img src={img.url} alt={img.altText || 'Gallery'} className="w-full h-full object-cover" />
+                  <Image src={img.url} alt={img.altText || 'Gallery'} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                 </div>
                 <Input
                   placeholder="Image caption / description..."

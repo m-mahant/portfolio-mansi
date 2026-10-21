@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { AboutProfile, MediaRef } from '@/types/admin.types';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -106,8 +107,8 @@ export function AboutForm({ initialData = {}, onSave, isSaving }: AboutFormProps
           </label>
           <div className="flex items-center gap-3">
             {formData.secondaryImage?.url ? (
-              <div className="w-16 h-20 rounded-xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
-                <img src={formData.secondaryImage.url} alt="Story" className="w-full h-full object-cover" />
+              <div className="relative w-16 h-20 rounded-xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
+                <Image src={formData.secondaryImage.url} alt="Story" fill sizes="64px" className="object-cover" />
               </div>
             ) : (
               <div className="w-16 h-20 rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] flex items-center justify-center text-xs text-[var(--color-text-muted)]">

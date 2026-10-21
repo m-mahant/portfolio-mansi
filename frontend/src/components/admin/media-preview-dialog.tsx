@@ -3,6 +3,7 @@
 // Accessible modal dialog for detailed media asset inspection, URL copying, and deletion.
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { MediaItem } from '@/types/admin.types';
 
 interface MediaPreviewDialogProps {
@@ -68,11 +69,13 @@ export const MediaPreviewDialog: React.FC<MediaPreviewDialogProps> = ({
         {/* Modal Body */}
         <div className="flex-1 overflow-y-auto p-5 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
           {/* Image Asset Viewport */}
-          <div className="md:col-span-7 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] p-3 flex flex-col items-center justify-center min-h-[250px] max-h-[400px]">
-            <img
+          <div className="relative md:col-span-7 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] p-3 min-h-[250px] h-[350px]">
+            <Image
               src={media.url}
               alt={media.altText || media.fileName}
-              className="max-h-[350px] w-auto object-contain rounded shadow-md"
+              fill
+              sizes="500px"
+              className="object-contain rounded shadow-md"
             />
           </div>
 
