@@ -7,19 +7,9 @@ import Link from 'next/link';
 import { useAdminAuth } from '@/context/admin-auth-context';
 import { adminApi } from '@/lib/api/admin-api';
 import { Project, Artwork, Blog, Experience, Education, MediaItem } from '@/types/admin.types';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Loading } from '@/components/ui/loading';
 import { Alert } from '@/components/ui/alert';
-
-interface RecentActivityItem {
-  id: string;
-  title: string;
-  type: 'project' | 'artwork' | 'experience' | 'education';
-  category: string;
-  date: string;
-  status?: string;
-  link: string;
-}
 
 export default function AdminDashboardPage() {
   const { idToken } = useAdminAuth();
@@ -86,7 +76,6 @@ export default function AdminDashboardPage() {
   const featuredProjectsCount = projects.filter((p) => p.isFeatured).length;
 
   const publishedArtworksCount = artworks.filter((a) => a.status === 'published').length;
-  const featuredArtworksCount = artworks.filter((a) => a.isFeatured).length;
 
   const activeExpCount = experiences.filter((e) => e.isCurrent).length;
 
@@ -119,44 +108,6 @@ export default function AdminDashboardPage() {
   const expPct = Math.round((experiences.length / totalContentCount) * 100);
   const eduPct = Math.round((educationList.length / totalContentCount) * 100);
   const mediaPct = 100 - (projectPct + artworkPct + expPct + eduPct);
-
-  // Recent activity stream
-  const recentItems: RecentActivityItem[] = [
-    ...projects.map((p) => ({
-      id: p.id || p.slug,
-      title: p.title,
-      type: 'project' as const,
-      category: 'Software Engineering',
-      date: p.updatedAt || p.createdAt || 'Recent',
-      status: p.status,
-      link: '/admin/projects',
-    })),
-    ...artworks.map((a) => ({
-      id: a.id || a.slug,
-      title: a.title,
-      type: 'artwork' as const,
-      category: a.category || 'Digital Art',
-      date: a.updatedAt || a.createdAt || 'Recent',
-      status: a.status,
-      link: '/admin/artworks',
-    })),
-    ...experiences.map((e) => ({
-      id: e.id || e.company,
-      title: `${e.role} @ ${e.company}`,
-      type: 'experience' as const,
-      category: 'Work Experience',
-      date: e.updatedAt || e.createdAt || 'Recent',
-      link: '/admin/experience',
-    })),
-    ...educationList.map((ed) => ({
-      id: ed.id || ed.institution,
-      title: `${ed.degree} (${ed.institution})`,
-      type: 'education' as const,
-      category: 'Education',
-      date: ed.updatedAt || ed.createdAt || 'Recent',
-      link: '/admin/education',
-    })),
-  ].slice(0, 6);
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
