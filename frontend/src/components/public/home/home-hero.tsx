@@ -1,18 +1,17 @@
 'use client';
 
 import React from 'react';
-import { HomePageConfig, SocialLink } from '@/types/public.types';
+import { HomePageConfig } from '@/types/public.types';
 import { PublicContainer } from '../public-container';
 import { HeroContent } from './hero-content';
 import { HeroImage } from './hero-image';
 
 interface HomeHeroProps {
-  socialLinks?: SocialLink[];
   homeConfig?: HomePageConfig | null;
 }
 
 // Main Hero section wrapper combining profile content and portrait image in an asymmetric layout.
-export const HomeHero: React.FC<HomeHeroProps> = ({ socialLinks = [], homeConfig }) => {
+export const HomeHero: React.FC<HomeHeroProps> = ({ homeConfig }) => {
   const profileImage = homeConfig?.hero?.profileImage;
 
   return (
@@ -25,7 +24,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ socialLinks = [], homeConfig
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 lg:gap-12 items-center w-full">
           {/* Left Column: Profile Copy & Dual Identity Actions */}
           <div className="md:col-span-7 order-2 md:order-1">
-            <HeroContent socialLinks={socialLinks} homeConfig={homeConfig} />
+            <HeroContent homeConfig={homeConfig} />
           </div>
 
           {/* Right Column: Hero Portrait Image Frame */}

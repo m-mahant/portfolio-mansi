@@ -1,21 +1,17 @@
 'use client';
 
 import React from 'react';
-import { HomePageConfig, SocialLink } from '@/types/public.types';
+import { HomePageConfig } from '@/types/public.types';
 import { DualIdentity } from './dual-identity';
 import { HeroActions } from './hero-actions';
-import { HomeSocialLinks } from './home-social-links';
 
 interface HeroContentProps {
-  socialLinks?: SocialLink[];
   homeConfig?: HomePageConfig | null;
 }
 
-// Assembles profile text, dual discipline details, actions, and social links for the hero.
-export const HeroContent: React.FC<HeroContentProps> = ({
-  socialLinks = [],
-  homeConfig,
-}) => {
+// Assembles profile text, dual discipline details, and primary actions for the hero.
+// Social links live on the Contact page, not duplicated here.
+export const HeroContent: React.FC<HeroContentProps> = ({ homeConfig }) => {
   const hero = homeConfig?.hero;
   const name = hero?.mainHeading || 'Mansi Mahant';
   const title = hero?.accentHeading || 'Software Developer × Creative Artist';
@@ -55,12 +51,6 @@ export const HeroContent: React.FC<HeroContentProps> = ({
         artCtaText={hero?.artCtaText}
         developmentUrl={hero?.devCtaTarget}
         artUrl={hero?.artCtaTarget}
-      />
-
-      {/* Social Links & Resume Download */}
-      <HomeSocialLinks
-        socialLinks={socialLinks}
-        showSocialLinks={true}
       />
     </div>
   );
