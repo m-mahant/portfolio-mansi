@@ -47,10 +47,13 @@ portfolio-mansi/
 ├── backend/           # Express API
 │   ├── src/
 │   └── scripts/       # bootstrap-admin, seed-firebase-content
+├── firebase/          # Firestore/Storage security rules + indexes (optional, Firebase CLI)
 ├── docs/
 │   ├── SETUP.md
 │   ├── architecture.md
 │   └── api.md
+├── firebase.json      # Firebase CLI config — must stay at repo root
+├── .firebaserc        # Firebase CLI project alias — must stay at repo root
 ├── AGENTS.md
 ├── LICENSE
 └── README.md
