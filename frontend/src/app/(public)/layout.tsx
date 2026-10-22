@@ -44,7 +44,7 @@ export default async function PublicLayout({ children }: { children: React.React
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--color-background)] text-[var(--color-text)] transition-colors duration-300 overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-[var(--color-background)] text-[var(--color-text)] transition-colors duration-300 overflow-x-clip">
       {faviconUrl && <link rel="icon" href={faviconUrl} key="dynamic-favicon" />}
       <script
         type="application/ld+json"
@@ -56,6 +56,14 @@ export default async function PublicLayout({ children }: { children: React.React
       >
         Skip to main content
       </a>
+
+      {/* Persistent ambient wash, fixed to the viewport so the transparent header/footer always
+          have something to blur behind them instead of the flat page background. */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-1/3 -left-1/4 h-[70vmax] w-[70vmax] rounded-full bg-[var(--color-primary)]/10 blur-3xl" />
+        <div className="absolute -bottom-1/3 -right-1/4 h-[70vmax] w-[70vmax] rounded-full bg-[var(--color-accent)]/10 blur-3xl" />
+      </div>
+
       <PublicHeader siteName={siteName} site={site} />
       <main id="main-content" className="flex-1 w-full min-w-0">{children}</main>
       <PublicFooter siteName={siteName} copyrightText={copyrightText} />

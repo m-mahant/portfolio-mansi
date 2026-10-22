@@ -15,7 +15,7 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full border-t border-[var(--color-border)] bg-[var(--color-background)] text-[var(--color-muted)] py-12 transition-colors duration-200">
+    <footer className="w-full bg-transparent text-[var(--color-muted)] py-12 transition-colors duration-200">
       <PublicContainer className="flex flex-col sm:flex-row items-center justify-between gap-6 text-xs">
         <div className="flex flex-col gap-1 text-center sm:text-left">
           <p className="font-semibold text-[var(--color-text)]">{siteName}</p>

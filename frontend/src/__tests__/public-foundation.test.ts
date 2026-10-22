@@ -37,8 +37,8 @@ export function runPublicFoundationTests(): void {
   const safeStack = getSafeFontStack('UnapprovedFont', 'Cinzel');
   assert.strictEqual(safeStack, APPROVED_FONTS['Cinzel']);
 
-  // verifies Work navigation dropdown contains ONLY Development and Art & Crafts
-  const workItem = PUBLIC_NAV_ITEMS.find((item) => item.label === 'Work');
+  // verifies Works navigation dropdown contains ONLY Development and Art & Crafts
+  const workItem = PUBLIC_NAV_ITEMS.find((item) => item.label === 'Works');
   assert.ok(workItem);
   assert.strictEqual(workItem?.children?.length, 2);
   assert.strictEqual(workItem?.children?.[0].href, '/work/development');
