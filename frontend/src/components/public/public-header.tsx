@@ -19,7 +19,7 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ siteName = 'Mansi Ma
   const logoAlt = site?.logo?.altText || name;
 
   return (
-    <div className="sticky top-0 z-40 w-full pt-3 sm:pt-4 px-3 sm:px-4">
+    <div className="sticky top-0 z-40 w-full py-3 sm:py-4 px-3 sm:px-4">
       <header
         className="mx-auto max-w-6xl rounded-2xl border border-[var(--glass-border)] shadow-[0_8px_32px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-2xl backdrop-saturate-150 transition-all duration-200"
         style={{ background: 'var(--glass-bg)' }}
