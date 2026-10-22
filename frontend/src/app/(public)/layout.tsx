@@ -44,7 +44,7 @@ export default async function PublicLayout({ children }: { children: React.React
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--color-background)] text-[var(--color-text)] transition-colors duration-300 overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-[var(--color-background)] text-[var(--color-text)] transition-colors duration-300 overflow-x-clip">
       {faviconUrl && <link rel="icon" href={faviconUrl} key="dynamic-favicon" />}
       <script
         type="application/ld+json"

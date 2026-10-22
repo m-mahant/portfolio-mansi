@@ -187,14 +187,12 @@ export function applyThemeToDocument(
   // Apply Liquid Glass mode-tuned custom properties
   if (isDark) {
     root.style.setProperty("--glass-bg", "rgba(30, 41, 59, 0.65)");
-    root.style.setProperty("--glass-bg-faint", "rgba(30, 41, 59, 0.3)");
     root.style.setProperty("--glass-bg-strong", "rgba(15, 23, 42, 0.85)");
     root.style.setProperty("--glass-border", "rgba(255, 255, 255, 0.12)");
     root.style.setProperty("--glass-highlight", "rgba(255, 255, 255, 0.08)");
     root.style.setProperty("--glass-shadow", "0 8px 32px 0 rgba(0, 0, 0, 0.37)");
   } else {
     root.style.setProperty("--glass-bg", "rgba(255, 255, 255, 0.75)");
-    root.style.setProperty("--glass-bg-faint", "rgba(255, 255, 255, 0.3)");
     root.style.setProperty("--glass-bg-strong", "rgba(248, 250, 252, 0.90)");
     root.style.setProperty("--glass-border", "rgba(15, 23, 42, 0.08)");
     root.style.setProperty("--glass-highlight", "rgba(255, 255, 255, 0.60)");

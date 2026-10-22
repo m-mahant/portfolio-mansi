@@ -16,10 +16,10 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ homeConfig }) => {
 
   return (
     <section className="relative overflow-hidden py-8 sm:py-12 lg:py-16">
-      {/* Ambient background glow accents. Masked to fade out before the section's overflow-hidden
-          edge so the blur never gets hard-clipped into a visible seam. */}
-      <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-[var(--color-primary)]/10 blur-3xl [mask-image:radial-gradient(circle,black_0%,black_35%,transparent_70%)]" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-[var(--color-accent)]/10 blur-3xl [mask-image:radial-gradient(circle,black_0%,black_35%,transparent_70%)]" />
+      {/* Ambient background glow accents, fully inside the section bounds so the blurred
+          circles fade out on their own instead of being sliced by overflow-hidden. */}
+      <div className="pointer-events-none absolute top-8 left-8 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-[var(--color-primary)]/10 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-8 right-8 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-[var(--color-accent)]/10 blur-3xl" />
 
       <PublicContainer className="relative lg:min-h-[calc(100vh-220px)] flex items-center">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 lg:gap-12 items-center w-full">
