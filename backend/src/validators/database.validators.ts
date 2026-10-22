@@ -100,26 +100,6 @@ export const siteSettingsSchema = z.object({
   updatedAt: z.string().datetime().optional(),
 });
 
-// Zod Schema for Intro Page Configuration
-export const introPageConfigSchema = z.object({
-  headline: z.string().optional(),
-  headlineAccent: z.string().optional(),
-  subtitle: z.string().optional(),
-  exploreButtonLabel: z.string().optional(),
-  exploreButtonTarget: z.string().optional(),
-  loadingText: z.string().optional(),
-  autoRedirect: z.boolean().optional(),
-  autoRedirectDelay: z.number().optional(),
-  showOnInitialVisit: z.boolean().optional(),
-  redirectTarget: z.string().optional(),
-  enabled: z.boolean().optional().default(true),
-  seo: seoMetadataSchema.optional(),
-  updatedAt: z.string().optional(),
-});
-
-export const updateIntroPageConfigSchema = introPageConfigSchema.partial();
-
-
 // Zod Schema for About Profile
 export const aboutProfileSchema = z.object({
   introduction: z.string().optional(),
@@ -377,21 +357,4 @@ export const themeSettingsSchema = z.object({
     imageHoverEffects: z.boolean(),
   }),
   updatedAt: z.string().optional(),
-});
-
-// Zod Schema for Media Documents
-export const mediaSchema = z.object({
-  id: z.string().optional(),
-  storagePath: z.string().min(1, 'Storage path is required'),
-  url: z.string().url('Must be a valid URL'),
-  fileName: z.string().min(1, 'File name is required'),
-  mimeType: z.string().min(1, 'Mime type is required'),
-  fileSize: z.number().positive('File size must be positive'),
-  width: z.number().positive().optional(),
-  height: z.number().positive().optional(),
-  altText: z.string().optional(),
-  caption: z.string().optional(),
-  displayOrder: z.number().int().optional(),
-  createdAt: z.string().datetime().optional(),
-  updatedAt: z.string().datetime().optional(),
 });

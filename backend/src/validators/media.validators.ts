@@ -13,8 +13,6 @@ export const ALLOWED_IMAGE_MIME_TYPES = [
 // Maximum allowed upload size (10 MB in bytes)
 export const MAX_UPLOAD_FILE_SIZE = 10 * 1024 * 1024;
 
-export type SupportedMimeType = (typeof ALLOWED_IMAGE_MIME_TYPES)[number];
-
 // Supported folder domain contexts for structured ImageKit directory organization
 export const MEDIA_CONTEXT_TYPES = [
   'site',
@@ -27,10 +25,6 @@ export const MEDIA_CONTEXT_TYPES = [
   'blog',
 ] as const;
 export type MediaContextType = (typeof MEDIA_CONTEXT_TYPES)[number];
-
-// Allowed section contexts for project/artwork subdirectories
-export const PROJECT_SECTION_CONTEXTS = ['cover', 'gallery', 'architecture', 'workflow', 'api-flow'] as const;
-export const ARTWORK_SECTION_CONTEXTS = ['featured', 'gallery'] as const;
 
 // Helper path generators for canonical structure
 export function getSiteMediaPath(): string {
@@ -129,8 +123,6 @@ export const uploadMediaMetadataSchema = z
       path: ['slug'],
     }
   );
-
-export type UploadMediaMetadataInput = z.infer<typeof uploadMediaMetadataSchema>;
 
 // Zod schema for updating media metadata (PATCH /api/v1/admin/media/:mediaId).
 export const updateMediaMetadataSchema = z.object({

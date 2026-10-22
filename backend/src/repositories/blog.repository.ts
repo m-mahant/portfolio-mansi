@@ -12,10 +12,6 @@ export interface BlogListResult {
 // In-memory fallback store for blog posts when Firestore is uninitialized or in test environment.
 let inMemoryBlogs: Blog[] = [];
 
-export function clearInMemoryBlogs(): void {
-  inMemoryBlogs = [];
-}
-
 // Repository for managing Blog documents in Firestore.
 export class BlogRepository {
   // Retrieves published blogs for public display.

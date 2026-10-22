@@ -67,13 +67,3 @@ export const CardContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
     {children}
   </div>
 );
-
-export const CardFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
-  children,
-  className = '',
-  ...props
-}) => (
-  <div className={`p-5 pt-3 border-t border-[var(--glass-border)] flex items-center justify-between ${className}`} {...props}>
-    {children}
-  </div>
-);
