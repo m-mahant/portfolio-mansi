@@ -104,29 +104,6 @@ export interface PublicArtworkQueryParams {
   limit?: number;
 }
 
-// Standardized public theme CSS variables map.
-export interface ThemeCssVariables {
-  '--color-primary': string;
-  '--color-secondary': string;
-  '--color-accent': string;
-  '--color-background': string;
-  '--color-surface': string;
-  '--color-text': string;
-  '--color-muted': string;
-  '--color-border': string;
-  '--font-heading': string;
-  '--font-body': string;
-  '--font-accent': string;
-  '--font-button': string;
-  '--font-card-title': string;
-  '--font-card-subtitle': string;
-  '--font-card-description': string;
-  '--font-tag': string;
-  '--font-nav': string;
-  '--font-mono': string;
-  '--radius-base': string;
-}
-
 // Contact submission payload interface.
 export interface ContactSubmissionData {
   name: string;

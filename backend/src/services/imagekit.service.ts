@@ -1,4 +1,4 @@
-import ImageKit, { toFile } from '@imagekit/nodejs';
+import ImageKit, { toFile, NotFoundError } from '@imagekit/nodejs';
 import { imagekitClient, isImageKitConfigured } from '../config/imagekit.config';
 import { AppError } from '../errors/app-error';
 
@@ -65,7 +65,9 @@ export class ImageKitService {
     }
   }
 
-  // Purges an asset from ImageKit by file ID.
+  // Purges an asset from ImageKit by file ID. Idempotent: a file that's already gone (e.g. removed
+  // directly on ImageKit, leaving a dangling Firestore record) counts as deleted, not a failure —
+  // otherwise that orphaned record could never be cleaned up through the admin UI.
   async deleteFile(fileId: string): Promise<void> {
     if (!this.client || !isImageKitConfigured) {
       throw AppError.internal('ImageKit client is not properly initialized or configured.');
@@ -74,6 +76,9 @@ export class ImageKitService {
     try {
       await this.client.files.delete(fileId);
     } catch (error) {
+      if (error instanceof NotFoundError) {
+        return;
+      }
       const message = error instanceof Error ? error.message : 'Unknown ImageKit delete error';
       throw AppError.internal(`ImageKit asset deletion failed: ${message}`);
     }

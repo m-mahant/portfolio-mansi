@@ -22,6 +22,13 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: BRAND_NAME,
   description: BRAND_TAGLINE,
+  icons: {
+    icon: [
+      { url: '/favicon/favicon.ico', sizes: 'any' },
+      { url: '/favicon/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
+    ],
+    apple: '/favicon/apple-touch-icon.png',
+  },
 };
 
 export const viewport: Viewport = {

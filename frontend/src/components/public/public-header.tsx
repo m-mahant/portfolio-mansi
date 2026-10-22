@@ -29,8 +29,8 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ siteName = 'Mansi Ma
             className="flex items-center gap-2 sm:gap-2.5 min-w-0 flex-1 md:flex-none text-sm sm:text-base font-bold tracking-tight text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors group"
           >
             {logoUrl ? (
-              <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-lg overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] shrink-0 group-hover:border-[var(--color-primary)] transition-colors">
-                <Image src={logoUrl} alt={logoAlt} fill className="object-contain p-0.5" />
+              <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] shrink-0 group-hover:border-[var(--color-primary)] transition-colors">
+                <Image src={logoUrl} alt={logoAlt} fill className="object-cover" />
               </div>
             ) : (
               <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)] shadow-sm shadow-[var(--color-primary)] animate-pulse shrink-0" />
