@@ -12,7 +12,7 @@ export const PUBLIC_NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   {
-    label: 'Work',
+    label: 'Works',
     href: '/work',
     children: [
       { label: 'Development', href: '/work/development', description: 'Software engineering case studies & architecture' },
@@ -83,7 +83,7 @@ export const PublicNavigation: React.FC = () => {
                     onClick={closeMenus}
                     className={`px-2.5 lg:px-3 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
                       active
-                        ? 'text-[var(--color-primary)] font-semibold bg-[var(--color-surface)]'
+                        ? 'text-[var(--color-primary)] font-semibold'
                         : 'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface)]/60'
                     }`}
                     aria-expanded={workDropdownOpen}
@@ -141,7 +141,7 @@ export const PublicNavigation: React.FC = () => {
                 href={item.href}
                 className={`px-2.5 lg:px-3.5 py-2 rounded-lg transition-all text-xs font-semibold ${
                   active
-                    ? 'text-[var(--color-primary)] font-semibold bg-[var(--color-primary)]/15 border border-[var(--color-primary)]/30 shadow-xs'
+                    ? 'text-[var(--color-primary)]'
                     : 'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[var(--glass-highlight)]'
                 }`}
               >

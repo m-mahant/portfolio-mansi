@@ -6,10 +6,10 @@ import { PUBLIC_NAV_ITEMS } from '@/components/public/public-navigation';
 export function runPublicHomeTests(): void {
   // Verify top-level navigation items
   const labels = PUBLIC_NAV_ITEMS.map((item) => item.label);
-  assert.deepStrictEqual(labels, ['Home', 'About', 'Work', 'Experience', 'Blogs', 'Contact']);
+  assert.deepStrictEqual(labels, ['Home', 'About', 'Works', 'Experience', 'Blogs', 'Contact']);
 
-  // Verify Work dropdown contents
-  const workItem = PUBLIC_NAV_ITEMS.find((item) => item.label === 'Work');
+  // Verify Works dropdown contents
+  const workItem = PUBLIC_NAV_ITEMS.find((item) => item.label === 'Works');
   assert.ok(workItem && workItem.children);
   assert.strictEqual(workItem.children.length, 2);
 

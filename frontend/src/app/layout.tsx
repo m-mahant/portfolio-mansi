@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[var(--color-background,#0f172a)] text-[var(--color-text,#f8fafc)] font-sans transition-colors duration-300 overflow-x-hidden">
+      <body className="min-h-full flex flex-col bg-[var(--color-background,#0f172a)] text-[var(--color-text,#f8fafc)] font-sans transition-colors duration-300 overflow-x-clip">
         <ThemeRuntimeProvider>{children}</ThemeRuntimeProvider>
         <Analytics />
         <SpeedInsights />
