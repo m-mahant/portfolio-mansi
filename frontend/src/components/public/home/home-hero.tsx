@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { HomePageConfig, SocialLink } from '@/types/public.types';
-import { PublicSection } from '../public-section';
+import { PublicContainer } from '../public-container';
 import { HeroContent } from './hero-content';
 import { HeroImage } from './hero-image';
 
@@ -16,18 +16,24 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ socialLinks = [], homeConfig
   const profileImage = homeConfig?.hero?.profileImage;
 
   return (
-    <PublicSection className="pt-8 sm:pt-12 lg:pt-16 pb-12 sm:pb-16 lg:pb-20">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-        {/* Left Column: Profile Copy & Dual Identity Actions */}
-        <div className="lg:col-span-7 order-2 lg:order-1">
-          <HeroContent socialLinks={socialLinks} homeConfig={homeConfig} />
-        </div>
+    <section className="relative overflow-hidden py-8 sm:py-12 lg:py-16">
+      {/* Ambient background glow accents, matching the treatment used on other public pages */}
+      <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-[var(--color-primary)]/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-[var(--color-accent)]/10 blur-3xl" />
 
-        {/* Right Column: Hero Portrait Image Frame */}
-        <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
-          <HeroImage image={profileImage} name={homeConfig?.hero?.mainHeading || 'Mansi Mahant'} />
+      <PublicContainer className="relative lg:min-h-[calc(100vh-220px)] flex items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 lg:gap-12 items-center w-full">
+          {/* Left Column: Profile Copy & Dual Identity Actions */}
+          <div className="md:col-span-7 order-2 md:order-1">
+            <HeroContent socialLinks={socialLinks} homeConfig={homeConfig} />
+          </div>
+
+          {/* Right Column: Hero Portrait Image Frame */}
+          <div className="md:col-span-5 order-1 md:order-2 flex justify-center">
+            <HeroImage image={profileImage} name={homeConfig?.hero?.mainHeading || 'Mansi Mahant'} />
+          </div>
         </div>
-      </div>
-    </PublicSection>
+      </PublicContainer>
+    </section>
   );
 };
