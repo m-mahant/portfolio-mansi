@@ -62,7 +62,6 @@ export function initFirebaseAdmin(): App | null {
 // Initializing Admin SDK
 initFirebaseAdmin();
 
-export const firebaseAdminApp: App | null = adminApp;
 export const db: Firestore | null = dbInstance;
 export const storage: ReturnType<typeof getStorage> | null = storageInstance;
 export const auth: Auth | null = authInstance;

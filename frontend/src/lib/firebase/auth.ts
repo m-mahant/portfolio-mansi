@@ -19,14 +19,6 @@ export async function signOutUser(): Promise<void> {
   await firebaseSignOut(getFirebaseAuth());
 }
 
-// Retrieves the currently active authenticated user instance or null.
-export function getCurrentUser(): User | null {
-  if (!isFirebaseClientConfigured()) {
-    return null;
-  }
-  return getFirebaseAuth().currentUser;
-}
-
 // Subscribes to real-time authentication state changes.
 export function onAuthStateChange(observer: NextOrObserver<User>): Unsubscribe {
   if (!isFirebaseClientConfigured()) {

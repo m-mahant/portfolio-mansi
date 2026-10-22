@@ -1,4 +1,4 @@
-import { DecodedIdToken, UserRecord } from 'firebase-admin/auth';
+import { DecodedIdToken } from 'firebase-admin/auth';
 import { auth, isFirebaseInitialized } from '../config/firebase.config';
 
 type TokenVerifier = (idToken: string) => Promise<DecodedIdToken>;
@@ -19,12 +19,4 @@ export async function verifyFirebaseIdToken(idToken: string): Promise<DecodedIdT
     throw new Error('Firebase Admin Auth is not initialized.');
   }
   return await auth.verifyIdToken(idToken);
-}
-
-// Retrieves user details by Firebase UID using Firebase Admin Auth.
-export async function getFirebaseUserByUid(uid: string): Promise<UserRecord> {
-  if (!isFirebaseInitialized || auth === null) {
-    throw new Error('Firebase Admin Auth is not initialized.');
-  }
-  return await auth.getUser(uid);
 }

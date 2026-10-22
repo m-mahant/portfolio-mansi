@@ -14,15 +14,6 @@ export interface ApiResponse<T> {
   };
 }
 
-export interface AdminUser {
-  uid: string;
-  email: string | null;
-  displayName: string | null;
-  photoURL: string | null;
-  token: string;
-  isAuthorizedAdmin: boolean;
-}
-
 export interface AuthCheckResponse {
   authenticated: boolean;
   authorized: boolean;

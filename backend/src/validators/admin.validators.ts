@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { AppError } from '../errors/app-error';
 import {
   siteSettingsSchema,
-  introPageConfigSchema,
   aboutProfileSchema,
   socialLinkSchema,
   projectSchema,
@@ -14,9 +13,6 @@ import {
 
 // Schema for updating global site settings with partial fields.
 export const updateSiteSettingsSchema = siteSettingsSchema.partial().strict();
-
-// Schema for updating intro page configuration.
-export const updateIntroPageConfigSchema = introPageConfigSchema.partial();
 
 // Schema for updating about/profile document with partial fields.
 export const updateAboutProfileSchema = aboutProfileSchema.partial().strict();

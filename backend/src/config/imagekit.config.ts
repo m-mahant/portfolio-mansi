@@ -31,11 +31,3 @@ isConfigured = initialized.isConfigured;
 
 export const imagekitClient = imagekitInstance;
 export const isImageKitConfigured = isConfigured;
-
-// Returns current ImageKit configuration status safely without exposing private key.
-export function getImageKitStatus(): { isConfigured: boolean; urlEndpoint?: string } {
-  return {
-    isConfigured,
-    urlEndpoint: isConfigured ? env.imagekitUrlEndpoint : undefined,
-  };
-}
