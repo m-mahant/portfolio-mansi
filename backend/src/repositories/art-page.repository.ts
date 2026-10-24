@@ -5,14 +5,14 @@ import { normalizeForFirestore } from '../utils/firestore.utils';
 
 const DEFAULT_ART_PAGE_CONFIG: ArtPageConfig = {
   eyebrow: 'Art & Crafts',
-  title: 'Art & Crafts Portfolio',
-  subtitle: 'Digital illustration and concept art exploring color, light, and emotion.',
+  title: 'Art, Illustration & Photography',
+  subtitle: 'Digital illustration, concept art, and photography exploring color, light, and emotion.',
   description:
-    'A personal space for visual storytelling, outside of any client brief — portrait and character illustration, fantasy concept art, botanical studies, and abstract composition.',
-  galleryHeading: 'Art & Crafts Gallery',
+    'A personal space for visual storytelling, outside of any client brief — portrait and character illustration, fantasy concept art, and photography across flowers, nature, and skies.',
+  galleryHeading: 'Art & Photography Gallery',
   seo: {
-    title: 'Art & Crafts Gallery | Mansi Mahant',
-    description: 'Digital illustration, portrait studies, and conceptual art by Mansi Mahant.',
+    title: 'Art & Photography Gallery | Mansi Mahant',
+    description: 'Digital illustration, concept art, and photography by Mansi Mahant.',
   },
   updatedAt: new Date().toISOString(),
 };
