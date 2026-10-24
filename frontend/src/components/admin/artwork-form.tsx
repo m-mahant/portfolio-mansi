@@ -173,11 +173,16 @@ export function ArtworkForm({ initialData = {}, onSave, isSaving }: ArtworkFormP
               className="w-full px-3 py-2 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
             >
               <option value="Digital Art">Digital Art</option>
-              <option value="Generative Artwork">Generative Artwork</option>
-              <option value="3D Render">3D Render</option>
-              <option value="Interactive Craft">Interactive Craft</option>
-              <option value="Physical Artwork">Physical Artwork</option>
               <option value="Illustration">Illustration</option>
+              <option value="Portrait">Portrait</option>
+              <option value="Fantasy & Concept Art">Fantasy & Concept Art</option>
+              <option value="Nature & Botanical">Nature & Botanical</option>
+              <option value="Abstract Art">Abstract Art</option>
+              <option value="Photography">Photography</option>
+              <option value="3D Render">3D Render</option>
+              <option value="Generative Artwork">Generative Artwork</option>
+              <option value="Physical Artwork">Physical Artwork</option>
+              <option value="Interactive Craft">Interactive Craft</option>
               <option value="Other Craft">Other Craft</option>
             </select>
           </div>
