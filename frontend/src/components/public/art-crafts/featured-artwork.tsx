@@ -95,7 +95,7 @@ export function FeaturedArtwork({ artwork }: FeaturedArtworkProps) {
             className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-accent)]"
             style={{ fontFamily: 'var(--font-button, inherit)' }}
           >
-            View artwork
+            View More
             <ArrowUpRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
