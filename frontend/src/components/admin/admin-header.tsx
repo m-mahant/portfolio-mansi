@@ -46,10 +46,10 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ onMobileToggle }) => {
           </div>
         )}
 
-        <Button variant="outline" size="sm" onClick={logout} className="text-xs glass-button hidden sm:inline-flex">
+        <Button variant="outline" size="sm" onClick={logout} className="text-[11px] py-1 px-2.5 glass-button hidden sm:inline-flex">
           Sign Out
         </Button>
-        <Button variant="outline" size="sm" onClick={logout} className="text-xs glass-button sm:hidden px-2" aria-label="Sign Out">
+        <Button variant="outline" size="sm" onClick={logout} className="text-[11px] py-1 px-2 glass-button sm:hidden" aria-label="Sign Out">
           Out
         </Button>
       </div>

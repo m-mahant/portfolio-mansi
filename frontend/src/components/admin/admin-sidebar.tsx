@@ -69,7 +69,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       <div className="h-14 sm:h-16 px-5 border-b border-[var(--glass-border)] flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-9 h-9 rounded-xl bg-[var(--color-primary)] flex items-center justify-center font-extrabold text-white text-base shadow-md shadow-[var(--color-primary)]/30 shrink-0">
-            L
+            {BRAND_NAME.charAt(0).toUpperCase()}
           </div>
           <div className="min-w-0">
             <h1 className="font-bold text-sm text-[var(--color-text)] leading-none font-heading truncate">
