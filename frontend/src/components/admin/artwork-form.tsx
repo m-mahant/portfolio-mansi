@@ -34,7 +34,7 @@ export function ArtworkForm({ initialData = {}, onSave, isSaving }: ArtworkFormP
     subtitle: initialData.subtitle || '',
     shortDescription: initialData.shortDescription || '',
     description: initialData.description || '',
-    category: initialData.category || 'Digital Art',
+    category: initialData.category || 'Art',
     tags: initialData.tags || [],
     materials: initialData.materials || [],
     year: initialData.year || new Date().getFullYear().toString(),
@@ -172,13 +172,12 @@ export function ArtworkForm({ initialData = {}, onSave, isSaving }: ArtworkFormP
               onChange={(e) => handleChange('category', e.target.value)}
               className="w-full px-3 py-2 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
             >
-              <option value="Digital Art">Digital Art</option>
-              <option value="Generative Artwork">Generative Artwork</option>
-              <option value="3D Render">3D Render</option>
-              <option value="Interactive Craft">Interactive Craft</option>
-              <option value="Physical Artwork">Physical Artwork</option>
-              <option value="Illustration">Illustration</option>
-              <option value="Other Craft">Other Craft</option>
+              <option value="Art">Art</option>
+              <option value="Craft">Craft</option>
+              <option value="Photography">Photography</option>
+              <option value="Sketch">Sketch</option>
+              <option value="Drawing">Drawing</option>
+              <option value="Wall Paint">Wall Paint</option>
             </select>
           </div>
 

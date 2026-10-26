@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
         <Card variant="glass" className="border-[var(--color-border)] shadow-2xl backdrop-blur-xl">
           <CardHeader className="text-center p-6 pb-2 border-none">
             <div className="mx-auto w-12 h-12 mb-4 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/25">
-              L
+              {BRAND_NAME.charAt(0).toUpperCase()}
             </div>
             <CardTitle className="text-2xl font-bold tracking-tight text-[var(--color-text)] font-heading">
               Admin Portal

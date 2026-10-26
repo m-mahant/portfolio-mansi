@@ -71,7 +71,7 @@ const DEFAULT_THEME: ThemeSettings = {
 
 export default function AdminThemePage() {
   const { idToken } = useAdminAuth();
-  const { activeMode } = useThemeRuntime();
+  const { activeMode, refreshTheme } = useThemeRuntime();
   const [theme, setTheme] = useState<ThemeSettings>(DEFAULT_THEME);
   const [originalTheme, setOriginalTheme] = useState<ThemeSettings>(DEFAULT_THEME);
 
@@ -116,6 +116,9 @@ export default function AdminThemePage() {
       const updated = await adminApi.updateThemeSettings(theme, idToken);
       setTheme(updated);
       setOriginalTheme(updated);
+      // Sync the app-wide theme provider so the new theme stays applied after navigating
+      // away from this page, instead of reverting to whatever it had cached on load.
+      await refreshTheme();
       setFeedback({ type: 'success', message: 'Theme settings updated successfully!' });
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Failed to save theme settings.';
