@@ -16,7 +16,7 @@ export const PUBLIC_NAV_ITEMS: NavItem[] = [
     href: '/work',
     children: [
       { label: 'Development', href: '/work/development', description: 'Software engineering case studies & architecture' },
-      { label: 'Art & Crafts', href: '/work/art-crafts', description: 'Digital illustration, 3D modeling & creative media' },
+      { label: 'Art & Crafts', href: '/work/art-crafts', description: 'Digital illustration, concept art & photography' },
     ],
   },
   { label: 'Experience', href: '/experience' },

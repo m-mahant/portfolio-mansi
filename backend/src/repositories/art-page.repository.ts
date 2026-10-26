@@ -5,16 +5,14 @@ import { normalizeForFirestore } from '../utils/firestore.utils';
 
 const DEFAULT_ART_PAGE_CONFIG: ArtPageConfig = {
   eyebrow: 'Art & Crafts',
-  title: 'Art & Crafts Portfolio',
-  subtitle:
-    'Explore 3D renders, digital illustrations, generative code artwork, and tactile handcrafted ceramics.',
+  title: 'Art, Illustration & Photography',
+  subtitle: 'Digital illustration, concept art, and photography exploring color, light, and emotion.',
   description:
-    'A curated space showcasing the dialogue between digital precision and physical craftsmanship. From procedural GLSL shaders to wheel-thrown stoneware ceramics, every piece embodies an exploration in medium, texture, light, and geometry.',
-  galleryHeading: 'Art & Crafts Gallery',
+    'A personal space for visual storytelling, outside of any client brief — portrait and character illustration, fantasy concept art, and photography across flowers, nature, and skies.',
+  galleryHeading: 'Art & Photography Gallery',
   seo: {
-    title: 'Art & Crafts Gallery | Mansi Mahant',
-    description:
-      'Explore 3D renders, digital illustrations, generative code artwork, and handcrafted fine ceramics.',
+    title: 'Art & Photography Gallery | Mansi Mahant',
+    description: 'Digital illustration, concept art, and photography by Mansi Mahant.',
   },
   updatedAt: new Date().toISOString(),
 };

@@ -17,8 +17,8 @@ const DEFAULT_WORK_PAGE_CONFIG: WorkPageConfig = {
   description: 'Comprehensive gallery of software engineering projects and digital artwork portfolios.',
   devTitle: 'Development',
   devDescription: 'Full-stack web engineering, cloud architecture diagrams, API specs, and technical case studies.',
-  artTitle: 'Art & Crafts',
-  artDescription: 'Digital illustrations, 3D modeling, creative media, and artistic process documentation.',
+  artTitle: 'Art & Photography',
+  artDescription: 'Digital illustration, concept art, and photography — outside the client brief.',
   seo: {
     title: 'Work Overview | Mansi Mahant',
     description: 'Explore software development case studies and creative digital art portfolios.',
