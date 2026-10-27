@@ -46,6 +46,12 @@ POST /api/v1/contact  (rate limited)
   → best-effort email notification via Resend (if RESEND_API_KEY is set)
 ```
 
+Body: `name`, `email`, `subject`, `message` (required), plus optional lead-qualification fields
+`inquiryType` (`'new-build' | 'maintenance' | 'consulting' | 'art-commission' | 'other'`), `budget`,
+`timeline` — free text the visitor fills in, never published pricing. Included in the email
+notification when present. A service/commission CTA elsewhere on the public site can link to
+`/contact?type=<inquiryType>` to pre-select the dropdown.
+
 ### Media upload
 
 ```text

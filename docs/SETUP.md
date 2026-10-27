@@ -89,6 +89,7 @@ out of CI (see below) — it would otherwise write real Firestore documents.
 | `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` | usually `your-project.appspot.com` |
 | `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` | from Firebase |
 | `NEXT_PUBLIC_FIREBASE_APP_ID` | from Firebase |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Optional. Enables Google Analytics, gated behind the cookie-consent banner. |
 
 **Backend** (`backend/.env`)
 
@@ -144,6 +145,8 @@ This is not a hosted SaaS. You can run your own instance.
 - ImageKit private key and Firebase service-account key stay on the API only.
 - Admin login is Firebase Auth + `admins/{uid}`. Do not skip that check.
 - Swagger UI documents the API; it does not bypass auth on admin routes.
+- The frontend sets a Content-Security-Policy and related security headers (`frontend/next.config.ts`). `connect-src`/`script-src` explicitly allow Firebase Auth, Vercel Analytics, and (dev only) `'unsafe-eval'`/websockets for Fast Refresh — if admin login or a new third-party script ever breaks with a browser console CSP error, this is the first place to check, not a Firebase/account problem.
+- The API origin serves a `Disallow: /` `robots.txt` (`backend/src/app.ts`) — it has no public pages of its own.
 - `npm run backup:firestore` (from `backend/`) exports every collection to timestamped JSON under `backend/backups/` (gitignored — contains visitor PII from `contactMessages`). `.github/workflows/backup-firestore.yml` also runs this weekly (Sundays) and, since GitHub Actions artifacts are publicly downloadable on a public repo, uploads the JSON to ImageKit as **private files** instead (`BACKUP_UPLOAD_TO_IMAGEKIT=true`, under `/backups/firestore/<timestamp>/`, `isPrivateFile: true` so the CDN URL alone can't serve them) — never as a workflow artifact, and no Firebase Storage bucket needed (that requires the paid Blaze plan). Requires repository secrets `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL`, `FIREBASE_PRIVATE_KEY`, `IMAGEKIT_PUBLIC_KEY`, `IMAGEKIT_PRIVATE_KEY`, `IMAGEKIT_URL_ENDPOINT` (the same ImageKit credentials already used for media).
 
 ## After clone: make it yours

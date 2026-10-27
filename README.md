@@ -34,6 +34,7 @@ License: [Proprietary — all rights reserved, not open source](./LICENSE). Setu
 | `/experience` | Work + education |
 | `/blog`, `/blog/[slug]` | Posts |
 | `/contact` | Contact form and details |
+| `/privacy` | Privacy policy |
 
 **Admin** (`/admin`) — Firebase Auth. Access requires `admins/{uid}` (`isActive`). Page configs, catalogs (projects, artworks, blogs, experience, education), site, socials, media, SEO, theme.
 
