@@ -10,14 +10,17 @@ import { ArtworkMeta } from '@/components/public/art-crafts/artwork-meta';
 import { ArtworkGallery } from '@/components/public/art-crafts/artwork-gallery';
 import { RelatedArtwork } from '@/components/public/art-crafts/related-artwork';
 import { ShareButtons } from '@/components/public/share-buttons';
-import { generatePublicMetadata, generateBreadcrumbJsonLd } from '@/utils/seo.utils';
+import { generatePublicMetadata, generateBreadcrumbJsonLd, safeJsonLd } from '@/utils/seo.utils';
 import { BRAND_NAME } from '@/lib/brand';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// Generates dynamic SEO metadata for artwork detail pages using backend SEO settings.
+// Generates dynamic SEO metadata for artwork detail pages using backend SEO settings. Calls
+// notFound() here (not just in the page body below) because this runs before the response
+// streams — if only the page body called it, Next.js had already committed to a 200 status by the
+// time it fired, producing a soft 404 (an "Artwork Not Found" page served with a 200, not a real 404).
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   try {
@@ -30,9 +33,7 @@ export async function generateMetadata({ params }: PageProps) {
       ogType: 'article',
     });
   } catch {
-    return generatePublicMetadata({
-      titleOverride: 'Artwork Not Found',
-    });
+    notFound();
   }
 }
 
@@ -50,9 +51,11 @@ export default async function PublicArtworkDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'VisualArtwork',
+    url: `${siteUrl}/work/art-crafts/${artwork.slug}`,
     name: artwork.title,
     description: artwork.shortDescription || artwork.subtitle,
     image: artwork.featuredImage?.url ? [artwork.featuredImage.url] : undefined,
@@ -60,7 +63,7 @@ export default async function PublicArtworkDetailPage({ params }: PageProps) {
     dateCreated: artwork.year || artwork.createdAt,
     artMedium: artwork.materials?.join(', '),
     keywords: artwork.tags?.join(', '),
-    creator: { '@type': 'Person', name: BRAND_NAME },
+    creator: { '@type': 'Person', name: BRAND_NAME, url: `${siteUrl}/about` },
   };
 
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
@@ -74,11 +77,11 @@ export default async function PublicArtworkDetailPage({ params }: PageProps) {
     <PublicSection className="py-12 md:py-16">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <div className="relative max-w-6xl mx-auto space-y-12 md:space-y-16">

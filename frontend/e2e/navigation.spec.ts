@@ -29,6 +29,23 @@ test.describe('Public navigation', () => {
     expect(response?.status()).toBe(404);
   });
 
+  // Regression test for a real bug: a global loading.tsx wrapped every route in an automatic
+  // Suspense boundary, which committed a 200 status the instant navigation started — by the time
+  // a dynamic detail page's own notFound() call resolved, the status could no longer change, so
+  // an invalid slug rendered a real "Not Found" page under a 200 (a soft 404).
+  test('an invalid slug on a dynamic detail route returns a real 404, not a soft 404', async ({ page }) => {
+    const routes = [
+      '/blog/this-slug-does-not-exist',
+      '/work/development/this-slug-does-not-exist',
+      '/work/art-crafts/this-slug-does-not-exist',
+    ];
+
+    for (const route of routes) {
+      const response = await page.goto(route);
+      expect(response?.status(), `${route} should return 404`).toBe(404);
+    }
+  });
+
   test('header navigation links are present and point to real routes', async ({ page }) => {
     await page.goto('/');
     const header = page.locator('header, nav').first();

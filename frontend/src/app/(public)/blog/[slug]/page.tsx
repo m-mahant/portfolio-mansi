@@ -7,14 +7,14 @@ import { PublicSection } from '@/components/public/public-section';
 import { PublicImage } from '@/components/public/public-image';
 import { BlogContent } from '@/components/public/blog/blog-content';
 import { ShareButtons } from '@/components/public/share-buttons';
-import { generatePublicMetadata, generateBreadcrumbJsonLd } from '@/utils/seo.utils';
+import { generatePublicMetadata, generateBreadcrumbJsonLd, safeJsonLd } from '@/utils/seo.utils';
 import { calculateReadTime, formatBlogDate } from '@/utils/blog.utils';
+import { BRAND_NAME } from '@/lib/brand';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// Generates dynamic SEO metadata for public blog post pages.
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   try {
@@ -27,9 +27,7 @@ export async function generateMetadata({ params }: PageProps) {
       ogType: 'article',
     });
   } catch {
-    return generatePublicMetadata({
-      titleOverride: 'Article Not Found',
-    });
+    notFound();
   }
 }
 
@@ -46,6 +44,7 @@ export default async function PublicBlogDetailPage({ params }: PageProps) {
 
   const readTime = calculateReadTime(blog.content);
   const formattedDate = formatBlogDate(blog.publishedAt || blog.createdAt, 'long');
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -54,9 +53,13 @@ export default async function PublicBlogDetailPage({ params }: PageProps) {
     description: blog.excerpt || blog.title,
     datePublished: blog.publishedAt || blog.createdAt,
     dateModified: blog.updatedAt,
-    image: blog.featuredImage?.url ? [blog.featuredImage.url] : undefined,
+    // Always a real URL, never undefined: Google's Article/BlogPosting guidelines require
+    // `image`, and before this it silently disappeared whenever a post had no featured image.
+    image: [blog.featuredImage?.url || `${siteUrl}/opengraph-image`],
     keywords: blog.tags?.join(', '),
     articleSection: blog.category || 'General',
+    author: { '@type': 'Person', name: BRAND_NAME, url: `${siteUrl}/about` },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${blog.slug}` },
   };
 
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
@@ -69,11 +72,11 @@ export default async function PublicBlogDetailPage({ params }: PageProps) {
     <article className="min-h-screen">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <PublicSection className="py-12 md:py-16">
@@ -98,6 +101,12 @@ export default async function PublicBlogDetailPage({ params }: PageProps) {
               )}
               {formattedDate && <span>{formattedDate}</span>}
               <span>{readTime} min read</span>
+              <span>
+                By{' '}
+                <Link href="/about" className="text-[var(--color-primary)] hover:underline">
+                  {BRAND_NAME}
+                </Link>
+              </span>
             </div>
 
             <h1

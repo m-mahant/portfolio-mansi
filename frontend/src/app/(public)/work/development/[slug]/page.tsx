@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import { publicApi } from '@/services/api/public-api';
 import { PublicSection } from '@/components/public/public-section';
-import { generatePublicMetadata, generateBreadcrumbJsonLd } from '@/utils/seo.utils';
+import { generatePublicMetadata, generateBreadcrumbJsonLd, safeJsonLd } from '@/utils/seo.utils';
 import { BRAND_NAME } from '@/lib/brand';
 import { ProjectHero } from '@/components/public/development/project-hero';
 import { ProjectOverviewSection } from '@/components/public/development/project-overview-section';
@@ -20,6 +20,9 @@ interface PageProps {
 }
 
 // Generates dynamic SEO metadata for project case study pages using backend project SEO properties.
+// Calls notFound() here (not just in the page body below) because this runs before the response
+// streams — if only the page body called it, Next.js had already committed to a 200 status by the
+// time it fired, producing a soft 404 (a "Project Not Found" page served with a 200, not a real 404).
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   try {
@@ -32,9 +35,7 @@ export async function generateMetadata({ params }: PageProps) {
       ogType: 'article',
     });
   } catch {
-    return generatePublicMetadata({
-      titleOverride: 'Project Not Found',
-    });
+    notFound();
   }
 }
 
@@ -49,16 +50,18 @@ export default async function PublicProjectDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
+    url: `${siteUrl}/work/development/${project.slug}`,
     name: project.title,
     description: project.shortDescription,
     image: project.coverImage?.url ? [project.coverImage.url] : undefined,
     dateCreated: project.createdAt,
     dateModified: project.updatedAt,
     keywords: [...(project.tags || []), ...(project.technologies || [])].join(', '),
-    author: { '@type': 'Person', name: BRAND_NAME },
+    author: { '@type': 'Person', name: BRAND_NAME, url: `${siteUrl}/about` },
   };
 
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
@@ -72,11 +75,11 @@ export default async function PublicProjectDetailPage({ params }: PageProps) {
     <article className="min-h-screen">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
 
       <PublicSection className="py-12 md:py-16">
