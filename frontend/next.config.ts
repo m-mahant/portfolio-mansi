@@ -1,12 +1,14 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV !== 'production';
+
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
+  `script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com${isDev ? " 'unsafe-eval'" : ''}`,
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: blob: https://ik.imagekit.io https://placehold.co",
-  `connect-src 'self' ${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'} https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.firebaseapp.com`,
+  `connect-src 'self' ${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'} https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.firebaseapp.com${isDev ? ' ws: wss:' : ''}`,
   "frame-ancestors 'self'",
   "base-uri 'self'",
   "form-action 'self'",
