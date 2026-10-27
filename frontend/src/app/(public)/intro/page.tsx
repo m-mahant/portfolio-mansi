@@ -4,9 +4,13 @@ import { generatePublicMetadata } from '@/utils/seo.utils';
 import { IntroStandaloneView } from '@/components/public/intro/intro-standalone-view';
 import { IntroPageConfig } from '@/types/public.types';
 
+// Noindexed: this is a redundant entry splash that redirects into / once its animation
+// finishes, with no unique content of its own — indexing it alongside / as duplicate content
+// was a confirmed contributor to a "Duplicate without user-selected canonical" exclusion.
 export const metadata = generatePublicMetadata({
   titleOverride: 'Welcome | Mansi Mahant',
   descriptionOverride: "Entry experience for Mansi Mahant's portfolio.",
+  seo: { noIndex: true },
 });
 
 export const dynamic = 'force-dynamic';

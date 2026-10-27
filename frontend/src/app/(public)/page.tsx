@@ -8,6 +8,7 @@ import { HomePageConfig, IntroPageConfig } from '@/types/public.types';
 export const metadata = generatePublicMetadata({
   titleOverride: 'Mansi Mahant — Home',
   descriptionOverride: 'Dynamic portfolio fusing software engineering precision and creative digital artwork.',
+  canonicalPath: '/',
 });
 
 // Renders the root public home page with backend-driven profile hero and creative intro screen wrapper.
