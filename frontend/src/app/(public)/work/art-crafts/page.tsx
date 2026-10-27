@@ -12,17 +12,18 @@ export async function generateMetadata() {
   try {
     const page = await publicApi.getArtPage();
     return generatePublicMetadata({
-      titleOverride: page.seo?.title || page.title || 'Art & Crafts Gallery',
+      seo: page.seo,
+      titleOverride: page.seo?.title || page.title || 'Art, Illustration & Photography',
       descriptionOverride:
         page.seo?.description ||
         page.subtitle ||
-        'Explore 3D renders, digital illustrations, and handcrafted fine ceramics.',
+        'Digital illustration, concept art, and photography exploring color, light, and emotion.',
       canonicalPath: '/work/art-crafts',
     });
   } catch {
     return generatePublicMetadata({
-      titleOverride: 'Art & Crafts Gallery',
-      descriptionOverride: 'Explore 3D renders, digital illustrations, and handcrafted fine ceramics.',
+      titleOverride: 'Art, Illustration & Photography',
+      descriptionOverride: 'Digital illustration, concept art, and photography exploring color, light, and emotion.',
       canonicalPath: '/work/art-crafts',
     });
   }

@@ -11,6 +11,7 @@ export async function generateMetadata() {
   try {
     const page = await publicApi.getDevelopmentPage();
     return generatePublicMetadata({
+      seo: page.seo,
       titleOverride: page.seo?.title || page.title || 'Software Development Portfolio',
       descriptionOverride:
         page.seo?.description ||

@@ -11,6 +11,7 @@ import { Alert } from '@/components/ui/alert';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { SeoForm } from '@/components/admin/seo-form';
 
 export default function AdminArtPage() {
   const { idToken } = useAdminAuth();
@@ -128,6 +129,8 @@ export default function AdminArtPage() {
             </div>
           </CardContent>
         </Card>
+
+        <SeoForm seo={config.seo} onChange={(seo) => setConfig({ ...config, seo })} />
 
         <div className="flex justify-end gap-3">
           <Button type="submit" disabled={saving}>
