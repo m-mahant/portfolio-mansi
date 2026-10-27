@@ -27,6 +27,12 @@ export function createApp(): Express {
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+  // This API has no public pages of its own — block all crawling. Google was found indexing
+  // the bare API origin (e.g. a 404 on its root) with no guidance either way.
+  app.get('/robots.txt', (_req, res) => {
+    res.type('text/plain').send('User-agent: *\nDisallow: /\n');
+  });
+
   // OpenAPI Documentation UI endpoints (/api-docs, /api/v1/docs) — development only, hidden in production
   if (env.nodeEnv !== 'production') {
     setupSwagger(app);
