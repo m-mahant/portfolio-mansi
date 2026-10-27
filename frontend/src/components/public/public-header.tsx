@@ -37,7 +37,7 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({ siteName = 'Mansi Ma
             )}
             <span
               style={{ fontFamily: 'var(--font-heading, inherit)' }}
-              className="tracking-wide truncate max-w-[11rem] sm:max-w-[18rem] md:max-w-none"
+              className="sm:tracking-wide truncate max-w-[11rem] sm:max-w-[18rem] md:max-w-none"
             >
               {name}
             </span>
