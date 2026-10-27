@@ -20,6 +20,23 @@ export default function AdminArtPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [newCommissionTitle, setNewCommissionTitle] = useState('');
+  const [newCommissionDescription, setNewCommissionDescription] = useState('');
+
+  const handleAddCommissionType = () => {
+    if (!newCommissionTitle.trim() || !newCommissionDescription.trim()) return;
+    const current = config.commissionTypes || [];
+    setConfig({
+      ...config,
+      commissionTypes: [...current, { title: newCommissionTitle.trim(), description: newCommissionDescription.trim() }],
+    });
+    setNewCommissionTitle('');
+    setNewCommissionDescription('');
+  };
+
+  const handleRemoveCommissionType = (index: number) => {
+    setConfig({ ...config, commissionTypes: (config.commissionTypes || []).filter((_, i) => i !== index) });
+  };
 
   useEffect(() => {
     async function loadData() {
@@ -126,6 +143,97 @@ export default function AdminArtPage() {
                 onChange={(e) => setConfig({ ...config, galleryHeading: e.target.value })}
                 placeholder="e.g. Art & Crafts Gallery"
               />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="glass-panel">
+          <CardHeader>
+            <div className="px-3 py-1.5 rounded-lg bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 text-[var(--color-primary)] text-[11px] font-mono font-bold uppercase tracking-wider mb-2">
+              CONTROLS PUBLIC SECTION: /work/art-crafts commissions block
+            </div>
+            <CardTitle className="text-base font-bold">Commissions</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            <div>
+              <label className="block text-xs font-semibold text-[var(--color-text)] mb-1">Section Heading</label>
+              <Input
+                value={config.commissionsHeading || ''}
+                onChange={(e) => setConfig({ ...config, commissionsHeading: e.target.value })}
+                placeholder="e.g. Commissions"
+              />
+            </div>
+
+            <div className="flex items-center gap-3 pt-1">
+              <input
+                type="checkbox"
+                id="commissionsOpenToggle"
+                checked={config.commissionsOpen ?? true}
+                onChange={(e) => setConfig({ ...config, commissionsOpen: e.target.checked })}
+                className="w-4 h-4 rounded bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-primary)] focus:ring-[var(--color-primary)]"
+              />
+              <label htmlFor="commissionsOpenToggle" className="text-xs text-[var(--color-text)] cursor-pointer">
+                Commissions currently open
+              </label>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-[var(--color-text)] mb-2">Commission Types</label>
+              <div className="space-y-2 mb-3">
+                {(config.commissionTypes || []).map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-[var(--glass-bg)] border border-[var(--glass-border)]"
+                  >
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold text-[var(--color-text)]">{item.title}</p>
+                      <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5">{item.description}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveCommissionType(i)}
+                      className="text-[var(--color-text-muted)] hover:text-red-400 text-xs shrink-0"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-2 p-3 rounded-xl border border-dashed border-[var(--glass-border)]">
+                <Input
+                  value={newCommissionTitle}
+                  onChange={(e) => setNewCommissionTitle(e.target.value)}
+                  placeholder="Commission type, e.g. Hand-Painted Murals"
+                />
+                <textarea
+                  value={newCommissionDescription}
+                  onChange={(e) => setNewCommissionDescription(e.target.value)}
+                  placeholder="Short description of this commission type..."
+                  className="w-full px-3.5 py-2.5 rounded-xl text-xs bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--color-text)] outline-none min-h-[60px]"
+                />
+                <Button type="button" variant="outline" size="sm" onClick={handleAddCommissionType}>
+                  Add Commission Type
+                </Button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-[var(--color-text)] mb-1">CTA Button Label</label>
+                <Input
+                  value={config.ctaLabel || ''}
+                  onChange={(e) => setConfig({ ...config, ctaLabel: e.target.value })}
+                  placeholder="e.g. Request a Commission"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-[var(--color-text)] mb-1">CTA Link</label>
+                <Input
+                  value={config.ctaTarget || ''}
+                  onChange={(e) => setConfig({ ...config, ctaTarget: e.target.value })}
+                  placeholder="/contact?type=art-commission"
+                />
+              </div>
             </div>
           </CardContent>
         </Card>

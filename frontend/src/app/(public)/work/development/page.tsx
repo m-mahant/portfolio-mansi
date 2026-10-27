@@ -1,10 +1,11 @@
 import React from 'react';
 import { publicApi } from '@/services/api/public-api';
-import { Project } from '@/types/public.types';
+import { Project, DevelopmentPageConfig } from '@/types/public.types';
 import { PublicSection } from '@/components/public/public-section';
 import { PublicError } from '@/components/public/public-error';
 import { FeaturedProject } from '@/components/public/development/featured-project';
 import { ProjectGrid } from '@/components/public/development/project-grid';
+import { DevelopmentServices } from '@/components/public/development/development-services';
 import { generatePublicMetadata } from '@/utils/seo.utils';
 
 export async function generateMetadata() {
@@ -35,14 +36,16 @@ export default async function PublicDevelopmentPage() {
   let pageTitle = 'Software Development Portfolio';
   let pageSubtitle =
     'Explore software engineering case studies, full-stack architectures, API systems, and production implementations.';
+  let pageConfig: DevelopmentPageConfig | null = null;
   let fetchFailed = false;
 
   try {
-    const [paginatedProjects, pageConfig] = await Promise.all([
+    const [paginatedProjects, fetchedConfig] = await Promise.all([
       publicApi.getProjects({ limit: 50 }),
       publicApi.getDevelopmentPage().catch(() => null),
     ]);
     projects = paginatedProjects.items || [];
+    pageConfig = fetchedConfig;
     if (pageConfig?.title) pageTitle = pageConfig.title;
     if (pageConfig?.subtitle) pageSubtitle = pageConfig.subtitle;
   } catch {
@@ -76,6 +79,14 @@ export default async function PublicDevelopmentPage() {
           </h1>
           <p className="text-[var(--color-muted)] text-base sm:text-lg leading-relaxed">{pageSubtitle}</p>
         </header>
+
+        <DevelopmentServices
+          heading={pageConfig?.servicesHeading}
+          services={pageConfig?.services}
+          processSteps={pageConfig?.processSteps}
+          ctaLabel={pageConfig?.ctaLabel}
+          ctaTarget={pageConfig?.ctaTarget}
+        />
 
         {primaryFeaturedProject && <FeaturedProject project={primaryFeaturedProject} />}
 

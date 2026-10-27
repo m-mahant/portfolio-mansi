@@ -33,7 +33,10 @@ export class ContactService {
       status: 'new',
       createdAt: now,
       updatedAt: now,
-      ipAddress: clientIp,
+      ...(clientIp && { ipAddress: clientIp }),
+      ...(validatedInput.inquiryType && { inquiryType: validatedInput.inquiryType }),
+      ...(validatedInput.budget && { budget: validatedInput.budget }),
+      ...(validatedInput.timeline && { timeline: validatedInput.timeline }),
     };
 
     const created = await this.repository.createMessage(messageData);

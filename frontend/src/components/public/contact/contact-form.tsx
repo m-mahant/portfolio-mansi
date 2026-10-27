@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { submitContact } from '@/services/api/public-api';
-import { ContactSubmissionData } from '@/types/public.types';
+import { ContactSubmissionData, ContactInquiryType } from '@/types/public.types';
 import { PublicButton } from '../public-button';
 
 // Form input state interface
@@ -14,13 +15,30 @@ interface FormErrors {
   general?: string;
 }
 
+const INQUIRY_TYPE_OPTIONS: { value: ContactInquiryType; label: string }[] = [
+  { value: 'new-build', label: 'New software build' },
+  { value: 'maintenance', label: 'Maintenance / fix an existing app' },
+  { value: 'consulting', label: 'Technical consulting' },
+  { value: 'art-commission', label: 'Art / mural commission' },
+  { value: 'other', label: 'Something else' },
+];
+
+
+function inquiryTypeFromQuery(value: string | null): ContactInquiryType | '' {
+  return INQUIRY_TYPE_OPTIONS.some((opt) => opt.value === value) ? (value as ContactInquiryType) : '';
+}
+
 // Renders the interactive contact form with validation, submission, and success/error feedback.
 export const ContactForm: React.FC = () => {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState<ContactSubmissionData>({
     name: '',
     email: '',
     subject: '',
     message: '',
+    inquiryType: inquiryTypeFromQuery(searchParams.get('type')) || undefined,
+    budget: '',
+    timeline: '',
     website: '',
   });
 
@@ -60,7 +78,7 @@ export const ContactForm: React.FC = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -82,11 +100,14 @@ export const ContactForm: React.FC = () => {
         email: formData.email.trim(),
         subject: formData.subject.trim(),
         message: formData.message.trim(),
+        inquiryType: formData.inquiryType || undefined,
+        budget: formData.budget?.trim() || undefined,
+        timeline: formData.timeline?.trim() || undefined,
         website: formData.website,
       });
 
       setIsSuccess(true);
-      setFormData({ name: '', email: '', subject: '', message: '', website: '' });
+      setFormData({ name: '', email: '', subject: '', message: '', inquiryType: undefined, budget: '', timeline: '', website: '' });
     } catch (error) {
       const errorMessage =
         error instanceof Error
@@ -244,6 +265,61 @@ export const ContactForm: React.FC = () => {
                 {errors.subject}
               </p>
             )}
+          </div>
+
+          {/* What do you need? / Budget / Timeline — all optional, just helps triage the inquiry */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="space-y-1.5">
+              <label htmlFor="contact-inquiry-type" className="block text-xs font-medium text-[var(--color-muted)]">
+                What do you need?
+              </label>
+              <select
+                id="contact-inquiry-type"
+                name="inquiryType"
+                value={formData.inquiryType || ''}
+                onChange={handleChange}
+                className="w-full px-4 py-2.5 rounded-xl bg-[var(--color-background)] border border-[var(--color-border)] text-[var(--color-text)] text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]/50"
+              >
+                <option value="">Not sure yet</option>
+                {INQUIRY_TYPE_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-1.5">
+              <label htmlFor="contact-budget" className="block text-xs font-medium text-[var(--color-muted)]">
+                Budget <span className="text-[var(--color-muted)]/60">(optional)</span>
+              </label>
+              <input
+                id="contact-budget"
+                name="budget"
+                type="text"
+                maxLength={100}
+                value={formData.budget}
+                onChange={handleChange}
+                placeholder="e.g. ₹50,000"
+                className="w-full px-4 py-2.5 rounded-xl bg-[var(--color-background)] border border-[var(--color-border)] text-[var(--color-text)] placeholder-[var(--color-muted)]/60 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]/50"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label htmlFor="contact-timeline" className="block text-xs font-medium text-[var(--color-muted)]">
+                Timeline <span className="text-[var(--color-muted)]/60">(optional)</span>
+              </label>
+              <input
+                id="contact-timeline"
+                name="timeline"
+                type="text"
+                maxLength={100}
+                value={formData.timeline}
+                onChange={handleChange}
+                placeholder="e.g. 2-3 weeks"
+                className="w-full px-4 py-2.5 rounded-xl bg-[var(--color-background)] border border-[var(--color-border)] text-[var(--color-text)] placeholder-[var(--color-muted)]/60 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]/50"
+              />
+            </div>
           </div>
 
           {/* Message */}

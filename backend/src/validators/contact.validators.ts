@@ -33,8 +33,19 @@ export const contactSubmissionSchema = z.object({
     .min(1, 'Message is required')
     .max(3000, 'Message must not exceed 3000 characters')
     .transform((val) => sanitizePlainText(val)),
-  // Honeypot: real visitors never see or fill this field; bots that autofill every
-  // input do. Non-empty means the submission is spam.
+  inquiryType: z.enum(['new-build', 'maintenance', 'consulting', 'art-commission', 'other']).optional(),
+  budget: z
+    .string()
+    .trim()
+    .max(100, 'Budget must not exceed 100 characters')
+    .transform((val) => sanitizePlainText(val))
+    .optional(),
+  timeline: z
+    .string()
+    .trim()
+    .max(100, 'Timeline must not exceed 100 characters')
+    .transform((val) => sanitizePlainText(val))
+    .optional(),
   website: z.string().max(200).optional(),
 });
 

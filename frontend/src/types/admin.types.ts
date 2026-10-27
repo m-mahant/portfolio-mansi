@@ -124,9 +124,19 @@ export interface WorkPageConfig {
   updatedAt?: string;
 }
 
+export interface ServiceOffering {
+  title: string;
+  description: string;
+}
+
 export interface DevelopmentPageConfig {
   title?: string;
   subtitle?: string;
+  servicesHeading?: string;
+  services?: ServiceOffering[];
+  processSteps?: string[];
+  ctaLabel?: string;
+  ctaTarget?: string;
   seo?: SeoMetadata;
   updatedAt?: string;
 }
@@ -137,6 +147,11 @@ export interface ArtPageConfig {
   subtitle?: string;
   description?: string;
   galleryHeading?: string;
+  commissionsHeading?: string;
+  commissionsOpen?: boolean;
+  commissionTypes?: ServiceOffering[];
+  ctaLabel?: string;
+  ctaTarget?: string;
   seo?: SeoMetadata;
   updatedAt?: string;
 }

@@ -20,6 +20,34 @@ export default function AdminDevelopmentPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [newServiceTitle, setNewServiceTitle] = useState('');
+  const [newServiceDescription, setNewServiceDescription] = useState('');
+  const [newStep, setNewStep] = useState('');
+
+  const handleAddService = () => {
+    if (!newServiceTitle.trim() || !newServiceDescription.trim()) return;
+    const current = config.services || [];
+    setConfig({
+      ...config,
+      services: [...current, { title: newServiceTitle.trim(), description: newServiceDescription.trim() }],
+    });
+    setNewServiceTitle('');
+    setNewServiceDescription('');
+  };
+
+  const handleRemoveService = (index: number) => {
+    setConfig({ ...config, services: (config.services || []).filter((_, i) => i !== index) });
+  };
+
+  const handleAddStep = () => {
+    if (!newStep.trim()) return;
+    setConfig({ ...config, processSteps: [...(config.processSteps || []), newStep.trim()] });
+    setNewStep('');
+  };
+
+  const handleRemoveStep = (index: number) => {
+    setConfig({ ...config, processSteps: (config.processSteps || []).filter((_, i) => i !== index) });
+  };
 
   useEffect(() => {
     async function loadData() {
@@ -103,6 +131,117 @@ export default function AdminDevelopmentPage() {
                 placeholder="Short intro under the title..."
                 className="w-full px-3.5 py-2.5 rounded-xl text-xs bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--color-text)] outline-none min-h-[80px]"
               />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="glass-panel">
+          <CardHeader>
+            <div className="px-3 py-1.5 rounded-lg bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 text-[var(--color-primary)] text-[11px] font-mono font-bold uppercase tracking-wider mb-2">
+              CONTROLS PUBLIC SECTION: /work/development services block
+            </div>
+            <CardTitle className="text-base font-bold">Services &amp; Process</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            <div>
+              <label className="block text-xs font-semibold text-[var(--color-text)] mb-1">Section Heading</label>
+              <Input
+                value={config.servicesHeading || ''}
+                onChange={(e) => setConfig({ ...config, servicesHeading: e.target.value })}
+                placeholder="e.g. Work With Me"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-[var(--color-text)] mb-2">Services Offered</label>
+              <div className="space-y-2 mb-3">
+                {(config.services || []).map((service, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-[var(--glass-bg)] border border-[var(--glass-border)]"
+                  >
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold text-[var(--color-text)]">{service.title}</p>
+                      <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5">{service.description}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveService(i)}
+                      className="text-[var(--color-text-muted)] hover:text-red-400 text-xs shrink-0"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-2 p-3 rounded-xl border border-dashed border-[var(--glass-border)]">
+                <Input
+                  value={newServiceTitle}
+                  onChange={(e) => setNewServiceTitle(e.target.value)}
+                  placeholder="Service title, e.g. Maintenance & Support"
+                />
+                <textarea
+                  value={newServiceDescription}
+                  onChange={(e) => setNewServiceDescription(e.target.value)}
+                  placeholder="Short description of this service..."
+                  className="w-full px-3.5 py-2.5 rounded-xl text-xs bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--color-text)] outline-none min-h-[60px]"
+                />
+                <Button type="button" variant="outline" size="sm" onClick={handleAddService}>
+                  Add Service
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-[var(--color-text)] mb-2">How I Work (process steps)</label>
+              <div className="space-y-1.5 mb-3">
+                {(config.processSteps || []).map((step, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between gap-3 px-3.5 py-2 rounded-xl bg-[var(--glass-bg)] border border-[var(--glass-border)]"
+                  >
+                    <span className="text-xs text-[var(--color-text)]">
+                      {i + 1}. {step}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveStep(i)}
+                      className="text-[var(--color-text-muted)] hover:text-red-400 text-xs shrink-0"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <Input
+                  value={newStep}
+                  onChange={(e) => setNewStep(e.target.value)}
+                  placeholder="e.g. Share your project or problem"
+                />
+                <Button type="button" variant="outline" size="sm" onClick={handleAddStep}>
+                  Add Step
+                </Button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-[var(--color-text)] mb-1">CTA Button Label</label>
+                <Input
+                  value={config.ctaLabel || ''}
+                  onChange={(e) => setConfig({ ...config, ctaLabel: e.target.value })}
+                  placeholder="e.g. Start a Project"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-[var(--color-text)] mb-1">CTA Link</label>
+                <Input
+                  value={config.ctaTarget || ''}
+                  onChange={(e) => setConfig({ ...config, ctaTarget: e.target.value })}
+                  placeholder="/contact?type=new-build"
+                />
+              </div>
             </div>
           </CardContent>
         </Card>

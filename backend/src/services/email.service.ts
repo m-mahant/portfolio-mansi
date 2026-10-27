@@ -44,6 +44,14 @@ export async function sendContactNotification(submission: ContactMessage): Promi
     return;
   }
 
+  const inquiryTypeLabels: Record<string, string> = {
+    'new-build': 'New build',
+    maintenance: 'Maintenance',
+    consulting: 'Consulting',
+    'art-commission': 'Art commission',
+    other: 'Other',
+  };
+
   try {
     notificationTimestamps.push(Date.now());
     await client.emails.send({
@@ -54,6 +62,9 @@ export async function sendContactNotification(submission: ContactMessage): Promi
       text: [
         `From: ${submission.name} <${submission.email}>`,
         `Subject: ${submission.subject}`,
+        ...(submission.inquiryType ? [`Inquiry type: ${inquiryTypeLabels[submission.inquiryType] || submission.inquiryType}`] : []),
+        ...(submission.budget ? [`Budget: ${submission.budget}`] : []),
+        ...(submission.timeline ? [`Timeline: ${submission.timeline}`] : []),
         '',
         submission.message,
       ].join('\n'),

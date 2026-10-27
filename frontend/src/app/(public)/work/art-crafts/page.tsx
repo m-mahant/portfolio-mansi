@@ -4,6 +4,7 @@ import { Artwork, ArtPageConfig } from '@/types/public.types';
 import { PublicSection } from '@/components/public/public-section';
 import { PublicError } from '@/components/public/public-error';
 import { ArtworkHero } from '@/components/public/art-crafts/artwork-hero';
+import { ArtworkCommissions } from '@/components/public/art-crafts/artwork-commissions';
 import { FeaturedArtwork } from '@/components/public/art-crafts/featured-artwork';
 import { ArtworkGrid } from '@/components/public/art-crafts/artwork-grid';
 import { generatePublicMetadata } from '@/utils/seo.utils';
@@ -66,6 +67,14 @@ export default async function PublicArtCraftsPage() {
         <div className="pointer-events-none absolute -top-20 right-0 h-72 w-72 rounded-full bg-[var(--color-accent)]/10 blur-3xl" />
 
         <ArtworkHero pageConfig={pageConfig} />
+
+        <ArtworkCommissions
+          heading={pageConfig?.commissionsHeading}
+          commissionsOpen={pageConfig?.commissionsOpen}
+          commissionTypes={pageConfig?.commissionTypes}
+          ctaLabel={pageConfig?.ctaLabel}
+          ctaTarget={pageConfig?.ctaTarget}
+        />
 
         {primaryFeaturedArtwork && <FeaturedArtwork artwork={primaryFeaturedArtwork} />}
 

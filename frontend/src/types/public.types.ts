@@ -27,6 +27,7 @@ import {
   ArtPageConfig,
   BlogPageConfig,
   ExperiencePageConfig,
+  ServiceOffering,
 } from './admin.types';
 
 export type {
@@ -56,6 +57,7 @@ export type {
   ArtPageConfig,
   BlogPageConfig,
   ExperiencePageConfig,
+  ServiceOffering,
 };
 
 
@@ -104,13 +106,17 @@ export interface PublicArtworkQueryParams {
   limit?: number;
 }
 
+export type ContactInquiryType = 'new-build' | 'maintenance' | 'consulting' | 'art-commission' | 'other';
+
 // Contact submission payload interface.
 export interface ContactSubmissionData {
   name: string;
   email: string;
   subject: string;
   message: string;
-  // Honeypot: left blank by real visitors, caught in CSS, filled by most spam bots.
+  inquiryType?: ContactInquiryType;
+  budget?: string;
+  timeline?: string;
   website?: string;
 }
 

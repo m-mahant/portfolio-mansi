@@ -147,10 +147,21 @@ export interface WorkPageConfig {
   updatedAt: string;
 }
 
+// A single named offering shown in a "services" or "commissions" block.
+export interface ServiceOffering {
+  title: string;
+  description: string;
+}
+
 // Development listing page config: developmentPage/config → /work/development
 export interface DevelopmentPageConfig {
   title?: string;
   subtitle?: string;
+  servicesHeading?: string;
+  services?: ServiceOffering[];
+  processSteps?: string[];
+  ctaLabel?: string;
+  ctaTarget?: string;
   seo?: SeoMetadata;
   updatedAt: string;
 }
@@ -162,6 +173,11 @@ export interface ArtPageConfig {
   subtitle?: string;
   description?: string;
   galleryHeading?: string;
+  commissionsHeading?: string;
+  commissionsOpen?: boolean;
+  commissionTypes?: ServiceOffering[];
+  ctaLabel?: string;
+  ctaTarget?: string;
   seo?: SeoMetadata;
   updatedAt: string;
 }
@@ -492,6 +508,8 @@ export interface ThemeSettings {
 
 export type ContactMessageStatus = 'new' | 'read' | 'archived';
 
+export type ContactInquiryType = 'new-build' | 'maintenance' | 'consulting' | 'art-commission' | 'other';
+
 // Contact Submission Document stored in Firestore collection: contactMessages/{messageId}
 export interface ContactMessage {
   id: string;
@@ -503,6 +521,9 @@ export interface ContactMessage {
   createdAt: string;
   updatedAt: string;
   ipAddress?: string;
+  inquiryType?: ContactInquiryType;
+  budget?: string;
+  timeline?: string;
 }
 
 export type BlogStatus = 'draft' | 'published' | 'archived';
