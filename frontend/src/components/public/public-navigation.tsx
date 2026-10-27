@@ -103,32 +103,37 @@ export const PublicNavigation: React.FC = () => {
                 </div>
 
                 {workDropdownOpen && (
-                  <div
-                    className="absolute left-0 top-full mt-2 w-64 max-w-[calc(100vw-2rem)] glass-panel-strong p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
-                    role="menu"
-                    aria-orientation="vertical"
-                  >
-                    {item.children.map((child) => {
-                      const childActive = pathname === child.href;
-                      return (
-                        <Link
-                          key={child.label}
-                          href={child.href}
-                          onClick={closeMenus}
-                          className={`block p-2.5 rounded-lg transition-all ${
-                            childActive
-                              ? 'bg-[var(--color-primary)]/20 text-[var(--color-primary)] font-semibold border border-[var(--color-primary)]/30'
-                              : 'hover:bg-[var(--glass-highlight)] text-[var(--color-text)]'
-                          }`}
-                          role="menuitem"
-                        >
-                          <div className="text-xs font-semibold">{child.label}</div>
-                          {child.description && (
-                            <p className="text-[11px] text-[var(--color-muted)] font-normal mt-0.5">{child.description}</p>
-                          )}
-                        </Link>
-                      );
-                    })}
+                  // The pt-2 spacer lives inside this absolutely-positioned wrapper (not as a
+                  // margin-top gap outside it) so the hoverable area is continuous all the way
+                  // from the trigger into the panel — no dead zone for mouseleave to fire in.
+                  <div className="absolute left-0 top-full pt-2 w-64 max-w-[calc(100vw-2rem)] z-50">
+                    <div
+                      className="glass-panel-strong p-2 animate-in fade-in slide-in-from-top-2 duration-150"
+                      role="menu"
+                      aria-orientation="vertical"
+                    >
+                      {item.children.map((child) => {
+                        const childActive = pathname === child.href;
+                        return (
+                          <Link
+                            key={child.label}
+                            href={child.href}
+                            onClick={closeMenus}
+                            className={`block p-2.5 rounded-lg transition-all ${
+                              childActive
+                                ? 'bg-[var(--color-primary)]/20 text-[var(--color-primary)] font-semibold border border-[var(--color-primary)]/30'
+                                : 'hover:bg-[var(--glass-highlight)] text-[var(--color-text)]'
+                            }`}
+                            role="menuitem"
+                          >
+                            <div className="text-xs font-semibold">{child.label}</div>
+                            {child.description && (
+                              <p className="text-[11px] text-[var(--color-muted)] font-normal mt-0.5">{child.description}</p>
+                            )}
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
               </li>
