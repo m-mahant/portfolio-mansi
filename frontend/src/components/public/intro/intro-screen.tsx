@@ -26,34 +26,29 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({ children, introConfig 
     isReducedMotion,
     introConfig,
   });
-
-  // When state reaches 'home', render actual Home page layout content
-  if (state === 'home') {
-    return <>{children}</>;
-  }
-
-  // Render initial minimal loading screen while theme/app is preparing
-  if (state === 'loading') {
-    return (
-      <LoadingScreen
-        isReducedMotion={isReducedMotion}
-        loadingText={introConfig?.loadingText}
-      />
-    );
-  }
-
-  // Render creative intro experience screen (intro or entering states)
+  const showOverlay = state !== 'home';
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center min-h-screen overflow-hidden bg-[var(--color-background,#0f172a)] text-[var(--color-text,#f8fafc)] select-none">
-      <IntroBackground />
-      <IntroDecoration isReducedMotion={isReducedMotion} />
-      <IntroContent
-        onExploreClick={handleExploreClick}
-        isEntering={state === 'entering'}
-        isReducedMotion={isReducedMotion}
-        introConfig={introConfig}
-      />
-      <IntroTransition isEntering={state === 'entering'} isReducedMotion={isReducedMotion} />
-    </div>
+    <>
+      <div inert={showOverlay}>{children}</div>
+      {state === 'loading' && (
+        <LoadingScreen
+          isReducedMotion={isReducedMotion}
+          loadingText={introConfig?.loadingText}
+        />
+      )}
+      {(state === 'intro' || state === 'entering') && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center min-h-screen overflow-hidden bg-[var(--color-background,#0f172a)] text-[var(--color-text,#f8fafc)] select-none">
+          <IntroBackground />
+          <IntroDecoration isReducedMotion={isReducedMotion} />
+          <IntroContent
+            onExploreClick={handleExploreClick}
+            isEntering={state === 'entering'}
+            isReducedMotion={isReducedMotion}
+            introConfig={introConfig}
+          />
+          <IntroTransition isEntering={state === 'entering'} isReducedMotion={isReducedMotion} />
+        </div>
+      )}
+    </>
   );
 };

@@ -28,19 +28,11 @@ export default async function PublicHomePage() {
     // Graceful fallback to default mock/null state if backend API is initializing
   }
 
-  // Preloads the hero portrait while the intro screen plays, so it's already cached by the
-  // time "home" renders instead of only starting to fetch after the user clicks through.
-  const heroImageUrl = homeConfig?.hero?.profileImage?.url;
-
   return (
-    <>
-      {heroImageUrl && <link rel="preload" as="image" fetchPriority="high" href={heroImageUrl} />}
-      <IntroScreen introConfig={introConfig}>
-        <div className="w-full">
-          {/* Home renders hero only: profile, dual identity, CTAs, and portrait. */}
-          <HomeHero homeConfig={homeConfig} />
-        </div>
-      </IntroScreen>
-    </>
+    <IntroScreen introConfig={introConfig}>
+      <div className="w-full">
+        <HomeHero homeConfig={homeConfig} />
+      </div>
+    </IntroScreen>
   );
 }
