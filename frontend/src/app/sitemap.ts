@@ -7,20 +7,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   const currentDate = new Date().toISOString();
 
-  // Core static public routes. /education is deliberately excluded: it's a redirect-only
-  // route (see (public)/education/page.tsx), and a sitemap should only list real indexable
-  // pages — listing a redirect here was a confirmed cause of "Page with redirect" exclusions
-  // in Search Console.
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}`, lastModified: currentDate, changeFrequency: 'daily', priority: 1.0 },
-    { url: `${baseUrl}/about`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${baseUrl}/work`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${baseUrl}/work/development`, lastModified: currentDate, changeFrequency: 'daily', priority: 0.9 },
-    { url: `${baseUrl}/work/art-crafts`, lastModified: currentDate, changeFrequency: 'daily', priority: 0.9 },
-    { url: `${baseUrl}/blog`, lastModified: currentDate, changeFrequency: 'daily', priority: 0.9 },
-    { url: `${baseUrl}/experience`, lastModified: currentDate, changeFrequency: 'weekly', priority: 0.7 },
-    { url: `${baseUrl}/contact`, lastModified: currentDate, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/privacy`, lastModified: currentDate, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${baseUrl}`, changeFrequency: 'daily', priority: 1.0 },
+    { url: `${baseUrl}/about`, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/work`, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/work/development`, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${baseUrl}/work/art-crafts`, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${baseUrl}/blog`, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${baseUrl}/experience`, changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${baseUrl}/contact`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/privacy`, changeFrequency: 'yearly', priority: 0.3 },
   ];
 
   // Requesting more than 50 throws BAD_REQUEST from the list APIs (blogQuerySchema caps limit
