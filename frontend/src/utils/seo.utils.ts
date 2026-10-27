@@ -18,6 +18,13 @@ export interface BreadcrumbItem {
   path: string;
 }
 
+// Serializes a JSON-LD object for a <script dangerouslySetInnerHTML>. CMS text fields (titles,
+// descriptions, tags) flow into this unsanitized; escaping "<" stops a value containing
+// "</script>" from breaking out of the script tag it's embedded in.
+export function safeJsonLd(data: unknown): string {
+  return JSON.stringify(data).replace(/</g, '\\u003c');
+}
+
 // Builds schema.org BreadcrumbList JSON-LD so Google can show the page's hierarchy in search results.
 export function generateBreadcrumbJsonLd(items: BreadcrumbItem[]) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
@@ -43,7 +50,11 @@ export function generatePublicMetadata(options?: SeoOptions): Metadata {
   const seo = options?.seo;
 
   const baseTitle = site?.siteTitle || site?.siteName || DEFAULT_SITE_TITLE;
-  const pageTitle = options?.titleOverride || seo?.title || baseTitle;
+  const rawPageTitle = options?.titleOverride || seo?.title || baseTitle;
+  const brandSuffix = ` | ${baseTitle}`;
+  const pageTitle = rawPageTitle.endsWith(brandSuffix)
+    ? rawPageTitle.slice(0, -brandSuffix.length)
+    : rawPageTitle;
   const title = pageTitle === baseTitle ? baseTitle : `${pageTitle} | ${baseTitle}`;
 
   const description =

@@ -7,8 +7,9 @@ import { AboutWhatIDo } from '@/components/public/about/about-what-i-do';
 import { AboutDualIdentity } from '@/components/public/about/about-dual-identity';
 import { AboutPhilosophy } from '@/components/public/about/about-philosophy';
 import { AboutInterests } from '@/components/public/about/about-interests';
-import { generatePublicMetadata } from '@/utils/seo.utils';
+import { generatePublicMetadata, generateBreadcrumbJsonLd, safeJsonLd } from '@/utils/seo.utils';
 import { AboutProfile } from '@/types/public.types';
+import { BRAND_NAME } from '@/lib/brand';
 
 // Was a static `metadata` export, which can't read Firestore — the About SEO form in Admin
 // (title/description/keywords/noIndex) had no way to ever reach the live page. Converted to an
@@ -53,8 +54,36 @@ export default async function PublicAboutPage() {
     );
   }
 
+  const socialLinks = await publicApi.getSocialLinks().catch(() => []);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    dateModified: about.updatedAt,
+    mainEntity: {
+      '@type': 'Person',
+      name: BRAND_NAME,
+      url: `${siteUrl}/about`,
+      jobTitle: 'Full-Stack Software Engineer & Digital Artist',
+      description: about.shortBio,
+      ...(about.profileImage?.url && { image: about.profileImage.url }),
+      ...(about.whatIDo?.length && { knowsAbout: about.whatIDo }),
+      ...(socialLinks?.length && {
+        sameAs: socialLinks.filter((s) => s.isVisible).map((s) => s.url),
+      }),
+    },
+  };
+
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+  ]);
+
   return (
     <PublicSection className="py-12 md:py-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }} />
       <div className="space-y-16 md:space-y-20 max-w-6xl mx-auto">
         <AboutStory story={about.myStory} image={about.secondaryImage} />
 
