@@ -29,6 +29,33 @@ test.describe('Public navigation', () => {
     expect(response?.status()).toBe(404);
   });
 
+  // Regression test for a real bug: the CSP's connect-src/script-src only allowed the backend
+  // API origin, so Firebase Auth's own requests (identitytoolkit.googleapis.com) and Vercel
+  // Analytics' script were silently blocked — every admin login attempt failed with
+  // "auth/network-request-failed" the moment CSP shipped.
+  test('admin login reaches Firebase Auth without a CSP violation blocking it', async ({ page }) => {
+    const cspViolations: string[] = [];
+    page.on('console', (msg) => {
+      if (msg.text().toLowerCase().includes('content security policy')) {
+        cspViolations.push(msg.text());
+      }
+    });
+
+    const authRequests: string[] = [];
+    page.on('request', (req) => {
+      if (req.url().includes('identitytoolkit.googleapis.com')) authRequests.push(req.url());
+    });
+
+    await page.goto('/admin/login');
+    await page.fill('input[type="email"]', 'nobody@example.com');
+    await page.fill('input[type="password"]', 'wrong-password-123');
+    await page.click('button[type="submit"]');
+    await page.waitForTimeout(2000);
+
+    expect(cspViolations, cspViolations.join('\n')).toHaveLength(0);
+    expect(authRequests.length, 'expected a real request to identitytoolkit.googleapis.com').toBeGreaterThan(0);
+  });
+
   // Regression test for a real bug: a global loading.tsx wrapped every route in an automatic
   // Suspense boundary, which committed a 200 status the instant navigation started — by the time
   // a dynamic detail page's own notFound() call resolved, the status could no longer change, so
